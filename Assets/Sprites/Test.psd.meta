@@ -2,12 +2,12 @@ fileFormatVersion: 2
 guid: c59d3acb190334145a14e6d02b3ad490
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Test_0
-    21300002: Test_1
-    21300004: Test_2
-    21300006: Test_3
-    21300008: Test_4
-    21300010: Test_5
+    21300000: Wall
+    21300002: Player
+    21300004: City
+    21300006: Boss
+    21300008: Grass
+    21300010: Teleport
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -66,7 +66,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -77,7 +77,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -99,7 +99,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -123,121 +123,121 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Test_0
+      name: Wall
       rect:
         serializedVersion: 2
-        x: 0
-        y: 288
+        x: 1
+        y: 223
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cd7db6a944c83c48a6b7e61f5e81486
+      spriteID: 1e1188cbe1516ab4b9b740b032f48f0d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_1
+      name: Player
       rect:
         serializedVersion: 2
-        x: 32
-        y: 288
+        x: 35
+        y: 223
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ebadedd30607eb46bad6f939d15fe19
+      spriteID: 156127ef0b93a5f4bba8635abd6b6f63
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_2
+      name: City
       rect:
         serializedVersion: 2
-        x: 64
-        y: 288
+        x: 69
+        y: 223
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c4e1ee87db9ade4997f8166a7e7f121
+      spriteID: ca786bdb99bb4f34780be1e92609bef1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_3
+      name: Boss
       rect:
         serializedVersion: 2
-        x: 96
-        y: 288
+        x: 103
+        y: 223
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74e6a6a3e94880c41b3deee34285ae06
+      spriteID: b1429206be890e64f8ff26d1216bd41b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_4
+      name: Grass
       rect:
         serializedVersion: 2
-        x: 128
-        y: 288
+        x: 137
+        y: 223
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2629f93448a76f42a76c5be56953673
+      spriteID: b278cadb13709a9449e3caf954eeb6f4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Test_5
+      name: Teleport
       rect:
         serializedVersion: 2
-        x: 160
-        y: 288
+        x: 171
+        y: 223
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e7506ba5bb8e954ea41ba1133a25e8e
+      spriteID: c4efc2672dcc6514aaa7301af4d9b737
       vertices: []
       indices: 
       edges: []

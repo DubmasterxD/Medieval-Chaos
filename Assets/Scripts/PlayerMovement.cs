@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1;
     bool isMoving = false;
@@ -18,19 +18,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             GoRight();
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             GoLeft();
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.UpArrow))
         {
             GoUp();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             GoDown();
         }
@@ -38,55 +38,46 @@ public class PlayerController : MonoBehaviour
 
     public void GoRight()
     {
-        if (!isMoving)
-        {
-            Move(new Vector2(1, 0));
-        }
+        Move(new Vector2(1, 0));
     }
 
     public void GoLeft()
     {
-        if (!isMoving)
-        {
-            Move(new Vector2(-1, 0));
-        }
+        Move(new Vector2(-1, 0));
     }
 
     public void GoUp()
     {
-        if (!isMoving)
-        {
-            Move(new Vector2(0, 1));
-        }
+        Move(new Vector2(0, 1));
     }
 
     public void GoDown()
     {
-        if (!isMoving)
-        {
-            Move(new Vector2(0, -1));
-        }
+        Move(new Vector2(0, -1));
     }
 
     private void Move(Vector2 moveDirection)
     {
-        anim.SetFloat(_moveX, moveDirection.x);
-        anim.SetFloat(_moveY, moveDirection.y);
-        anim.speed = movementSpeed;
-        isMoving = true;
+        if (!isMoving)
+        {
+            anim.SetFloat(_moveX, moveDirection.x);
+            anim.SetFloat(_moveY, moveDirection.y);
+            anim.speed = movementSpeed;
+            isMoving = true;
+        }
     }
 
     public void FinishedMovingX(float MoveX)
     {
         anim.SetFloat(_moveX, 0);
-        transform.position = new Vector3(transform.position.x + MoveX, transform.position.y,0);
+        transform.position = new Vector3(transform.position.x + MoveX, transform.position.y, 0);
         isMoving = false;
     }
 
     public void FinishedMovingY(float MoveY)
     {
         anim.SetFloat(_moveY, 0);
-        transform.position = new Vector3(transform.position.x, transform.position.y + MoveY,0);
+        transform.position = new Vector3(transform.position.x, transform.position.y + MoveY, 0);
         isMoving = false;
     }
 
