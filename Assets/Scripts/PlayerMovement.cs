@@ -15,43 +15,23 @@ public class PlayerMovement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            GoRight();
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            GoLeft();
-        }
-        else if (Input.GetKey(KeyCode.UpArrow))
-        {
-            GoUp();
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            GoDown();
-        }
-    }
-
-    public void GoRight()
+    
+    public void MoveRight()
     {
         Move(new Vector2(1, 0));
     }
 
-    public void GoLeft()
+    public void MoveLeft()
     {
         Move(new Vector2(-1, 0));
     }
 
-    public void GoUp()
+    public void MoveUp()
     {
         Move(new Vector2(0, 1));
     }
 
-    public void GoDown()
+    public void MoveDown()
     {
         Move(new Vector2(0, -1));
     }
@@ -83,9 +63,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        anim.SetFloat(_moveX, 0);
-        anim.SetFloat(_moveY, 0);
-        anim.SetTrigger(_wallTrigger);
-        isMoving = false;
+        if (!collision.isTrigger)
+        {
+            anim.SetFloat(_moveX, 0);
+            anim.SetFloat(_moveY, 0);
+            anim.SetTrigger(_wallTrigger);
+            isMoving = false;
+        }
     }
 }

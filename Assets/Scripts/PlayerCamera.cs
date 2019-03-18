@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerCamera : MonoBehaviour
 {
+    [SerializeField] float xOffset = 0;
     GameObject playerBody;
     Tilemap map;
     Vector2 topRightLimit;
@@ -34,7 +35,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void FollowPlayer()
     {
-        float posX = Mathf.Clamp(playerBody.transform.position.x, botLeftLimit.x + halfWidth + 1, topRightLimit.x - halfWidth);
+        float posX = Mathf.Clamp(playerBody.transform.position.x + halfWidth * xOffset, botLeftLimit.x + halfWidth + 1, topRightLimit.x - halfWidth + halfWidth * 2 * xOffset);
         float posY = Mathf.Clamp(playerBody.transform.position.y, botLeftLimit.y + halfHeight + 1, topRightLimit.y - halfHeight);
         transform.position = new Vector3(posX, posY, transform.position.z);
     }
