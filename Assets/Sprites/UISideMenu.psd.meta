@@ -3,6 +3,7 @@ guid: 2e115a2024d5e5742bb4e64a324533f4
 TextureImporter:
   fileIDToRecycleName:
     21300000: UIOverlay_0
+    21300002: UISideMenu_0
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -41,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -92,17 +93,39 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UIOverlay_0
+      name: UISideMenu_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 968
-        width: 1920
-        height: 1080
+        x: 478
+        y: 0
+        width: 546
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,7 +133,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 557eddb31e8d30e41810c37a48784471
+      spriteID: c5f164f9ca2c22b43a6764ee93838294
       vertices: []
       indices: 
       edges: []
