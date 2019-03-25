@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1;
-    bool isMoving = false;
+    Player player = null;
     Animator anim = null;
     int _wallTrigger = Animator.StringToHash("wall");
     int _moveX = Animator.StringToHash("moveX");
@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        player = Player.instance;
         anim = GetComponent<Animator>();
     }
     
@@ -38,12 +39,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector2 moveDirection)
     {
-        if (!isMoving)
+        if (!player.isMoving)
         {
             anim.SetFloat(_moveX, moveDirection.x);
             anim.SetFloat(_moveY, moveDirection.y);
             anim.speed = movementSpeed;
-            isMoving = true;
+            player.isMoving = true;
         }
     }
 
@@ -51,14 +52,14 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetFloat(_moveX, 0);
         transform.position = new Vector3(transform.position.x + MoveX, transform.position.y, 0);
-        isMoving = false;
+        player.isMoving = false;
     }
 
     public void FinishedMovingY(float MoveY)
     {
         anim.SetFloat(_moveY, 0);
         transform.position = new Vector3(transform.position.x, transform.position.y + MoveY, 0);
-        isMoving = false;
+        player.isMoving = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetFloat(_moveX, 0);
             anim.SetFloat(_moveY, 0);
             anim.SetTrigger(_wallTrigger);
-            isMoving = false;
+            player.isMoving = false;
         }
     }
 }

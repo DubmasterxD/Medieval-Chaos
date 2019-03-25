@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class GameCanvas : MonoBehaviour
 {
-    public static Player instance;
-
-    public string previousScene { get; set; }
-    public bool isMoving { get; set; }
+    public static GameCanvas instance;
 
     private void Awake()
     {
-        if(instance==null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
