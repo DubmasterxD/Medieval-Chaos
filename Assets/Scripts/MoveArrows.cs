@@ -12,7 +12,7 @@ public class MoveArrows : MonoBehaviour
 
     private void Start()
     {
-        playerMovement = Player.instance.GetComponent<PlayerMovement>();
+        playerMovement = Player.instance.movement;
     }
 
     private void Update()

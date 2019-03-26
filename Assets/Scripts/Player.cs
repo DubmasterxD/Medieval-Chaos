@@ -6,8 +6,9 @@ public class Player : MonoBehaviour
 {
     public static Player instance;
 
+    public PlayerMovement movement { get; private set; }
+
     public string previousScene { get; set; }
-    public bool isMoving { get; set; }
 
     private void Awake()
     {
@@ -15,10 +16,16 @@ public class Player : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SetReferences();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void SetReferences()
+    {
+        movement = GetComponent<PlayerMovement>();
     }
 }

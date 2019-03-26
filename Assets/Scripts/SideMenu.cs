@@ -32,7 +32,7 @@ public class SideMenu : MonoBehaviour
 
     public void OpenItemChangeMenu()
     {
-        if (!player.isMoving)
+        if (!player.movement.isMoving)
         {
             ShowEquippedItems();
             itemEquipMenu.SetActive(true);
@@ -41,7 +41,7 @@ public class SideMenu : MonoBehaviour
 
     public void OpenInventory()
     {
-        if (!player.isMoving)
+        if (!player.movement.isMoving)
         {
             inventoryMenu.SetActive(true);
         }
@@ -49,7 +49,7 @@ public class SideMenu : MonoBehaviour
 
     public void OpenQuestLog()
     {
-        if (!player.isMoving)
+        if (!player.movement.isMoving)
         {
             questLogMenu.SetActive(true);
         }
@@ -57,7 +57,7 @@ public class SideMenu : MonoBehaviour
     
     public void OpenActionDetailsMenu()
     {
-        if (!player.isMoving)
+        if (!player.movement.isMoving)
         {
             actionMenu.SetActive(true);
         }
