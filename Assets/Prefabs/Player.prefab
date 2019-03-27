@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 119585837945782234}
   - component: {fileID: 119585837945782232}
   - component: {fileID: 119585837945782233}
-  - component: {fileID: 119585837945782235}
   - component: {fileID: 119585837945782215}
+  - component: {fileID: 119585837945782235}
+  - component: {fileID: 7962644058215252345}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -102,6 +103,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &119585837945782215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119585837945782237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ec4b6cf00c9f2488ab97b85a64aa06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nickname: 
 --- !u!114 &119585837945782235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
---- !u!114 &119585837945782215
+--- !u!114 &7962644058215252345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,9 +138,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 119585837945782237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ec4b6cf00c9f2488ab97b85a64aa06, type: 3}
+  m_Script: {fileID: 11500000, guid: 26688a9f4bd0d6a43a8ed32b3a0b423d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  element: 0
+  level: 1
+  maxHP: 50
+  armor: 5
+  chanceToBlock: 0
+  critResist: 0
+  fireResist: 0
+  iceResist: 0
+  earthResist: 0
+  minDamage: 1
+  maxDamage: 2
+  attackSpeed: 50
+  critChance: 0
+  critMultiplier: 1.5
+  armorPenetration: 0
+  minElementalDamage: 0
+  maxElementalDamage: 0
+  physicalToElementalDamage: 0
+  damageReflected: 0
+  lifeSteal: 0
+  chanceToSurviveOn1HP: 0
+  chanceToGainShield: 0
+  maxShield: 0
 --- !u!1 &119585837998120460
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +230,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -531090941
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: c59d3acb190334145a14e6d02b3ad490, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

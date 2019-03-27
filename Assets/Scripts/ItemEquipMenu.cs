@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ItemEquipMenu : MonoBehaviour
 {
+    [SerializeField] GameObject itemEquipMenu;
+
     public void CloseWindow()
     {
-        gameObject.SetActive(false);
+        itemEquipMenu.SetActive(false);
     }
 }

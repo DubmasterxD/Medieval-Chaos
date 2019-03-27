@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryMenu : MonoBehaviour
 {
+    [SerializeField] GameObject inventoryMenu;
     [Header("Top Menu")]
     [SerializeField] GameObject itemsMenu = null;
     [SerializeField] GameObject statsMenu = null;
@@ -141,6 +142,6 @@ public class InventoryMenu : MonoBehaviour
     public void CloseWindow()
     {
         ShowItemsMenu();
-        gameObject.SetActive(false);
+        inventoryMenu.SetActive(false);
     }
 }

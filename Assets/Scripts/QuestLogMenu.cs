@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class QuestLogMenu : MonoBehaviour
 {
+    [SerializeField] GameObject questLogMenu;
     [SerializeField] GameObject mainQuestsMenu = null;
     [SerializeField] GameObject sideQuestsMenu = null;
     [SerializeField] GameObject mainQuestsButtonHighlight = null;
@@ -38,6 +39,6 @@ public class QuestLogMenu : MonoBehaviour
 
     public void CloseWindow()
     {
-        gameObject.SetActive(false);
+        questLogMenu.SetActive(false);
     }
 }

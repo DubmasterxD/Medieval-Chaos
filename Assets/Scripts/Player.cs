@@ -7,8 +7,11 @@ public class Player : MonoBehaviour
     public static Player instance;
 
     public PlayerMovement movement { get; private set; }
+    public Stats stats { get; private set; }
 
+    [SerializeField] string nickname;
     public string previousScene { get; set; }
+    public string Nickname { get => nickname; set => nickname = value; }
 
     private void Awake()
     {
@@ -27,5 +30,6 @@ public class Player : MonoBehaviour
     private void SetReferences()
     {
         movement = GetComponent<PlayerMovement>();
+        stats = GetComponent<Stats>();
     }
 }
