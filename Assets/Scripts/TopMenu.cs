@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TopMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Text goldText = null;
+    [SerializeField] Text premiumText = null;
+    [SerializeField] Text movesText = null;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        goldText.text = Player.instance.currency.gold.ToString();
+        premiumText.text = Player.instance.currency.premium.ToString();
+        movesText.text = Player.instance.currency.movesLeft + "/" + Player.instance.currency.maxMoves;
     }
 }

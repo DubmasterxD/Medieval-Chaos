@@ -7131,6 +7131,11 @@ PrefabInstance:
       propertyPath: nickname
       value: Dubmaster xD
       objectReference: {fileID: 0}
+    - target: {fileID: 7962644058215252345, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
+        type: 3}
+      propertyPath: element
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844, type: 3}
 --- !u!1001 &1282849582703558919
@@ -7623,6 +7628,96 @@ PrefabInstance:
     - target: {fileID: 3529065979314626570, guid: 318ef7d5595a5fc4380872f89205df69,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150436412024100079, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150436412024100079, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150436412024100079, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150436412024100079, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150436412024100079, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150436412024100079, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923087447748905454, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923087447748905454, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923087447748905454, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923087447748905454, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923087447748905454, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923087447748905454, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286699829286047577, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286699829286047577, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286699829286047577, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286699829286047577, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286699829286047577, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286699829286047577, guid: 318ef7d5595a5fc4380872f89205df69,
+        type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

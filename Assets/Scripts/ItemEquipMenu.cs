@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemEquipMenu : MonoBehaviour
 {
-    [SerializeField] GameObject itemEquipMenu;
+    [SerializeField] GameObject itemEquipMenu = null;
 
     public void CloseWindow()
     {

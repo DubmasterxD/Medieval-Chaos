@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryMenu : MonoBehaviour
 {
-    [SerializeField] GameObject inventoryMenu;
+    [SerializeField] GameObject inventoryMenu = null;
     [Header("Top Menu")]
     [SerializeField] GameObject itemsMenu = null;
     [SerializeField] GameObject statsMenu = null;
@@ -20,11 +21,27 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] GameObject armorItemsMenuButtonHighlight = null;
     [SerializeField] GameObject accessoryItemsMenuButtonHighlight = null;
     [SerializeField] GameObject miscItemsMenuButtonHighlight = null;
+    [Header("Stats Menu")]
+    [SerializeField] Text nicknameText = null;
+    [SerializeField] Text levelText = null;
+    [SerializeField] Text expValueText = null;
+    [SerializeField] Slider expSlider = null;
+    [SerializeField] Text goldText = null;
+    [SerializeField] Text attackStatsText = null;
+    [SerializeField] Text defenceStatsText = null;
+    [SerializeField] Text specialStatsText = null;
     [Header("Gallery Menu")]
     [SerializeField] GameObject allGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject weaponGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject armorGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject accessoryGalleryMenuButtonHighlight = null;
+
+    private Stats playerStats;
+
+    private void Start()
+    {
+        playerStats = Player.instance.stats;
+    }
 
     public void ShowItemsMenu()
     {
@@ -39,6 +56,7 @@ public class InventoryMenu : MonoBehaviour
         SetAllTopMenuInactive();
         statsMenu.SetActive(true);
         statsMenuButtonHighlight.SetActive(true);
+        RefreshStats();
     }
 
     public void ShowAchievementsMenu()
@@ -137,6 +155,79 @@ public class InventoryMenu : MonoBehaviour
         weaponGalleryMenuButtonHighlight.SetActive(false);
         armorGalleryMenuButtonHighlight.SetActive(false);
         accessoryGalleryMenuButtonHighlight.SetActive(false);
+    }
+
+    private void RefreshStats()
+    {
+        RefreshProfileStats();
+        RefreshAttackStats();
+        RefreshDefenceStats();
+        RefreshSpecialStats();
+        
+    }
+
+    private void RefreshProfileStats()
+    {
+        nicknameText.text = Player.instance.Nickname;
+        levelText.text = "Lvl: " + playerStats.Level;
+        expValueText.text = playerStats.currExp + "/" + playerStats.expToNextLevel;
+        expSlider.value = playerStats.currExp / playerStats.expToNextLevel;
+        goldText.text = Player.instance.currency.gold.ToString();
+    }
+
+    private void RefreshAttackStats()
+    {
+        attackStatsText.text = "Damage: " + playerStats.MinDamage + " - " + playerStats.MaxDamage;
+        attackStatsText.text += "\nAttack Speed: " + playerStats.AttackSpeed;
+        if (playerStats.CritChance != 0)
+        {
+            attackStatsText.text += "\nCritical Hit Chance" + (playerStats.CritChance * 100) + "%";
+            attackStatsText.text += "\nCritical Hit Multiplier" + playerStats.CritMultiplier;
+        }
+        if (playerStats.ArmorPenetration != 0)
+        {
+            attackStatsText.text += "\nArmor Penetration" + (playerStats.ArmorPenetration * 100) + "%";
+        }
+        if (playerStats.Element != Stats.elementals.None)
+        {
+            attackStatsText.text += "\n" + playerStats.Element.ToString() + " Damage: " + playerStats.MinElementalDamage + " - " + playerStats.MaxElementalDamage;
+            attackStatsText.text += "\nPhysical To " + playerStats.Element + " Damage: " + playerStats.PhysicalToElementalDamage;
+        }
+    }
+
+    private void RefreshDefenceStats()
+    {
+        defenceStatsText.text = "Health: " + playerStats.MaxHP;
+        defenceStatsText.text += "\nArmor: " + playerStats.Armor;
+        if (playerStats.ChanceToBlock != 0)
+        {
+            defenceStatsText.text += "\nChance To Block: " + (playerStats.ChanceToBlock * 100) + "%";
+        }
+        if (playerStats.CritResist != 0)
+        {
+            defenceStatsText.text += "\nCritical Damage Reduction: " + (playerStats.CritResist * 100) + "%";
+        }
+        defenceStatsText.text += "\nFire Reduction: " + (playerStats.FireResist * 100) + "%";
+        defenceStatsText.text += "\nIce Reduction: " + (playerStats.IceResist * 100) + "%";
+        defenceStatsText.text += "\nEarth Reduction: " + (playerStats.EarthResist * 100) + "%";
+    }
+
+    private void RefreshSpecialStats()
+    {
+        specialStatsText.text = "Life Steal: " + (playerStats.LifeSteal * 100) + "%";
+        if(playerStats.DamageReflected!=0)
+        {
+            specialStatsText.text += "\nDamage Reflection: " + (playerStats.DamageReflected * 100) + "%";
+        }
+        if(playerStats.ChanceToSurviveOn1HP!=0)
+        {
+            specialStatsText.text += "\nChance To Cheat Death: " + (playerStats.ChanceToSurviveOn1HP * 100) + "%";
+        }
+        if(playerStats.ChanceToGainShield!=0)
+        {
+            specialStatsText.text += "\nChance To Gain Shield: " + (playerStats.ChanceToGainShield * 100) + "%";
+            specialStatsText.text += "\nAmount Of Gained Shield: " + playerStats.MaxShield;
+        }
     }
 
     public void CloseWindow()
