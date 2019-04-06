@@ -17,6 +17,8 @@ public class Item : ScriptableObject
     [SerializeField] private Item[] dismantleResources;
     [SerializeField] private int sellPrice;
     [SerializeField] private int buyPrice;
+    private int nextUpgradeCost;
+    private int currUpgradesDone;
     [Header("Defence")]
     [SerializeField] private int HP;
     [SerializeField] private int armor;
@@ -29,9 +31,9 @@ public class Item : ScriptableObject
     [SerializeField] private int minDamage;
     [SerializeField] private int maxDamage;
     [Range(0, 50)] [SerializeField] private int attackSpeed;
-    [Range(0, 1)] [SerializeField] private int critChance;
-    [Range(1.5f, 3)] [SerializeField] private float critMultiplier;
-    [Range(0, 1)] [SerializeField] private int armorPenetration;
+    [Range(0, 1)] [SerializeField] private float critChance;
+    [SerializeField] private float critMultiplier;
+    [SerializeField] private int armorPenetration;
     [SerializeField] private int minElementalDamage;
     [SerializeField] private int maxElementalDamage;
     [Range(0, 1)] [SerializeField] private float physicalToElementalDamage;
@@ -41,4 +43,5 @@ public class Item : ScriptableObject
     [Range(0, 1)] [SerializeField] private float chanceToSurviveOn1HP;
     [Range(0, 1)] [SerializeField] private float chanceToGainShield;
     [SerializeField] private int Shield;
+    [SerializeField] float movementSpeed;
 }
