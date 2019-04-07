@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e3e1683b6e20240837dee26472babb, type: 3}
   m_Name: Iron Knife
   m_EditorClassIdentifier: 
+  name: 
   ID: 1
-  image: {fileID: 0}
+  image: {fileID: 21300006, guid: c59d3acb190334145a14e6d02b3ad490, type: 3}
   level: 1
   element: 0
   type: 0
@@ -35,12 +36,11 @@ MonoBehaviour:
   critChance: 0
   critMultiplier: 0
   armorPenetration: 0
-  minElementalDamage: 0
-  maxElementalDamage: 0
   physicalToElementalDamage: 0
   damageReflected: 0
   lifeSteal: 0
   chanceToSurviveOn1HP: 0
   chanceToGainShield: 0
-  Shield: 0
+  shield: 0
   movementSpeed: 0
+  itemDescription: 

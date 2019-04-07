@@ -2925,35 +2925,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &361197554 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 119585837945782237, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
-    type: 3}
-  m_PrefabInstance: {fileID: 119585838423286582}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &361197555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361197554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eaeabbb524330e468703eb6801bafa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSlots: 50
-  referenceItems:
-  - {fileID: 11400000, guid: 19b67dbfe26d8634091c32bb1a005f03, type: 2}
-  - {fileID: 11400000, guid: bd3048aa89ab5a141b40cee35bdee3ac, type: 2}
-  - {fileID: 11400000, guid: 2af953ccfcf6d4e41ae850b1e379fdb8, type: 2}
-  - {fileID: 11400000, guid: 66ead1bd9f8106640b8235e52df58e93, type: 2}
-  - {fileID: 11400000, guid: 5f8d29afb3154974db2620f1174cf1c2, type: 2}
-  - {fileID: 11400000, guid: 1e476b17176d7dd47acf16118b47d767, type: 2}
-  - {fileID: 11400000, guid: 8921f2d46495d554f8d4ab20ba567372, type: 2}
-  - {fileID: 11400000, guid: 1354176101c94e54cae7d1e15fe746c9, type: 2}
-  - {fileID: 11400000, guid: b78c4106700af8b4491a34c2d275393c, type: 2}
 --- !u!1 &970764662
 GameObject:
   m_ObjectHideFlags: 0
@@ -7153,16 +7124,6 @@ PrefabInstance:
     - target: {fileID: 119585837945782214, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 119585837945782215, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
-        type: 3}
-      propertyPath: nickname
-      value: Dubmaster xD
-      objectReference: {fileID: 0}
-    - target: {fileID: 7962644058215252345, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
-        type: 3}
-      propertyPath: element
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

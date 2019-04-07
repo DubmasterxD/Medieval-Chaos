@@ -205,11 +205,11 @@ public class InventoryMenu : MonoBehaviour
         }
         if (playerStats.CritResist != 0)
         {
-            defenceStatsText.text += "\nCritical Damage Reduction: " + (playerStats.CritResist * 100) + "%";
+            defenceStatsText.text += "\nCritical Damage Resists: " + (playerStats.CritResist * 100) + "%";
         }
-        defenceStatsText.text += "\nFire Reduction: " + (playerStats.FireResist * 100) + "%";
-        defenceStatsText.text += "\nIce Reduction: " + (playerStats.IceResist * 100) + "%";
-        defenceStatsText.text += "\nEarth Reduction: " + (playerStats.EarthResist * 100) + "%";
+        defenceStatsText.text += "\nFire Resists: " + (playerStats.FireResist * 100) + "%";
+        defenceStatsText.text += "\nIce Resists: " + (playerStats.IceResist * 100) + "%";
+        defenceStatsText.text += "\nEarth Resists: " + (playerStats.EarthResist * 100) + "%";
     }
 
     private void RefreshSpecialStats()

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e3e1683b6e20240837dee26472babb, type: 3}
   m_Name: Dirty Shirt
   m_EditorClassIdentifier: 
+  name: 
   ID: 3
-  image: {fileID: 0}
+  image: {fileID: 21300004, guid: c59d3acb190334145a14e6d02b3ad490, type: 3}
   level: 1
   element: 0
   type: 2
@@ -31,16 +32,15 @@ MonoBehaviour:
   earthResist: 0
   minDamage: 0
   maxDamage: 0
-  attackSpeed: 50
+  attackSpeed: 0
   critChance: 0
   critMultiplier: 0
   armorPenetration: 0
-  minElementalDamage: 0
-  maxElementalDamage: 0
   physicalToElementalDamage: 0
   damageReflected: 0
   lifeSteal: 0
   chanceToSurviveOn1HP: 0
   chanceToGainShield: 0
-  Shield: 0
+  shield: 0
   movementSpeed: 0
+  itemDescription: 
