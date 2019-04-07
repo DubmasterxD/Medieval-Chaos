@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e3e1683b6e20240837dee26472babb, type: 3}
   m_Name: Leather Armor
   m_EditorClassIdentifier: 
-  name: 
-  ID: 4
+  itemName: 
+  IDnumber: 4
   image: {fileID: 0}
   level: 1
   element: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   dismantleResources: []
   sellPrice: 5
   buyPrice: 12
-  HP: 15
+  health: 10
   armor: 5
   chanceToBlock: 0
   critResist: 0

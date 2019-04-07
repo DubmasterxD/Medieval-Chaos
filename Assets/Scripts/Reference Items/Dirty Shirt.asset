@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e3e1683b6e20240837dee26472babb, type: 3}
   m_Name: Dirty Shirt
   m_EditorClassIdentifier: 
-  name: 
-  ID: 3
+  itemName: 
+  IDnumber: 3
   image: {fileID: 21300004, guid: c59d3acb190334145a14e6d02b3ad490, type: 3}
   level: 1
   element: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   dismantleResources: []
   sellPrice: 1
   buyPrice: 2
-  HP: 5
+  health: 5
   armor: 2
   chanceToBlock: 0
   critResist: 0

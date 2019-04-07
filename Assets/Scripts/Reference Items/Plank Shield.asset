@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e3e1683b6e20240837dee26472babb, type: 3}
   m_Name: Plank Shield
   m_EditorClassIdentifier: 
-  ID: 5
+  itemName: 
+  IDnumber: 5
   image: {fileID: 0}
   level: 1
   element: 0
@@ -22,7 +23,7 @@ MonoBehaviour:
   dismantleResources: []
   sellPrice: 5
   buyPrice: 13
-  HP: 0
+  health: 0
   armor: 6
   chanceToBlock: 0.01
   critResist: 0
@@ -35,12 +36,11 @@ MonoBehaviour:
   critChance: 0
   critMultiplier: 0
   armorPenetration: 0
-  minElementalDamage: 0
-  maxElementalDamage: 0
   physicalToElementalDamage: 0
   damageReflected: 0
   lifeSteal: 0
   chanceToSurviveOn1HP: 0
   chanceToGainShield: 0
-  Shield: 0
+  shield: 0
   movementSpeed: 0
+  itemDescription: 

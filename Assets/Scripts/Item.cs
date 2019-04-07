@@ -6,22 +6,22 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     [Header("General")]
-    [SerializeField] private string name;
-    [SerializeField] private int ID;
+    [SerializeField] private string itemName;
+    [SerializeField] private int IDnumber;
     [SerializeField] private Sprite image;
     [SerializeField] private int level;
     [SerializeField] Stats.elementals element;
     [SerializeField] ItemsList.itemTypes type;
     [SerializeField] ItemsList.itemRarity rarity;
     [SerializeField] private int maxDurability;
-    private int currDurability;
+    public int currDurability { get; set; }
     [SerializeField] private Item[] dismantleResources;
     [SerializeField] private int sellPrice;
     [SerializeField] private int buyPrice;
-    private int nextUpgradeCost;
-    private int currUpgradesDone;
+    public int nextUpgradeCost { get; set; }
+    public int currUpgradesDone { get; set; }
     [Header("Defence")]
-    [SerializeField] private int HP;
+    [SerializeField] private int health;
     [SerializeField] private int armor;
     [Range(0, 1)] [SerializeField] private float chanceToBlock;
     [Range(0, 1)] [SerializeField] private float critResist;
@@ -45,16 +45,46 @@ public class Item : ScriptableObject
     [SerializeField] float movementSpeed;
     [Header("Description")]
     [Multiline(10)][SerializeField] string itemDescription;
-
+    
+    public string Name { get => itemName; set => itemName = value; }
+    public int IDNumber { get => IDnumber; set => IDnumber = value; }
     public Sprite Image { get => image; set => image = value; }
+    public int Level { get => level; set => level = value; }
+    public Stats.elementals Element { get => element; set => element = value; }
+    public ItemsList.itemTypes Type { get => type; set => type = value; }
+    public ItemsList.itemRarity Rarity { get => rarity; set => rarity = value; }
+    public int MaxDurability { get => maxDurability; set => maxDurability = value; }
+    public Item[] DismantleResources { get => dismantleResources; set => dismantleResources = value; }
+    public int SellPrice { get => sellPrice; set => sellPrice = value; }
+    public int BuyPrice { get => buyPrice; set => buyPrice = value; }
+    public int Health { get => health; set => health = value; }
+    public int Armor { get => armor; set => armor = value; }
+    public float ChanceToBlock { get => chanceToBlock; set => chanceToBlock = value; }
+    public float CritResist { get => critResist; set => critResist = value; }
+    public float FireResist { get => fireResist; set => fireResist = value; }
+    public float IceResist { get => iceResist; set => iceResist = value; }
+    public float EarthResist { get => earthResist; set => earthResist = value; }
+    public int MinDamage { get => minDamage; set => minDamage = value; }
+    public int MaxDamage { get => maxDamage; set => maxDamage = value; }
+    public int AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
+    public float CritChance { get => critChance; set => critChance = value; }
+    public float CritMultiplier { get => critMultiplier; set => critMultiplier = value; }
+    public int ArmorPenetration { get => armorPenetration; set => armorPenetration = value; }
+    public float PhysicalToElementalDamage { get => physicalToElementalDamage; set => physicalToElementalDamage = value; }
+    public float DamageReflected { get => damageReflected; set => damageReflected = value; }
+    public float LifeSteal { get => lifeSteal; set => lifeSteal = value; }
+    public float ChanceToSurviveOn1HP { get => chanceToSurviveOn1HP; set => chanceToSurviveOn1HP = value; }
+    public float ChanceToGainShield { get => chanceToGainShield; set => chanceToGainShield = value; }
+    public int Shield { get => shield; set => shield = value; }
+    public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public string ItemDescription { get => itemDescription; set => itemDescription = value; }
 
     public string StatsDescription()
     {
-        string stats = rarity + name + "\n" + " Level: " + level + "\nDurability: "+currDurability+"/"+maxDurability;
-        if(HP!=0)
+        string stats = rarity + itemName + "\n" + " Level: " + level + "\nDurability: "+currDurability+"/"+maxDurability;
+        if(health!=0)
         {
-            stats += "\nHP: " + HP;
+            stats += "\nHP: " + health;
         }
         if(armor!=0)
         {
@@ -62,23 +92,23 @@ public class Item : ScriptableObject
         }
         if (chanceToBlock != 0)
         {
-            stats += "\nChance To Block: " + chanceToBlock + "%";
+            stats += "\nChance To Block: " + (chanceToBlock*100) + "%";
         }
         if (critResist != 0)
         {
-            stats += "\nCrit Resists: " + critResist + "%";
+            stats += "\nCrit Resists: " + (critResist * 100) + "%";
         }
         if (fireResist != 0)
         {
-            stats += "\nFire Resists: " + fireResist + "%";
+            stats += "\nFire Resists: " + (fireResist * 100) + "%";
         }
         if (iceResist != 0)
         {
-            stats += "\nIce Resists: " + iceResist + "%";
+            stats += "\nIce Resists: " + (iceResist * 100) + "%";
         }
         if (earthResist != 0)
         {
-            stats += "\nEarth Resists: " + earthResist + "%";
+            stats += "\nEarth Resists: " + (earthResist * 100) + "%";
         }
         if (maxDamage != 0)
         {
@@ -107,11 +137,11 @@ public class Item : ScriptableObject
         }
         if (critChance != 0)
         {
-            stats += "\nChance To Crit: " + critChance + "%";
+            stats += "\nChance To Crit: " + (critChance * 100) + "%";
         }
         if (critMultiplier != 0)
         {
-            stats += "\nCrit Multiplier: " + critMultiplier + "%";
+            stats += "\nCrit Multiplier: " + (critMultiplier * 100) + "%";
         }
         if (armorPenetration != 0)
         {
@@ -119,23 +149,23 @@ public class Item : ScriptableObject
         }
         if (physicalToElementalDamage != 0)
         {
-            stats += "\nPhysical To Elemental Damage: " + physicalToElementalDamage+"%";
+            stats += "\nPhysical To Elemental: " + (physicalToElementalDamage * 100)+"%";
         }
         if (damageReflected != 0)
         {
-            stats += "\nDamage Reflected: " + damageReflected + "%";
+            stats += "\nDamage Reflected: " + (damageReflected * 100) + "%";
         }
         if (lifeSteal != 0)
         {
-            stats += "\nLife Steal: " + lifeSteal + "%";
+            stats += "\nLife Steal: " + (lifeSteal * 100) + "%";
         }
         if (chanceToSurviveOn1HP != 0)
         {
-            stats += "\nChance To Survive On 1 HP: " + chanceToSurviveOn1HP + "%";
+            stats += "\nChance To Survive Death: " + (chanceToSurviveOn1HP * 100) + "%";
         }
         if (chanceToGainShield != 0)
         {
-            stats += "\nChance To Gain Shield: " + chanceToGainShield + "%";
+            stats += "\nChance To Gain Shield: " + (chanceToGainShield * 100) + "%";
         }
         if (shield != 0)
         {

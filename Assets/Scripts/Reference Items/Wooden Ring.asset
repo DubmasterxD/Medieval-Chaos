@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e3e1683b6e20240837dee26472babb, type: 3}
   m_Name: Wooden Ring
   m_EditorClassIdentifier: 
-  ID: 7
+  itemName: 
+  IDnumber: 7
   image: {fileID: 0}
   level: 0
   element: 0
@@ -22,7 +23,7 @@ MonoBehaviour:
   dismantleResources: []
   sellPrice: 4
   buyPrice: 10
-  HP: 5
+  health: 0
   armor: 0
   chanceToBlock: 0
   critResist: 0
@@ -35,12 +36,11 @@ MonoBehaviour:
   critChance: 0
   critMultiplier: 0.2
   armorPenetration: 0
-  minElementalDamage: 0
-  maxElementalDamage: 0
   physicalToElementalDamage: 0
   damageReflected: 0
   lifeSteal: 0
   chanceToSurviveOn1HP: 0
   chanceToGainShield: 0
-  Shield: 0
+  shield: 0
   movementSpeed: 0
+  itemDescription: 

@@ -7126,6 +7126,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7962644058215252345, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
+        type: 3}
+      propertyPath: basicHP
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962644058215252345, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
+        type: 3}
+      propertyPath: basicDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962644058215252345, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844,
+        type: 3}
+      propertyPath: basicCritMultiplier
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 361197555, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844, type: 3}
+      propertyPath: equippedArtifact
+      value: 
+      objectReference: {fileID: 11400000, guid: 44e007aba0e118a4f998d126bebe4862,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ae1c40c5ffd16c4c84440bf3f8ed844, type: 3}
 --- !u!1001 &1282849582703558919

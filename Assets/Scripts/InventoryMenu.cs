@@ -178,38 +178,38 @@ public class InventoryMenu : MonoBehaviour
     private void RefreshAttackStats()
     {
         attackStatsText.text = "Damage: " + playerStats.MinDamage + " - " + playerStats.MaxDamage;
-        attackStatsText.text += "\nAttack Speed: " + playerStats.AttackSpeed;
+        attackStatsText.text += "\n\nAttack Speed: " + playerStats.AttackSpeed;
         if (playerStats.CritChance != 0)
         {
-            attackStatsText.text += "\nCritical Hit Chance" + (playerStats.CritChance * 100) + "%";
-            attackStatsText.text += "\nCritical Hit Multiplier" + playerStats.CritMultiplier;
+            attackStatsText.text += "\n\nCritical Hit Chance: " + (playerStats.CritChance * 100) + "%";
+            attackStatsText.text += "\n\nCritical Hit Multiplier: " + playerStats.CritMultiplier;
         }
         if (playerStats.ArmorPenetration != 0)
         {
-            attackStatsText.text += "\nArmor Penetration" + (playerStats.ArmorPenetration * 100) + "%";
+            attackStatsText.text += "\n\nArmor Penetration: " + playerStats.ArmorPenetration;
         }
         if (playerStats.Element != Stats.elementals.None)
         {
-            attackStatsText.text += "\n" + playerStats.Element.ToString() + " Damage: " + playerStats.MinElementalDamage + " - " + playerStats.MaxElementalDamage;
-            attackStatsText.text += "\nPhysical To " + playerStats.Element + " Damage: " + playerStats.PhysicalToElementalDamage;
+            attackStatsText.text += "\n\n" + playerStats.Element.ToString() + " Damage: " + playerStats.MinElementalDamage + " - " + playerStats.MaxElementalDamage;
+            attackStatsText.text += "\n\nPhysical To " + playerStats.Element + " Damage: " + playerStats.PhysicalToElementalDamage;
         }
     }
 
     private void RefreshDefenceStats()
     {
         defenceStatsText.text = "Health: " + playerStats.MaxHP;
-        defenceStatsText.text += "\nArmor: " + playerStats.Armor;
+        defenceStatsText.text += "\n\nArmor: " + playerStats.Armor;
         if (playerStats.ChanceToBlock != 0)
         {
-            defenceStatsText.text += "\nChance To Block: " + (playerStats.ChanceToBlock * 100) + "%";
+            defenceStatsText.text += "\n\nChance To Block: " + (playerStats.ChanceToBlock * 100) + "%";
         }
         if (playerStats.CritResist != 0)
         {
-            defenceStatsText.text += "\nCritical Damage Resists: " + (playerStats.CritResist * 100) + "%";
+            defenceStatsText.text += "\n\nCritical Damage Resists: " + (playerStats.CritResist * 100) + "%";
         }
-        defenceStatsText.text += "\nFire Resists: " + (playerStats.FireResist * 100) + "%";
-        defenceStatsText.text += "\nIce Resists: " + (playerStats.IceResist * 100) + "%";
-        defenceStatsText.text += "\nEarth Resists: " + (playerStats.EarthResist * 100) + "%";
+        defenceStatsText.text += "\n\nFire Resists: " + (playerStats.FireResist * 100) + "%";
+        defenceStatsText.text += "\n\nIce Resists: " + (playerStats.IceResist * 100) + "%";
+        defenceStatsText.text += "\n\nEarth Resists: " + (playerStats.EarthResist * 100) + "%";
     }
 
     private void RefreshSpecialStats()
@@ -217,16 +217,16 @@ public class InventoryMenu : MonoBehaviour
         specialStatsText.text = "Life Steal: " + (playerStats.LifeSteal * 100) + "%";
         if(playerStats.DamageReflected!=0)
         {
-            specialStatsText.text += "\nDamage Reflection: " + (playerStats.DamageReflected * 100) + "%";
+            specialStatsText.text += "\n\nDamage Reflection: " + (playerStats.DamageReflected * 100) + "%";
         }
         if(playerStats.ChanceToSurviveOn1HP!=0)
         {
-            specialStatsText.text += "\nChance To Cheat Death: " + (playerStats.ChanceToSurviveOn1HP * 100) + "%";
+            specialStatsText.text += "\n\nChance To Cheat Death: " + (playerStats.ChanceToSurviveOn1HP * 100) + "%";
         }
         if(playerStats.ChanceToGainShield!=0)
         {
-            specialStatsText.text += "\nChance To Gain Shield: " + (playerStats.ChanceToGainShield * 100) + "%";
-            specialStatsText.text += "\nAmount Of Gained Shield: " + playerStats.MaxShield;
+            specialStatsText.text += "\n\nChance To Gain Shield: " + (playerStats.ChanceToGainShield * 100) + "%";
+            specialStatsText.text += "\n\nAmount Of Gained Shield: " + playerStats.MaxShield;
         }
     }
 
