@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public PlayerMovement movement { get; private set; }
     public Stats stats { get; private set; }
     public CurrencyController currency { get; private set; }
+    public ItemsList items { get; private set; }
 
     [SerializeField] string nickname;
     public string previousScene { get; set; }
@@ -33,5 +34,6 @@ public class Player : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         stats = GetComponent<Stats>();
         currency = GetComponent<CurrencyController>();
+        items = GetComponent<ItemsList>();
     }
 }

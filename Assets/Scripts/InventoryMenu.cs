@@ -21,6 +21,11 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] GameObject armorItemsMenuButtonHighlight = null;
     [SerializeField] GameObject accessoryItemsMenuButtonHighlight = null;
     [SerializeField] GameObject miscItemsMenuButtonHighlight = null;
+    [SerializeField] Text SlotsText = null;
+    [SerializeField] GameObject[] itemSlots = null;
+    [SerializeField] Image selectedItemImage = null;
+    [SerializeField] Text selectedItemName = null;
+    [SerializeField] Text selectedItemDescription = null;
     [Header("Stats Menu")]
     [SerializeField] Text nicknameText = null;
     [SerializeField] Text levelText = null;
@@ -35,12 +40,15 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] GameObject weaponGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject armorGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject accessoryGalleryMenuButtonHighlight = null;
+    int selectedItemIndex = 0;
 
     private Stats playerStats;
+    private ItemsList playerItems;
 
     private void Start()
     {
         playerStats = Player.instance.stats;
+        playerItems = Player.instance.items;
     }
 
     public void ShowItemsMenu()
@@ -48,7 +56,24 @@ public class InventoryMenu : MonoBehaviour
         SetAllTopMenuInactive();
         itemsMenu.SetActive(true);
         itemsMenuButtonHighlight.SetActive(true);
+        SetItemSlots();
         ShowAllItems();
+    }
+
+    public void SetItemSlots()
+    {
+        for(int i=0; i<itemSlots.Length;i++)
+        {
+            if(i<playerItems.ItemSlots)
+            {
+                itemSlots[i].SetActive(true);
+            }
+            else
+            {
+                itemSlots[i].SetActive(false);
+            }
+        }
+        SlotsText.text = "Slots used: " + playerItems.GetNumberOfSlotsUsed() + "/" + playerItems.ItemSlots;
     }
 
     public void ShowStatsMenu()
@@ -78,6 +103,18 @@ public class InventoryMenu : MonoBehaviour
     {
         SetAllItemsMenuHighlightInactive();
         allItemsMenuButtonHighlight.SetActive(true);
+        for(int i=0; i<playerItems.ItemSlots;i++)
+        {
+            if(playerItems.InventoryItems[i]==null)
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = null;
+            }
+            else
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = playerItems.InventoryItems[i].Image;
+            }
+        }
+        SelectItem(0);
     }
 
     public void ShowWeaponItems()
@@ -155,6 +192,23 @@ public class InventoryMenu : MonoBehaviour
         weaponGalleryMenuButtonHighlight.SetActive(false);
         armorGalleryMenuButtonHighlight.SetActive(false);
         accessoryGalleryMenuButtonHighlight.SetActive(false);
+    }
+
+    public void SelectItem(int index)
+    {
+        selectedItemIndex = index;
+        if(playerItems.InventoryItems[index]==null)
+        {
+            selectedItemImage.sprite = null;
+            selectedItemName.text = "None";
+            selectedItemDescription.text = "No item selected";
+        }
+        else
+        {
+            selectedItemImage.sprite = playerItems.InventoryItems[index].Image;
+            selectedItemName.text = playerItems.InventoryItems[index].Rarity + " " + playerItems.InventoryItems[index].Name;
+            selectedItemDescription.text = playerItems.InventoryItems[index].GetStatsDescription();
+        }
     }
 
     private void RefreshStats()

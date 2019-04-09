@@ -46,7 +46,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedWeapon.StatsDescription();
+                    selectedItemInfo.text = items.EquippedWeapon.GetStatsDescription();
                 }
                 break;
             case "Armor":
@@ -56,7 +56,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedArmor.StatsDescription();
+                    selectedItemInfo.text = items.EquippedArmor.GetStatsDescription();
                 }
                 break;
             case "Shield":
@@ -66,7 +66,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedShield.StatsDescription();
+                    selectedItemInfo.text = items.EquippedShield.GetStatsDescription();
                 }
                 break;
             case "Neckle":
@@ -76,7 +76,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedNeckle.StatsDescription();
+                    selectedItemInfo.text = items.EquippedNeckle.GetStatsDescription();
                 }
                 break;
             case "Ring":
@@ -86,7 +86,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedRing.StatsDescription();
+                    selectedItemInfo.text = items.EquippedRing.GetStatsDescription();
                 }
                 break;
             case "Helmet":
@@ -96,7 +96,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedHelmet.StatsDescription();
+                    selectedItemInfo.text = items.EquippedHelmet.GetStatsDescription();
                 }
                 break;
             case "Boots":
@@ -106,7 +106,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedBoots.StatsDescription();
+                    selectedItemInfo.text = items.EquippedBoots.GetStatsDescription();
                 }
                 break;
             case "Gloves":
@@ -116,7 +116,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedGloves.StatsDescription();
+                    selectedItemInfo.text = items.EquippedGloves.GetStatsDescription();
                 }
                 break;
             case "Artifact":
@@ -126,7 +126,7 @@ public class SideMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemInfo.text = items.EquippedArtifact.StatsDescription();
+                    selectedItemInfo.text = items.EquippedArtifact.GetStatsDescription();
                 }
                 break;
             default:

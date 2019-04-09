@@ -203,7 +203,57 @@ MonoBehaviour:
   equippedGloves: {fileID: 0}
   equippedArtifact: {fileID: 11400000, guid: 44e007aba0e118a4f998d126bebe4862, type: 2}
   equippedHelmet: {fileID: 0}
-  inventoryItems: []
+  inventoryItems:
+  - {fileID: 11400000, guid: 2af953ccfcf6d4e41ae850b1e379fdb8, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 19b67dbfe26d8634091c32bb1a005f03, type: 2}
+  - {fileID: 11400000, guid: 19b67dbfe26d8634091c32bb1a005f03, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   referenceItems:
   - {fileID: 11400000, guid: 19b67dbfe26d8634091c32bb1a005f03, type: 2}
   - {fileID: 11400000, guid: bd3048aa89ab5a141b40cee35bdee3ac, type: 2}

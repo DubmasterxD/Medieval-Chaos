@@ -31,11 +31,13 @@ public class ItemsList : MonoBehaviour
     public Item[] EquippedItems { get => equippedItems; set => equippedItems = value; }
     public Item EquippedArtifact { get => equippedArtifact; set => equippedArtifact = value; }
     public Item EquippedHelmet { get => equippedHelmet; set => equippedHelmet = value; }
+    public int ItemSlots { get => itemSlots; set => itemSlots = value; }
+    public Item[] InventoryItems { get => inventoryItems; set => inventoryItems = value; }
 
     private void Start()
     {
         playerStats = Player.instance.GetComponent<Stats>();
-        inventoryItems = new Item[itemSlots];
+        //inventoryItems = new Item[itemSlots];
         equippedItems = new Item[] { equippedWeapon, equippedArmor, equippedShield, equippedRing, equippedNeckle, equippedBoots, equippedGloves, equippedArtifact, equippedHelmet };
         UpdateStats();
     }
@@ -81,5 +83,18 @@ public class ItemsList : MonoBehaviour
         playerStats.IncreaseMaxElementalDamage(Mathf.RoundToInt(playerStats.MaxDamage * playerStats.PhysicalToElementalDamage));
         playerStats.IncreaseMinDamage(-Mathf.RoundToInt(playerStats.MinDamage * playerStats.PhysicalToElementalDamage));
         playerStats.IncreaseMaxDamage(-Mathf.RoundToInt(playerStats.MaxDamage * playerStats.PhysicalToElementalDamage));
+    }
+
+    public int GetNumberOfSlotsUsed()
+    {
+        int used = 0;
+        for (int i=0; i<inventoryItems.Length;i++)
+        {
+            if(inventoryItems[i]!=null)
+            {
+                used++;
+            }
+        }
+        return used;
     }
 }

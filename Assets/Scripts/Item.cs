@@ -79,7 +79,7 @@ public class Item : ScriptableObject
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public string ItemDescription { get => itemDescription; set => itemDescription = value; }
 
-    public string StatsDescription()
+    public string GetStatsDescription()
     {
         string stats = rarity + itemName + "\n" + " Level: " + level + "\nDurability: "+currDurability+"/"+maxDurability;
         if(health!=0)
