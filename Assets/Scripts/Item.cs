@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Item : ScriptableObject
+public class Item : ScriptableObject, IComparable<Item>
 {
     [Header("General")]
     [SerializeField] private string itemName;
-    [SerializeField] private int IDnumber;
+    [SerializeField] private int iDNumber;
     [SerializeField] private Sprite image;
     [SerializeField] private int level;
     [SerializeField] Stats.elementals element;
@@ -20,6 +21,7 @@ public class Item : ScriptableObject
     [SerializeField] private int buyPrice;
     public int nextUpgradeCost { get; set; }
     public int currUpgradesDone { get; set; }
+    [SerializeField] int amount;
     [Header("Defence")]
     [SerializeField] private int health;
     [SerializeField] private int armor;
@@ -44,10 +46,10 @@ public class Item : ScriptableObject
     [SerializeField] private int shield;
     [SerializeField] float movementSpeed;
     [Header("Description")]
-    [Multiline(10)][SerializeField] string itemDescription;
-    
+    [Multiline(10)] [SerializeField] string itemDescription;
+
     public string Name { get => itemName; set => itemName = value; }
-    public int IDNumber { get => IDnumber; set => IDnumber = value; }
+    public int IDNumber { get => iDNumber; set => iDNumber = value; }
     public Sprite Image { get => image; set => image = value; }
     public int Level { get => level; set => level = value; }
     public Stats.elementals Element { get => element; set => element = value; }
@@ -78,21 +80,27 @@ public class Item : ScriptableObject
     public int Shield { get => shield; set => shield = value; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public string ItemDescription { get => itemDescription; set => itemDescription = value; }
+    public int Amount { get => amount; set => amount = value; }
 
     public string GetStatsDescription()
     {
-        string stats = rarity + itemName + "\n" + " Level: " + level + "\nDurability: "+currDurability+"/"+maxDurability;
-        if(health!=0)
+        string stats = "";
+        if (rarity != ItemsList.itemRarity.Common)
+        {
+            stats = rarity.ToString();
+        }
+        stats += itemName + "\n" + " Level: " + level + "\nDurability: " + currDurability + "/" + maxDurability;
+        if (health != 0)
         {
             stats += "\nHP: " + health;
         }
-        if(armor!=0)
+        if (armor != 0)
         {
             stats += "\nArmor: " + armor;
         }
         if (chanceToBlock != 0)
         {
-            stats += "\nChance To Block: " + (chanceToBlock*100) + "%";
+            stats += "\nChance To Block: " + (chanceToBlock * 100) + "%";
         }
         if (critResist != 0)
         {
@@ -129,7 +137,7 @@ public class Item : ScriptableObject
                 default:
                     break;
             }
-            stats += "Damage: " + minDamage +"-"+maxDamage;
+            stats += "Damage: " + minDamage + "-" + maxDamage;
         }
         if (attackSpeed != 0)
         {
@@ -149,7 +157,7 @@ public class Item : ScriptableObject
         }
         if (physicalToElementalDamage != 0)
         {
-            stats += "\nPhysical To Elemental: " + (physicalToElementalDamage * 100)+"%";
+            stats += "\nPhysical To Elemental: " + (physicalToElementalDamage * 100) + "%";
         }
         if (damageReflected != 0)
         {
@@ -176,5 +184,17 @@ public class Item : ScriptableObject
             stats += "\nMovement Speed: " + movementSpeed;
         }
         return stats;
+    }
+
+    public int CompareTo(Item other)
+    {
+        if (other == null) return -1;
+        if (this.rarity > other.rarity) return -1;
+        if (this.rarity < other.rarity) return 1;
+        if (this.level > other.level) return -1;
+        if (this.level < other.level) return 1;
+        if (this.type < other.type) return -1;
+        if (this.type > other.type) return 1;
+        return 0;
     }
 }

@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Leather Armor
   m_EditorClassIdentifier: 
   itemName: 
-  IDnumber: 4
+  iDNumber: 4
   image: {fileID: 0}
-  level: 1
+  level: 2
   element: 0
-  type: 2
+  type: 1
   rarity: 0
   maxDurability: 10
   dismantleResources: []
   sellPrice: 5
   buyPrice: 12
+  amount: 0
   health: 10
   armor: 5
   chanceToBlock: 0

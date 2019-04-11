@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Plank Shield
   m_EditorClassIdentifier: 
   itemName: 
-  IDnumber: 5
+  iDNumber: 5
   image: {fileID: 0}
   level: 1
   element: 0
-  type: 1
+  type: 2
   rarity: 0
   maxDurability: 20
   dismantleResources: []
   sellPrice: 5
   buyPrice: 13
+  amount: 0
   health: 0
   armor: 6
   chanceToBlock: 0.01

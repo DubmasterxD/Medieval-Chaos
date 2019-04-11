@@ -206,18 +206,18 @@ MonoBehaviour:
   inventoryItems:
   - {fileID: 11400000, guid: 2af953ccfcf6d4e41ae850b1e379fdb8, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 1e476b17176d7dd47acf16118b47d767, type: 2}
   - {fileID: 11400000, guid: 19b67dbfe26d8634091c32bb1a005f03, type: 2}
   - {fileID: 11400000, guid: 19b67dbfe26d8634091c32bb1a005f03, type: 2}
+  - {fileID: 11400000, guid: 2e91a12bf0a10184f8cd64964959e25f, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: bd3048aa89ab5a141b40cee35bdee3ac, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 66ead1bd9f8106640b8235e52df58e93, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

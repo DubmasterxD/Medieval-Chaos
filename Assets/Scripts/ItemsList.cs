@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ItemsList : MonoBehaviour
 {
-    public enum itemTypes { Weapon, Shield, Armor, Neckle, Boots, Gloves, Ring, Helmet, Artifact };
+    public enum itemTypes { Weapon, Armor, Shield, Helmet, Boots, Gloves, Neckle, Ring, Artifact, Misc };
     public enum itemRarity { Common, Uncommon, Rare, Legendary, Unique };
     [SerializeField] int itemSlots = 50;
     [SerializeField] Item equippedWeapon;
@@ -46,7 +48,7 @@ public class ItemsList : MonoBehaviour
     {
         playerStats.ResetStats();
         playerStats.Element = equippedWeapon.Element;
-        foreach(Item item in equippedItems)
+        foreach (Item item in equippedItems)
         {
             if (item != null)
             {
@@ -88,13 +90,32 @@ public class ItemsList : MonoBehaviour
     public int GetNumberOfSlotsUsed()
     {
         int used = 0;
-        for (int i=0; i<inventoryItems.Length;i++)
+        for (int i = 0; i < inventoryItems.Length; i++)
         {
-            if(inventoryItems[i]!=null)
+            if (inventoryItems[i] != null)
             {
                 used++;
             }
         }
         return used;
+    }
+
+    public void SortInventory()
+    {
+        for (int i = 1; i < inventoryItems.Length; i++)
+        {
+            Item key = inventoryItems[i];
+            if (key != null)
+            {
+                int j = i - 1;
+                while (j >= 0 && key.CompareTo(inventoryItems[j]) < 0)
+                {
+                    inventoryItems[j + 1] = inventoryItems[j];
+                    j = j - 1;
+                }
+                j++;
+                inventoryItems[j] = key;
+            }
+        }
     }
 }

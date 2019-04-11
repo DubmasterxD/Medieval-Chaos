@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Leather Boots
   m_EditorClassIdentifier: 
   itemName: 
-  IDnumber: 8
+  iDNumber: 8
   image: {fileID: 0}
   level: 0
   element: 0
@@ -23,6 +23,7 @@ MonoBehaviour:
   dismantleResources: []
   sellPrice: 2
   buyPrice: 4
+  amount: 0
   health: 5
   armor: 0
   chanceToBlock: 0

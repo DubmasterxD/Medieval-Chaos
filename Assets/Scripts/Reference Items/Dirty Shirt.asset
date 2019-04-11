@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Dirty Shirt
   m_EditorClassIdentifier: 
   itemName: 
-  IDnumber: 3
+  iDNumber: 3
   image: {fileID: 21300004, guid: c59d3acb190334145a14e6d02b3ad490, type: 3}
   level: 1
   element: 0
-  type: 2
+  type: 1
   rarity: 0
   maxDurability: 10
   dismantleResources: []
   sellPrice: 1
   buyPrice: 2
+  amount: 0
   health: 5
   armor: 2
   chanceToBlock: 0

@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Wooden Ring
   m_EditorClassIdentifier: 
   itemName: 
-  IDnumber: 7
+  iDNumber: 7
   image: {fileID: 0}
   level: 0
   element: 0
-  type: 6
+  type: 7
   rarity: 1
   maxDurability: 5
   dismantleResources: []
   sellPrice: 4
   buyPrice: 10
+  amount: 0
   health: 0
   armor: 0
   chanceToBlock: 0

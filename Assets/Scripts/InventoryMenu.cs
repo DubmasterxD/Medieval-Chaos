@@ -62,9 +62,9 @@ public class InventoryMenu : MonoBehaviour
 
     public void SetItemSlots()
     {
-        for(int i=0; i<itemSlots.Length;i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            if(i<playerItems.ItemSlots)
+            if (i < playerItems.ItemSlots)
             {
                 itemSlots[i].SetActive(true);
             }
@@ -78,10 +78,10 @@ public class InventoryMenu : MonoBehaviour
 
     public void ShowStatsMenu()
     {
+        RefreshStats();
         SetAllTopMenuInactive();
         statsMenu.SetActive(true);
         statsMenuButtonHighlight.SetActive(true);
-        RefreshStats();
     }
 
     public void ShowAchievementsMenu()
@@ -101,17 +101,25 @@ public class InventoryMenu : MonoBehaviour
 
     public void ShowAllItems()
     {
+        playerItems.SortInventory();
         SetAllItemsMenuHighlightInactive();
         allItemsMenuButtonHighlight.SetActive(true);
-        for(int i=0; i<playerItems.ItemSlots;i++)
+        for (int i = 0; i < playerItems.ItemSlots; i++)
         {
-            if(playerItems.InventoryItems[i]==null)
+            itemSlots[i].GetComponentInChildren<Text>().text = "";
+            if (playerItems.InventoryItems[i] == null)
             {
                 itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = null;
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
             }
             else
             {
                 itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = playerItems.InventoryItems[i].Image;
+                if (playerItems.InventoryItems[i].Type == ItemsList.itemTypes.Misc)
+                {
+                    itemSlots[i].GetComponentInChildren<Text>().text = playerItems.InventoryItems[i].Amount.ToString();
+                }
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
             }
         }
         SelectItem(0);
@@ -121,24 +129,92 @@ public class InventoryMenu : MonoBehaviour
     {
         SetAllItemsMenuHighlightInactive();
         weaponItemsMenuButtonHighlight.SetActive(true);
+        bool selected = false;
+        for (int i = 0; i < playerItems.ItemSlots; i++)
+        {
+            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Weapon && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Shield))
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
+            }
+            else
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
+                if (selected == false)
+                {
+                    SelectItem(i);
+                    selected = true;
+                }
+            }
+        }
     }
 
     public void ShowArmorItems()
     {
         SetAllItemsMenuHighlightInactive();
         armorItemsMenuButtonHighlight.SetActive(true);
+        bool selected = false;
+        for (int i = 0; i < playerItems.ItemSlots; i++)
+        {
+            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Armor && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Helmet && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Boots && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Gloves))
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
+            }
+            else
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
+                if (selected == false)
+                {
+                    SelectItem(i);
+                    selected = true;
+                }
+            }
+        }
     }
 
     public void ShowAccessoryItems()
     {
         SetAllItemsMenuHighlightInactive();
         accessoryItemsMenuButtonHighlight.SetActive(true);
+        bool selected = false;
+        for (int i = 0; i < playerItems.ItemSlots; i++)
+        {
+            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Artifact && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Neckle && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Ring))
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
+            }
+            else
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
+                if (selected == false)
+                {
+                    SelectItem(i);
+                    selected = true;
+                }
+            }
+        }
     }
 
     public void ShowMiscItems()
     {
         SetAllItemsMenuHighlightInactive();
         miscItemsMenuButtonHighlight.SetActive(true);
+        bool selected = false;
+        for (int i = 0; i < playerItems.ItemSlots; i++)
+        {
+            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Misc))
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
+            }
+            else
+            {
+                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
+                if (selected == false)
+                {
+                    SelectItem(i);
+                    selected = true;
+                }
+            }
+        }
     }
 
     public void ShowAllGallery()
@@ -197,17 +273,20 @@ public class InventoryMenu : MonoBehaviour
     public void SelectItem(int index)
     {
         selectedItemIndex = index;
-        if(playerItems.InventoryItems[index]==null)
+        if (itemSlots[index].GetComponentsInChildren<Image>()[1].color != Color.black)
         {
-            selectedItemImage.sprite = null;
-            selectedItemName.text = "None";
-            selectedItemDescription.text = "No item selected";
-        }
-        else
-        {
-            selectedItemImage.sprite = playerItems.InventoryItems[index].Image;
-            selectedItemName.text = playerItems.InventoryItems[index].Rarity + " " + playerItems.InventoryItems[index].Name;
-            selectedItemDescription.text = playerItems.InventoryItems[index].GetStatsDescription();
+            if (playerItems.InventoryItems[index] == null)
+            {
+                selectedItemImage.sprite = null;
+                selectedItemName.text = "None";
+                selectedItemDescription.text = "No item selected";
+            }
+            else
+            {
+                selectedItemImage.sprite = playerItems.InventoryItems[index].Image;
+                selectedItemName.text = playerItems.InventoryItems[index].Rarity + " " + playerItems.InventoryItems[index].Name;
+                selectedItemDescription.text = playerItems.InventoryItems[index].GetStatsDescription();
+            }
         }
     }
 
@@ -217,7 +296,6 @@ public class InventoryMenu : MonoBehaviour
         RefreshAttackStats();
         RefreshDefenceStats();
         RefreshSpecialStats();
-        
     }
 
     private void RefreshProfileStats()
@@ -273,20 +351,20 @@ public class InventoryMenu : MonoBehaviour
         {
             specialStatsText.text = "\nLife Steal: " + (playerStats.LifeSteal * 100) + "%";
         }
-        if(playerStats.DamageReflected!=0)
+        if (playerStats.DamageReflected != 0)
         {
             specialStatsText.text += "\nDamage Reflection: " + (playerStats.DamageReflected * 100) + "%";
         }
-        if(playerStats.ChanceToSurviveOn1HP!=0)
+        if (playerStats.ChanceToSurviveOn1HP != 0)
         {
             specialStatsText.text += "\nChance To Cheat Death: " + (playerStats.ChanceToSurviveOn1HP * 100) + "%";
         }
-        if(playerStats.ChanceToGainShield!=0)
+        if (playerStats.ChanceToGainShield != 0)
         {
             specialStatsText.text += "\nChance To Gain Shield: " + (playerStats.ChanceToGainShield * 100) + "%";
             specialStatsText.text += "\nAmount Of Gained Shield: " + playerStats.MaxShield;
         }
-        if(specialStatsText.text!="")
+        if (specialStatsText.text != "")
         {
             specialStatsText.text = specialStatsText.text.Remove(0, 1);
         }
