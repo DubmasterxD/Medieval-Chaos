@@ -208,6 +208,7 @@ public class SideMenu : MonoBehaviour
         if (!player.movement.isMoving)
         {
             inventoryMenu.SetActive(true);
+            gameObject.transform.parent.GetComponentInChildren<InventoryMenu>().ShowItemsMenu();
         }
     }
 
@@ -216,6 +217,7 @@ public class SideMenu : MonoBehaviour
         if (!player.movement.isMoving)
         {
             questLogMenu.SetActive(true);
+            gameObject.transform.parent.GetComponentInChildren<QuestLogMenu>().ShowMainQuests();
         }
     }
     

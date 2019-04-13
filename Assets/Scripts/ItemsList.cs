@@ -40,12 +40,12 @@ public class ItemsList : MonoBehaviour
     {
         playerStats = Player.instance.GetComponent<Stats>();
         //inventoryItems = new Item[itemSlots];
-        equippedItems = new Item[] { equippedWeapon, equippedArmor, equippedShield, equippedRing, equippedNeckle, equippedBoots, equippedGloves, equippedArtifact, equippedHelmet };
         UpdateStats();
     }
 
     public void UpdateStats()
     {
+        equippedItems = new Item[] { equippedWeapon, equippedArmor, equippedShield, equippedRing, equippedNeckle, equippedBoots, equippedGloves, equippedArtifact, equippedHelmet };
         playerStats.ResetStats();
         playerStats.Element = equippedWeapon.Element;
         foreach (Item item in equippedItems)
