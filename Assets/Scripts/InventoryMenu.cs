@@ -327,8 +327,31 @@ public class InventoryMenu : MonoBehaviour
                 break;
         }
         playerItems.UpdateStats();
+        SetItemSlots();
         ShowAllItems();
         gameObject.transform.parent.GetComponentInChildren<SideMenu>().ShowEquippedItems();
+    }
+
+    public void DismantleSelectedItem()
+    {
+        Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
+        if (playerItems.ItemSlots - playerItems.GetNumberOfSlotsUsed() >= itemToDismantle.DismantleResources.Length - 1)
+        {
+            playerItems.InventoryItems[selectedItemIndex] = null;
+            int i = 0;
+            int j = 0;
+            while(i<itemToDismantle.DismantleResources.Length)
+            {
+                if(playerItems.InventoryItems[j]==null)
+                {
+                    playerItems.InventoryItems[j] = itemToDismantle.DismantleResources[i];
+                    i++;
+                }
+                j++;
+            }
+            SetItemSlots();
+            ShowAllItems();
+        }
     }
 
     public void ShowAllGallery()
