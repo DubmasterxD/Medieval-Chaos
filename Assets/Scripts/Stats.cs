@@ -225,6 +225,11 @@ public class Stats : MonoBehaviour
         maxShield += value;
     }
 
+    public void IncreaseMovementSpeed(float value)
+    {
+        Player.instance.movement.MovementSpeed += value;
+    }
+
     public void ResetStats()
     {
         maxHP = basicHP;
@@ -249,5 +254,6 @@ public class Stats : MonoBehaviour
         chanceToSurviveOn1HP = 0;
         chanceToGainShield = 0;
         maxShield = 0;
+        Player.instance.movement.MovementSpeed = 1;
     }
 }

@@ -22,7 +22,14 @@ MonoBehaviour:
   maxDurability: 10
   dismantleResources:
   - {fileID: 11400000}
-  - {fileID: 11400000, guid: 2e91a12bf0a10184f8cd64964959e25f, type: 2}
+  - {fileID: 11400000, guid: 1354176101c94e54cae7d1e15fe746c9, type: 2}
+  - {fileID: 11400000, guid: 2af953ccfcf6d4e41ae850b1e379fdb8, type: 2}
+  - {fileID: 11400000, guid: bd3048aa89ab5a141b40cee35bdee3ac, type: 2}
+  - {fileID: 11400000, guid: 66ead1bd9f8106640b8235e52df58e93, type: 2}
+  - {fileID: 11400000, guid: b78c4106700af8b4491a34c2d275393c, type: 2}
+  - {fileID: 11400000, guid: 5f8d29afb3154974db2620f1174cf1c2, type: 2}
+  - {fileID: 11400000, guid: 44e007aba0e118a4f998d126bebe4862, type: 2}
+  - {fileID: 11400000, guid: 8921f2d46495d554f8d4ab20ba567372, type: 2}
   sellPrice: 1
   buyPrice: 2
   amount: 0

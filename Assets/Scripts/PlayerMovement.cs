@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1;
     public bool isMoving { get; set; }
+    public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
+
     Animator anim = null;
     int _wallTrigger = Animator.StringToHash("wall");
     int _moveX = Animator.StringToHash("moveX");

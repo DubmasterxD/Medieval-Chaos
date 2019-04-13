@@ -69,6 +69,7 @@ public class ItemsList : MonoBehaviour
                 playerStats.IncreaseChanceToSurviveOn1HP(item.ChanceToSurviveOn1HP);
                 playerStats.IncreaseChanceToGainShield(item.ChanceToGainShield);
                 playerStats.IncreaseMaxShield(item.Shield);
+                playerStats.IncreaseMovementSpeed(item.MovementSpeed);
                 if (item.Element == Stats.elementals.None)
                 {
                     playerStats.IncreaseMinDamage(item.MinDamage);
@@ -98,6 +99,118 @@ public class ItemsList : MonoBehaviour
             }
         }
         return used;
+    }
+
+    public void EquipItem(int selectedItemIndex)
+    {
+        Item itemToEquip = InventoryItems[selectedItemIndex];
+        switch (itemToEquip.Type)
+        {
+            case itemTypes.Weapon:
+                if (EquippedWeapon == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedWeapon;
+                }
+                EquippedWeapon = itemToEquip;
+                break;
+            case itemTypes.Armor:
+                if (EquippedArmor == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedArmor;
+                }
+                EquippedArmor = itemToEquip;
+                break;
+            case itemTypes.Shield:
+                if (EquippedShield == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedShield;
+                }
+                EquippedShield = itemToEquip;
+                break;
+            case itemTypes.Helmet:
+                if (EquippedHelmet == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedHelmet;
+                }
+                EquippedHelmet = itemToEquip;
+                break;
+            case itemTypes.Boots:
+                if (EquippedBoots == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedBoots;
+                }
+                EquippedBoots = itemToEquip;
+                break;
+            case itemTypes.Gloves:
+                if (EquippedGloves == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedGloves;
+                }
+                EquippedGloves = itemToEquip;
+                break;
+            case itemTypes.Neckle:
+                if (EquippedNeckle == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedNeckle;
+                }
+                EquippedNeckle = itemToEquip;
+                break;
+            case itemTypes.Ring:
+                if (EquippedRing == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedRing;
+                }
+                EquippedRing = itemToEquip;
+                break;
+            case itemTypes.Artifact:
+                if (EquippedArtifact == null)
+                {
+                    InventoryItems[selectedItemIndex] = null;
+                }
+                else
+                {
+                    InventoryItems[selectedItemIndex] = EquippedArtifact;
+                }
+                EquippedArtifact = itemToEquip;
+                break;
+            case itemTypes.Misc:
+                break;
+            default:
+                break;
+        }
+        UpdateStats();
     }
 
     public void SortInventory()

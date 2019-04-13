@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class SideMenu : MonoBehaviour
 {
     Player player;
-
-    [SerializeField] GameObject itemsSideMenu = null;
-    [SerializeField] GameObject infoSideMenu = null;
+    
     [SerializeField] GameObject inventoryMenu = null;
     [SerializeField] GameObject itemEquipMenu = null;
     [SerializeField] GameObject actionMenu = null;
@@ -23,7 +21,6 @@ public class SideMenu : MonoBehaviour
     [SerializeField] Image BootsSlot = null;
     [SerializeField] Image GlovesSlot = null;
     [SerializeField] Image ArtifactSlot = null;
-    [SerializeField] Text selectedItemInfo = null;
     ItemsList items;
 
     private void Start()
@@ -33,111 +30,8 @@ public class SideMenu : MonoBehaviour
         ShowEquippedItems();
     }
 
-    public void ShowItemInfo(string itemType)
-    {
-        itemsSideMenu.SetActive(false);
-        infoSideMenu.SetActive(true);
-        switch (itemType)
-        {
-            case "Weapon":
-                if(items.EquippedWeapon==null)
-                {
-                    selectedItemInfo.text = "No weapon equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedWeapon.GetStatsDescription();
-                }
-                break;
-            case "Armor":
-                if (items.EquippedArmor == null)
-                {
-                    selectedItemInfo.text = "No armor equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedArmor.GetStatsDescription();
-                }
-                break;
-            case "Shield":
-                if (items.EquippedShield == null)
-                {
-                    selectedItemInfo.text = "No shield equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedShield.GetStatsDescription();
-                }
-                break;
-            case "Neckle":
-                if (items.EquippedNeckle == null)
-                {
-                    selectedItemInfo.text = "No neckle equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedNeckle.GetStatsDescription();
-                }
-                break;
-            case "Ring":
-                if (items.EquippedRing == null)
-                {
-                    selectedItemInfo.text = "No ring equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedRing.GetStatsDescription();
-                }
-                break;
-            case "Helmet":
-                if (items.EquippedHelmet == null)
-                {
-                    selectedItemInfo.text = "No helmet equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedHelmet.GetStatsDescription();
-                }
-                break;
-            case "Boots":
-                if (items.EquippedBoots == null)
-                {
-                    selectedItemInfo.text = "No boots equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedBoots.GetStatsDescription();
-                }
-                break;
-            case "Gloves":
-                if (items.EquippedGloves == null)
-                {
-                    selectedItemInfo.text = "No gloves equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedGloves.GetStatsDescription();
-                }
-                break;
-            case "Artifact":
-                if (items.EquippedArtifact == null)
-                {
-                    selectedItemInfo.text = "No artifact equipped";
-                }
-                else
-                {
-                    selectedItemInfo.text = items.EquippedArtifact.GetStatsDescription();
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
     public void ShowEquippedItems()
     {
-        itemsSideMenu.SetActive(true);
-        infoSideMenu.SetActive(false);
         WeaponSlot.gameObject.SetActive(false);
         ArmorSlot.gameObject.SetActive(false);
         ShieldSlot.gameObject.SetActive(false);
@@ -194,11 +88,44 @@ public class SideMenu : MonoBehaviour
         }
     }
 
-    public void OpenItemChangeMenu()
+    public void OpenItemChangeMenu(string itemType)
     {
         if (!player.movement.isMoving)
         {
-            ShowEquippedItems();
+            ItemsList.itemTypes selectedItemType = default;
+            switch (itemType)
+            {
+                case "Weapon":
+                    selectedItemType = ItemsList.itemTypes.Weapon;
+                    break;
+                case "Armor":
+                    selectedItemType = ItemsList.itemTypes.Armor;
+                    break;
+                case "Shield":
+                    selectedItemType = ItemsList.itemTypes.Shield;
+                    break;
+                case "Neckle":
+                    selectedItemType = ItemsList.itemTypes.Neckle;
+                    break;
+                case "Ring":
+                    selectedItemType = ItemsList.itemTypes.Ring;
+                    break;
+                case "Helmet":
+                    selectedItemType = ItemsList.itemTypes.Helmet;
+                    break;
+                case "Boots":
+                    selectedItemType = ItemsList.itemTypes.Boots;
+                    break;
+                case "Gloves":
+                    selectedItemType = ItemsList.itemTypes.Gloves;
+                    break;
+                case "Artifact":
+                    selectedItemType = ItemsList.itemTypes.Artifact;
+                    break;
+                default:
+                    break;
+            }
+            gameObject.transform.parent.gameObject.GetComponentInChildren<ItemEquipMenu>().LoadInfo(selectedItemType);
             itemEquipMenu.SetActive(true);
         }
     }
@@ -208,7 +135,6 @@ public class SideMenu : MonoBehaviour
         if (!player.movement.isMoving)
         {
             inventoryMenu.SetActive(true);
-            gameObject.transform.parent.GetComponentInChildren<InventoryMenu>().ShowItemsMenu();
         }
     }
 
@@ -217,7 +143,6 @@ public class SideMenu : MonoBehaviour
         if (!player.movement.isMoving)
         {
             questLogMenu.SetActive(true);
-            gameObject.transform.parent.GetComponentInChildren<QuestLogMenu>().ShowMainQuests();
         }
     }
     

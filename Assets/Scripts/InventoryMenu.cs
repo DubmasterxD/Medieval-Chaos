@@ -41,7 +41,7 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] GameObject armorGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject accessoryGalleryMenuButtonHighlight = null;
     [Header("Info")]
-    [SerializeField] Text Info = null;
+    [SerializeField] Text info = null;
     [SerializeField] Text DismantleInfo = null;
     int selectedItemIndex = 0;
 
@@ -223,116 +223,17 @@ public class InventoryMenu : MonoBehaviour
     public void EquipSelectedItem()
     {
         Item itemToEquip = playerItems.InventoryItems[selectedItemIndex];
-        switch (itemToEquip.Type)
+        if (itemToEquip.Level > playerStats.Level)
         {
-            case ItemsList.itemTypes.Weapon:
-                if(playerItems.EquippedWeapon==null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedWeapon;
-                }
-                playerItems.EquippedWeapon = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Armor:
-                if (playerItems.EquippedArmor == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedArmor;
-                }
-                playerItems.EquippedArmor = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Shield:
-                if (playerItems.EquippedShield == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedShield;
-                }
-                playerItems.EquippedShield = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Helmet:
-                if (playerItems.EquippedHelmet == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedHelmet;
-                }
-                playerItems.EquippedHelmet = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Boots:
-                if (playerItems.EquippedBoots == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedBoots;
-                }
-                playerItems.EquippedBoots = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Gloves:
-                if (playerItems.EquippedGloves == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedGloves;
-                }
-                playerItems.EquippedGloves = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Neckle:
-                if (playerItems.EquippedNeckle == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedNeckle;
-                }
-                playerItems.EquippedNeckle = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Ring:
-                if (playerItems.EquippedRing == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedRing;
-                }
-                playerItems.EquippedRing = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Artifact:
-                if (playerItems.EquippedArtifact == null)
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = null;
-                }
-                else
-                {
-                    playerItems.InventoryItems[selectedItemIndex] = playerItems.EquippedArtifact;
-                }
-                playerItems.EquippedArtifact = itemToEquip;
-                break;
-            case ItemsList.itemTypes.Misc:
-                break;
-            default:
-                break;
+            info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
+            info.transform.parent.gameObject.SetActive(true);
         }
-        playerItems.UpdateStats();
-        SetItemSlots();
-        ShowAllItems();
-        gameObject.transform.parent.GetComponentInChildren<SideMenu>().ShowEquippedItems();
+        else
+        {
+            playerItems.EquipItem(selectedItemIndex);
+            SetItemSlots();
+            ShowAllItems();
+        }
     }
 
     public void ShowDismantleInfo()
@@ -398,8 +299,8 @@ public class InventoryMenu : MonoBehaviour
         }
         else
         {
-            Info.text = "You don't have enough space in inventory to dismantle this item.";
-            Info.transform.parent.gameObject.SetActive(true);
+            info.text = "You don't have enough space in inventory to dismantle this item.";
+            info.transform.parent.gameObject.SetActive(true);
         }
         DismantleInfo.transform.parent.gameObject.SetActive(false);
     }
