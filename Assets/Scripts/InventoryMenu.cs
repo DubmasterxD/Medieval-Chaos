@@ -40,6 +40,9 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] GameObject weaponGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject armorGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject accessoryGalleryMenuButtonHighlight = null;
+    [Header("Info")]
+    [SerializeField] Text Info = null;
+    [SerializeField] Text DismantleInfo = null;
     int selectedItemIndex = 0;
 
     private Stats playerStats;
@@ -332,6 +335,29 @@ public class InventoryMenu : MonoBehaviour
         gameObject.transform.parent.GetComponentInChildren<SideMenu>().ShowEquippedItems();
     }
 
+    public void ShowDismantleInfo()
+    {
+        Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
+        DismantleInfo.text = "Are you sure that you want to dismantle " + itemToDismantle.Rarity + " " + itemToDismantle.Name + " ?\nYou will get:";
+        if(itemToDismantle.DismantleResources.Length==0)
+        {
+            DismantleInfo.text += "\nnothing";
+        }
+        foreach(Item item in itemToDismantle.DismantleResources)
+        {
+            if(item.Type== ItemsList.itemTypes.Misc)
+            {
+                DismantleInfo.text += "\n- " + item.Amount + "x ";
+            }
+            else
+            {
+                DismantleInfo.text += "\n- 1x ";
+            }
+            DismantleInfo.text += item.Name;
+        }
+        DismantleInfo.transform.parent.gameObject.SetActive(true);
+    }
+
     public void DismantleSelectedItem()
     {
         Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
@@ -342,6 +368,24 @@ public class InventoryMenu : MonoBehaviour
             int j = 0;
             while(i<itemToDismantle.DismantleResources.Length)
             {
+                if(itemToDismantle.DismantleResources[i].Type== ItemsList.itemTypes.Misc)
+                {
+                    int k = 0;
+                    while(k<playerItems.ItemSlots && playerItems.InventoryItems[k].Name!=itemToDismantle.DismantleResources[i].Name)
+                    {
+                        k++;
+                    }
+                    if(playerItems.InventoryItems[k]==null)
+                    {
+                        playerItems.InventoryItems[k] = itemToDismantle.DismantleResources[i];
+                    }
+                    else
+                    {
+                        playerItems.InventoryItems[k].Amount += itemToDismantle.DismantleResources[i].Amount;
+                    }
+                    i++;
+                    j--;
+                }
                 if(playerItems.InventoryItems[j]==null)
                 {
                     playerItems.InventoryItems[j] = itemToDismantle.DismantleResources[i];
@@ -352,6 +396,12 @@ public class InventoryMenu : MonoBehaviour
             SetItemSlots();
             ShowAllItems();
         }
+        else
+        {
+            Info.text = "You don't have enough space in inventory to dismantle this item.";
+            Info.transform.parent.gameObject.SetActive(true);
+        }
+        DismantleInfo.transform.parent.gameObject.SetActive(false);
     }
 
     public void ShowAllGallery()

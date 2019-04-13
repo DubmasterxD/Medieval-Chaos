@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e3e1683b6e20240837dee26472babb, type: 3}
   m_Name: test2
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Weapon Scraps
   iDNumber: -2
   image: {fileID: 21300000, guid: 97abb02b83da29247adbb304e1332416, type: 3}
   level: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   dismantleResources: []
   sellPrice: 0
   buyPrice: 0
-  amount: 4
+  amount: 10
   health: 0
   armor: 0
   chanceToBlock: 0

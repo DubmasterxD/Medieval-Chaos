@@ -23,9 +23,6 @@ MonoBehaviour:
   dismantleResources:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: 2e91a12bf0a10184f8cd64964959e25f, type: 2}
-  - {fileID: 11400000, guid: 2e91a12bf0a10184f8cd64964959e25f, type: 2}
-  - {fileID: 11400000, guid: 44e007aba0e118a4f998d126bebe4862, type: 2}
-  - {fileID: 11400000}
   sellPrice: 1
   buyPrice: 2
   amount: 0
