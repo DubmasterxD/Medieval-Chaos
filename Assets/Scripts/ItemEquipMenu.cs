@@ -189,6 +189,7 @@ public class ItemEquipMenu : MonoBehaviour
             if (itemToUnequip != null)
             {
                 playerItems.InventoryItems[playerItems.ItemSlots - 1] = itemToUnequip;
+                playerItems.UpdateStats();
                 CloseWindow();
             }
             else

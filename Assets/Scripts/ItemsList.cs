@@ -47,7 +47,14 @@ public class ItemsList : MonoBehaviour
     {
         equippedItems = new Item[] { equippedWeapon, equippedArmor, equippedShield, equippedRing, equippedNeckle, equippedBoots, equippedGloves, equippedArtifact, equippedHelmet };
         playerStats.ResetStats();
-        playerStats.Element = equippedWeapon.Element;
+        if (equippedWeapon != null)
+        {
+            playerStats.Element = equippedWeapon.Element;
+        }
+        else
+        {
+            playerStats.Element = Stats.elementals.None;
+        }
         foreach (Item item in equippedItems)
         {
             if (item != null)

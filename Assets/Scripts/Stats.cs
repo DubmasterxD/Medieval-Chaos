@@ -13,6 +13,7 @@ public class Stats : MonoBehaviour
     [SerializeField] private int basicHP;
     [SerializeField] private int basicDamage;
     [SerializeField] private float basicCritMultiplier;
+    [SerializeField] private int basicAttackSpeed;
     [Header("Defence")]
     [SerializeField] private int maxHP;
     public int currHp { get; set; }
@@ -242,7 +243,7 @@ public class Stats : MonoBehaviour
         earthResist = 0;
         minDamage = basicDamage;
         maxDamage = basicDamage;
-        attackSpeed = 0;
+        attackSpeed = basicAttackSpeed;
         critChance = 0;
         critMultiplier = basicCritMultiplier;
         armorPenetration = 0;

@@ -148,6 +148,7 @@ MonoBehaviour:
   basicHP: 10
   basicDamage: 1
   basicCritMultiplier: 1.3
+  basicAttackSpeed: 50
   maxHP: 50
   armor: 5
   chanceToBlock: 0
@@ -201,7 +202,7 @@ MonoBehaviour:
   equippedNeckle: {fileID: 0}
   equippedBoots: {fileID: 0}
   equippedGloves: {fileID: 0}
-  equippedArtifact: {fileID: 11400000, guid: 44e007aba0e118a4f998d126bebe4862, type: 2}
+  equippedArtifact: {fileID: 0}
   equippedHelmet: {fileID: 0}
   inventoryItems:
   - {fileID: 11400000, guid: 2af953ccfcf6d4e41ae850b1e379fdb8, type: 2}
