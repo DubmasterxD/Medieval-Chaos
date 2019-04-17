@@ -21,7 +21,7 @@ public class ItemsList : MonoBehaviour
     Item[] equippedItems;
     [SerializeField] Item[] inventoryItems;
     [SerializeField] Item[] referenceItems;
-    Stats playerStats;
+    PlayerStats playerStats;
 
     public Item EquippedWeapon { get => equippedWeapon; set => equippedWeapon = value; }
     public Item EquippedArmor { get => equippedArmor; set => equippedArmor = value; }
@@ -38,7 +38,7 @@ public class ItemsList : MonoBehaviour
 
     private void Start()
     {
-        playerStats = Player.instance.GetComponent<Stats>();
+        playerStats = Player.instance.GetComponent<PlayerStats>();
         //inventoryItems = new Item[itemSlots];
         UpdateStats();
     }
@@ -53,7 +53,7 @@ public class ItemsList : MonoBehaviour
         }
         else
         {
-            playerStats.Element = Stats.elementals.None;
+            playerStats.Element = PlayerStats.elementals.None;
         }
         foreach (Item item in equippedItems)
         {
@@ -77,7 +77,7 @@ public class ItemsList : MonoBehaviour
                 playerStats.IncreaseChanceToGainShield(item.ChanceToGainShield);
                 playerStats.IncreaseMaxShield(item.Shield);
                 playerStats.IncreaseMovementSpeed(item.MovementSpeed);
-                if (item.Element == Stats.elementals.None)
+                if (item.Element == PlayerStats.elementals.None)
                 {
                     playerStats.IncreaseMinDamage(item.MinDamage);
                     playerStats.IncreaseMaxDamage(item.MaxDamage);

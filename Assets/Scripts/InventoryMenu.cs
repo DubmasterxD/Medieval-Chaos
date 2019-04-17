@@ -45,7 +45,7 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] Text DismantleInfo = null;
     int selectedItemIndex = 0;
 
-    private Stats playerStats;
+    private PlayerStats playerStats;
     private ItemsList playerItems;
 
     private void Start()
@@ -408,7 +408,7 @@ public class InventoryMenu : MonoBehaviour
         {
             attackStatsText.text += "\nArmor Penetration: " + playerStats.ArmorPenetration;
         }
-        if (playerStats.Element != Stats.elementals.None)
+        if (playerStats.Element != PlayerStats.elementals.None)
         {
             attackStatsText.text += "\n" + playerStats.Element.ToString() + " Damage: " + playerStats.MinElementalDamage + " - " + playerStats.MaxElementalDamage;
             attackStatsText.text += "\nPhysical To " + playerStats.Element + " Damage: " + playerStats.PhysicalToElementalDamage;

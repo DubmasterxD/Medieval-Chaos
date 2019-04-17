@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Enemy : ScriptableObject
+{
+    [Header("Basic Stats")]
+    [SerializeField] private string name;
+    [SerializeField] private Image sprite = null;
+    [SerializeField] private PlayerStats.elementals element;
+    [SerializeField] private int level;
+    [Header("Defence")]
+    [SerializeField] private int maxHP;
+    public int currHp { get; set; }
+    [SerializeField] private int armor;
+    [Range(0, 1)] [SerializeField] private float chanceToBlock;
+    [Range(0, 1)] [SerializeField] private float critResist;
+    [Range(-1, 1)] [SerializeField] private float fireResist;
+    [Range(-1, 1)] [SerializeField] private float iceResist;
+    [Range(-1, 1)] [SerializeField] private float earthResist;
+    [Header("Attack")]
+    [SerializeField] private int minDamage;
+    [SerializeField] private int maxDamage;
+    [Range(0, 50)] [SerializeField] private int attackSpeed;
+    [Range(0, 1)] [SerializeField] private float critChance;
+    [SerializeField] private float critMultiplier;
+    [SerializeField] private int armorPenetration;
+    [Header("Special")]
+    [Range(0, 1)] [SerializeField] private float lifeSteal;
+    [Range(0, 1)] [SerializeField] private float chanceToSurviveOn1HP;
+    [Range(0, 1)] [SerializeField] private float chanceToGainShield;
+    [SerializeField] private int maxShield;
+    public int currShield { get; set; }
+    [SerializeField] Item[] possibleDropItems;
+    [SerializeField] float[] dropChances;
+}

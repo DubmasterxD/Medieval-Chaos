@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public static Player instance;
 
     public PlayerMovement movement { get; private set; }
-    public Stats stats { get; private set; }
+    public PlayerStats stats { get; private set; }
     public CurrencyController currency { get; private set; }
     public ItemsList items { get; private set; }
 
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     private void SetReferences()
     {
         movement = GetComponent<PlayerMovement>();
-        stats = GetComponent<Stats>();
+        stats = GetComponent<PlayerStats>();
         currency = GetComponent<CurrencyController>();
         items = GetComponent<ItemsList>();
     }

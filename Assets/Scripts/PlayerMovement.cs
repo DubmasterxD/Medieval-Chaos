@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isMoving { get; set; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
 
+    Actions actions;
     Animator anim = null;
     int _wallTrigger = Animator.StringToHash("wall");
     int _moveX = Animator.StringToHash("moveX");
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        actions = GameManager.instance.gameObject.GetComponent<Actions>();
     }
     
     public void MoveRight()
@@ -54,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat(_moveX, 0);
         transform.position = new Vector3(transform.position.x + MoveX, transform.position.y, 0);
         isMoving = false;
+        actions.SetNewAction();
     }
 
     public void FinishedMovingY(float MoveY)
@@ -61,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat(_moveY, 0);
         transform.position = new Vector3(transform.position.x, transform.position.y + MoveY, 0);
         isMoving = false;
+        actions.SetNewAction();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

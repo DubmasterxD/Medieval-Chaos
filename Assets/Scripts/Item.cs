@@ -11,7 +11,7 @@ public class Item : ScriptableObject, IComparable<Item>
     [SerializeField] private int iDNumber;
     [SerializeField] private Sprite image;
     [SerializeField] private int level;
-    [SerializeField] Stats.elementals element;
+    [SerializeField] PlayerStats.elementals element;
     [SerializeField] ItemsList.itemTypes type;
     [SerializeField] ItemsList.itemRarity rarity;
     [SerializeField] private int maxDurability;
@@ -52,7 +52,7 @@ public class Item : ScriptableObject, IComparable<Item>
     public int IDNumber { get => iDNumber; set => iDNumber = value; }
     public Sprite Image { get => image; set => image = value; }
     public int Level { get => level; set => level = value; }
-    public Stats.elementals Element { get => element; set => element = value; }
+    public PlayerStats.elementals Element { get => element; set => element = value; }
     public ItemsList.itemTypes Type { get => type; set => type = value; }
     public ItemsList.itemRarity Rarity { get => rarity; set => rarity = value; }
     public int MaxDurability { get => maxDurability; set => maxDurability = value; }
@@ -122,16 +122,16 @@ public class Item : ScriptableObject, IComparable<Item>
         {
             switch (element)
             {
-                case Stats.elementals.None:
+                case PlayerStats.elementals.None:
                     stats += "\n";
                     break;
-                case Stats.elementals.Fire:
+                case PlayerStats.elementals.Fire:
                     stats += "\nFire ";
                     break;
-                case Stats.elementals.Ice:
+                case PlayerStats.elementals.Ice:
                     stats += "\nIce ";
                     break;
-                case Stats.elementals.Earth:
+                case PlayerStats.elementals.Earth:
                     stats += "\nEarth ";
                     break;
                 default:

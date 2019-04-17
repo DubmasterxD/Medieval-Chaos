@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stats : MonoBehaviour
+public class PlayerStats : MonoBehaviour
 {
     public enum elementals { None, Fire, Ice, Earth };
     [Header("Basic Stats")]
