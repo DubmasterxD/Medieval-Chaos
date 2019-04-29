@@ -12,5 +12,46 @@ public class Encounters : ScriptableObject
     [SerializeField] Enemy rareEncounter;
     [SerializeField] float chanceToEnemy;
     [SerializeField] float chanceToItem;
-    [SerializeField] float chanceToRare;
+
+    public string AreaName { get => areaName; set => areaName = value; }
+    public Enemy RareEncounter { get => rareEncounter; set => rareEncounter = value; }
+
+    public bool IsNewEncounterItem()
+    {
+        float random = Random.Range(0, 1);
+        if(random > chanceToEnemy)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public Item NewTreasure()
+    {
+        float random = Random.Range(0, 1);
+        int i = -1;
+        float sum = 0;
+        do
+        {
+            i++;
+            sum += itemsChances[i];
+        } while (sum < random);
+        return items[i];
+    }
+
+    public Enemy NewEnemy()
+    {
+        float random = Random.Range(0, 1);
+        int i = -1;
+        float sum = 0;
+        do
+        {
+            i++;
+            sum += enemiesChances[i];
+        } while (sum < random);
+        return enemies[i];
+    }
 }

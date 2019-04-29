@@ -14,6 +14,7 @@ public class TeleportEntrance : MonoBehaviour
         {
             Player.instance.previousScene = GameManager.instance.GetComponent<SceneLoader>().GetCurrentScene();
             GameManager.instance.gameObject.GetComponent<SceneLoader>().ChangeScene(toScene);
+            GameManager.instance.actions.AreaChanged(ToScene);
         }
     }
 }

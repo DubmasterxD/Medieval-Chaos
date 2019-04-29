@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public Actions actions;
 
     private void Awake()
     {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            actions = GetComponent<Actions>();
         }
         else
         {

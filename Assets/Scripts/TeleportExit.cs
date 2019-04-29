@@ -17,5 +17,4 @@ public class TeleportExit : MonoBehaviour
             Player.instance.gameObject.transform.position = transform.position;
         }
     }
-
 }

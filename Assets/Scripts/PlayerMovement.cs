@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        actions = GameManager.instance.gameObject.GetComponent<Actions>();
+        actions = GameManager.instance.actions;
     }
     
     public void MoveRight()
