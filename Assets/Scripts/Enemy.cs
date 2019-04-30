@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[CreateAssetMenu]
 public class Enemy : ScriptableObject
 {
     [Header("Basic Stats")]
     [SerializeField] private string name;
-    [SerializeField] private Image sprite = null;
+    [SerializeField] private Sprite sprite = null;
     [SerializeField] private PlayerStats.elementals element;
     [SerializeField] private int level;
     [Header("Defence")]

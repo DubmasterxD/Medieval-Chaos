@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class Encounters : ScriptableObject
 {
     [SerializeField] string areaName;
@@ -18,7 +19,7 @@ public class Encounters : ScriptableObject
 
     public bool IsNewEncounterItem()
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0f, 1f);
         if(random > chanceToEnemy)
         {
             return true;
@@ -31,7 +32,7 @@ public class Encounters : ScriptableObject
 
     public Item NewTreasure()
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0f, 1f);
         int i = -1;
         float sum = 0;
         do
@@ -44,7 +45,7 @@ public class Encounters : ScriptableObject
 
     public Enemy NewEnemy()
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0f, 1f);
         int i = -1;
         float sum = 0;
         do

@@ -15,6 +15,11 @@ public class Actions : MonoBehaviour
     Enemy enemy = null;
     public Enemy boss { get; set; } = null;
 
+    private void Start()
+    {
+        AreaChanged("Test");
+    }
+
     public void AreaChanged(string newAreaName)
     {
         areaName = newAreaName;
