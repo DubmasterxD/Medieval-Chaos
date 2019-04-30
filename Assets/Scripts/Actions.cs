@@ -8,7 +8,7 @@ public class Actions : MonoBehaviour
     Encounters areaEncounters = null;
     string areaName ="";
     public bool isBossNearby { get; set; } = false;
-    bool isInCity = false;
+    public bool isInCity { get; set; } = false;
     bool isSpecialEncounter = false;
     bool isTreasure = false;
     Item treasure = null;
