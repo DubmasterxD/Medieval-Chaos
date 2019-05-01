@@ -10,11 +10,13 @@ public class TeleportEntrance : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             Player.instance.previousScene = GameManager.instance.GetComponent<SceneLoader>().GetCurrentScene();
+            Player.instance.movement.HitWall();
             GameManager.instance.gameObject.GetComponent<SceneLoader>().ChangeScene(toScene);
             GameManager.instance.actions.AreaChanged(ToScene);
+            GameManager.instance.actions.SetNewAction();
         }
     }
 }

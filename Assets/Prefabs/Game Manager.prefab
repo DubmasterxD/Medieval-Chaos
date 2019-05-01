@@ -70,4 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fb2e8a63746fb4cac4bf840bf0f1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  encounters: []
+  encounters:
+  - {fileID: 11400000, guid: 93c4e75f2a93cc2478b7d1d854e34209, type: 2}
+  - {fileID: 11400000, guid: 386d8db0045391145b0b0b84c4a5ecab, type: 2}

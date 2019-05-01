@@ -71,10 +71,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!collision.isTrigger)
         {
-            anim.SetFloat(_moveX, 0);
-            anim.SetFloat(_moveY, 0);
-            anim.SetTrigger(_wallTrigger);
-            isMoving = false;
+            HitWall();
         }
+    }
+
+    public void HitWall()
+    {
+        anim.SetFloat(_moveX, 0);
+        anim.SetFloat(_moveY, 0);
+        anim.SetTrigger(_wallTrigger);
+        isMoving = false;
     }
 }

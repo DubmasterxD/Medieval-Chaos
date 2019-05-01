@@ -19,4 +19,12 @@ public class BossEncounter : MonoBehaviour
     {
         GameManager.instance.actions.isBossNearby = false;
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameManager.instance.actions.isBossNearby = true;
+        }
+    }
 }
