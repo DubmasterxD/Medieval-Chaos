@@ -1,30 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Actions : MonoBehaviour
 {
     [SerializeField] Encounters[] encounters = null;
     Encounters areaEncounters = null;
-    string areaName ="";
+    string areaName = "";
     public bool isBossNearby { get; set; } = false;
     public bool isInCity { get; set; } = false;
-    bool isSpecialEncounter = false;
-    bool isTreasure = false;
+    public bool isSpecialEncounter { get; set; } = false;
+    public bool isTreasure { get; set; } = false;
     Item treasure = null;
     Enemy enemy = null;
     public Enemy boss { get; set; } = null;
+    Text actionButtonText = null;
+    GameObject city = null;
 
     private void Start()
     {
         AreaChanged("Test");
+        actionButtonText = GameCanvas.instance.Overlay.gameObject.GetComponent<SideMenu>().ActionButton.GetComponentInChildren<Text>();
     }
 
     public void AreaChanged(string newAreaName)
     {
         areaName = newAreaName;
         int i = 0;
-        while(areaName!=encounters[i].AreaName)
+        while (areaName != encounters[i].AreaName)
         {
             i++;
         }
@@ -34,29 +38,30 @@ public class Actions : MonoBehaviour
     public void SetNewAction()
     {
         isTreasure = false;
-        if(isBossNearby)
+        if (isBossNearby)
         {
             enemy = boss;
+            actionButtonText.text = "Boss fight";
         }
-        else if(isInCity)
+        else if (isInCity)
         {
-
+            actionButtonText.text = "Enter city";
         }
-        else if(isSpecialEncounter)
+        else if (isSpecialEncounter)
         {
             enemy = areaEncounters.RareEncounter;
+            actionButtonText.text = "Rare fight";
+        }
+        else if (areaEncounters.IsNewEncounterItem())
+        {
+            isTreasure = true;
+            treasure = areaEncounters.NewTreasure();
+            actionButtonText.text = "Treasure";
         }
         else
         {
-            if(areaEncounters.IsNewEncounterItem())
-            {
-                isTreasure = true;
-                treasure = areaEncounters.NewTreasure();
-            }
-            else
-            {
-                enemy = areaEncounters.NewEnemy();
-            }
+            enemy = areaEncounters.NewEnemy();
+            actionButtonText.text = "Fight";
         }
     }
 }

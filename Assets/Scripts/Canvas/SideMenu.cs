@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class SideMenu : MonoBehaviour
 {
     Player player;
-    
+
     [SerializeField] GameObject inventoryMenu = null;
     [SerializeField] GameObject itemEquipMenu = null;
     [SerializeField] GameObject actionMenu = null;
     [SerializeField] GameObject questLogMenu = null;
+    [SerializeField] GameObject cityMenu = null;
+    [SerializeField] GameObject actionButton = null;
     [Header("Equipped items")]
     [SerializeField] Image WeaponSlot = null;
     [SerializeField] Image ArmorSlot = null;
@@ -21,11 +23,22 @@ public class SideMenu : MonoBehaviour
     [SerializeField] Image BootsSlot = null;
     [SerializeField] Image GlovesSlot = null;
     [SerializeField] Image ArtifactSlot = null;
+
+    GameObject actionInfo = null;
+    GameObject actionFight = null;
+    GameObject actionTreasure = null;
     ItemsList items;
+
+    Actions actions;
+    public GameObject ActionButton { get => actionButton; }
 
     private void Start()
     {
         player = Player.instance;
+        actions = GameManager.instance.actions;
+        actionInfo = actionMenu.GetComponent<ActionMenu>().ActionInfo;
+        actionFight = actionMenu.GetComponent<ActionMenu>().ActionFight;
+        actionTreasure = actionMenu.GetComponent<ActionMenu>().ActionTreasure;
         items = player.GetComponent<ItemsList>();
         ShowEquippedItems();
     }
@@ -145,12 +158,28 @@ public class SideMenu : MonoBehaviour
             questLogMenu.SetActive(true);
         }
     }
-    
-    public void OpenActionDetailsMenu()
+
+    public void ActionButtonPress()
     {
-        if (!player.movement.isMoving)
+        if (actions.isBossNearby)
         {
-            actionMenu.SetActive(true);
+            actionInfo.SetActive(true);
+        }
+        else if (actions.isInCity)
+        {
+            cityMenu.SetActive(true);
+        }
+        else if (actions.isSpecialEncounter)
+        {
+            actionInfo.SetActive(true);
+        }
+        else if (actions.isTreasure)
+        {
+            actionInfo.SetActive(true);
+        }
+        else
+        {
+            actionInfo.SetActive(true);
         }
     }
 }
