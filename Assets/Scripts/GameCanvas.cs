@@ -11,7 +11,7 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] GameObject city = null;
     [SerializeField] GameObject map = null;
     [SerializeField] GameObject action = null;
-    [SerializeField] GameObject dialogue = null;
+    [SerializeField] GameObject quest = null;
     [SerializeField] GameObject informations = null;
 
     public GameObject Overlay { get => overlay; }
@@ -19,7 +19,7 @@ public class GameCanvas : MonoBehaviour
     public GameObject City { get => city; }
     public GameObject Map { get => map; }
     public GameObject Action { get => action; }
-    public GameObject Dialogue { get => dialogue; }
+    public GameObject Dialogue { get => quest; }
     public GameObject Informations { get => informations; }
 
     private void Awake()
