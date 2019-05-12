@@ -298,6 +298,13 @@ public class CityMenu : MonoBehaviour
         }
     }
 
+    public void ShowSellInfo()
+    {
+        Item itemToSell = playerItems.InventoryItems[selectedItemIndex];
+        DismantleInfo.text = "Are you sure that you want to sell " + itemToSell.Rarity + " " + itemToSell.Name + " for " + itemToSell.SellPrice + "?";
+        DismantleInfo.transform.parent.gameObject.SetActive(true);
+    }
+
     public void ShowDismantleInfo()
     {
         Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
@@ -417,32 +424,10 @@ public class CityMenu : MonoBehaviour
         switch (currentTab)
         {
             case CityTabs.Inventory:
-                Item itemToEquip = playerItems.InventoryItems[selectedItemIndex];
-                if (itemToEquip.Level > playerStats.Level)
-                {
-                    info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
-                    info.transform.parent.gameObject.SetActive(true);
-                }
-                else
-                {
-                    playerItems.EquipItem(selectedItemIndex);
-                    SetItemSlots();
-                    ShowAllItems();
-                }
+                EquipSelectedItem();
                 break;
             case CityTabs.Sell:
-                Item itemToSell = playerItems.InventoryItems[selectedItemIndex];
-                if (itemToSell.Type == ItemsList.itemTypes.Misc)
-                {
-                    Player.instance.currency.gold += itemToSell.Amount * itemToSell.SellPrice;
-                }
-                else
-                {
-                    Player.instance.currency.gold += itemToSell.SellPrice;
-                }
-                playerItems.InventoryItems[selectedItemIndex] = null;
-                SetItemSlots();
-                ShowAllItems();
+                ShowSellInfo();
                 break;
             case CityTabs.Buy:
                 //TODO merchantsss
@@ -451,19 +436,7 @@ public class CityMenu : MonoBehaviour
                 //TODO upgrades
                 break;
             case CityTabs.Stash:
-                if(playerItems.GetNumberOfInventorySlotsUsed()< playerItems.InventoryItemSlots)
-                {
-                    Item itemToMove = playerItems.StashItems[selectedItemIndex];
-                    playerItems.StashItems[selectedItemIndex] = null;
-                    playerItems.InventoryItems[playerItems.InventoryItemSlots - 1] = itemToMove;
-                    playerItems.SortStash();
-                    playerItems.SortInventory();
-                }
-                else
-                {
-                    info.text = "Your inventory is full!";
-                    info.transform.parent.gameObject.SetActive(true);
-                }
+                MoveSelectedItem();
                 break;
             default:
                 break;
@@ -472,7 +445,87 @@ public class CityMenu : MonoBehaviour
 
     public void Button2Use()
     {
-        
+        switch (currentTab)
+        {
+            case CityTabs.Inventory:
+                MoveSelectedItem();
+                break;
+            case CityTabs.Sell:
+                ShowDismantleInfo();
+                break;
+            case CityTabs.Blacksmith:
+                ShowDismantleInfo();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void EquipSelectedItem()
+    {
+        Item itemToEquip = playerItems.InventoryItems[selectedItemIndex];
+        if (itemToEquip.Level > playerStats.Level)
+        {
+            info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
+            info.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            playerItems.EquipItem(selectedItemIndex);
+            SetItemSlots();
+            ShowAllItems();
+        }
+    }
+
+    public void SellSelectedItem()
+    {
+        Item itemToSell = playerItems.InventoryItems[selectedItemIndex];
+        if (itemToSell.Type == ItemsList.itemTypes.Misc)
+        {
+            Player.instance.currency.gold += itemToSell.Amount * itemToSell.SellPrice;
+        }
+        else
+        {
+            Player.instance.currency.gold += itemToSell.SellPrice;
+        }
+        playerItems.InventoryItems[selectedItemIndex] = null;
+        SetItemSlots();
+        ShowAllItems();
+    }
+
+    private void MoveSelectedItem()
+    {
+        int slotsUsed;
+        int itemSlots;
+        Item[] fromItems;
+        Item[] toItems;
+        if(currentTab == CityTabs.Inventory)
+        {
+            slotsUsed = playerItems.GetNumberOfStashSlotsUsed();
+            itemSlots = playerItems.StashItemSlots;
+            fromItems = playerItems.InventoryItems;
+            toItems = playerItems.StashItems;
+        }
+        else
+        {
+            slotsUsed = playerItems.GetNumberOfInventorySlotsUsed();
+            itemSlots = playerItems.InventoryItemSlots;
+            fromItems = playerItems.StashItems;
+            toItems = playerItems.InventoryItems;
+        }
+        if (slotsUsed < itemSlots)
+        {
+            Item itemToMove = fromItems[selectedItemIndex];
+            fromItems[selectedItemIndex] = null;
+            toItems[itemSlots - 1] = itemToMove;
+            playerItems.SortStash();
+            playerItems.SortInventory();
+        }
+        else
+        {
+            info.text = "Your stash is full!";
+            info.transform.parent.gameObject.SetActive(true);
+        }
     }
 
     public void ExitCity()
