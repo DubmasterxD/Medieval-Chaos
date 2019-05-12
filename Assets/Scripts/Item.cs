@@ -16,7 +16,8 @@ public class Item : ScriptableObject, IComparable<Item>
     [SerializeField] ItemsList.itemRarity rarity;
     [SerializeField] private int maxDurability;
     public int currDurability { get; set; }
-    [SerializeField] private Item[] dismantleResources;
+    [SerializeField] private Item[] dismantleResources = null;
+    [SerializeField] private Item[] upgradeResources = null;
     [SerializeField] private int sellPrice;
     [SerializeField] private int buyPrice;
     public int nextUpgradeCost { get; set; }
@@ -81,6 +82,7 @@ public class Item : ScriptableObject, IComparable<Item>
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public string ItemDescription { get => itemDescription; set => itemDescription = value; }
     public int Amount { get => amount; set => amount = value; }
+    public Item[] UpgradeResources { get => upgradeResources; set => upgradeResources = value; }
 
     public string GetStatsDescription()
     {

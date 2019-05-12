@@ -21,7 +21,7 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] GameObject armorItemsMenuButtonHighlight = null;
     [SerializeField] GameObject accessoryItemsMenuButtonHighlight = null;
     [SerializeField] GameObject miscItemsMenuButtonHighlight = null;
-    [SerializeField] Text SlotsText = null;
+    [SerializeField] Text slotsText = null;
     [SerializeField] GameObject[] itemSlots = null;
     [SerializeField] Image selectedItemImage = null;
     [SerializeField] Text selectedItemName = null;
@@ -42,7 +42,6 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] GameObject accessoryGalleryMenuButtonHighlight = null;
     [Header("Info")]
     [SerializeField] Text info = null;
-    [SerializeField] Text DismantleInfo = null;
     int selectedItemIndex = 0;
 
     private PlayerStats playerStats;
@@ -67,7 +66,7 @@ public class InventoryMenu : MonoBehaviour
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (i < playerItems.ItemSlots)
+            if (i < playerItems.InventoryItemSlots)
             {
                 itemSlots[i].SetActive(true);
             }
@@ -76,7 +75,7 @@ public class InventoryMenu : MonoBehaviour
                 itemSlots[i].SetActive(false);
             }
         }
-        SlotsText.text = "Slots used: " + playerItems.GetNumberOfSlotsUsed() + "/" + playerItems.ItemSlots;
+        slotsText.text = "Slots used: " + playerItems.GetNumberOfInventorySlotsUsed() + "/" + playerItems.InventoryItemSlots;
     }
 
     public void ShowStatsMenu()
@@ -107,7 +106,7 @@ public class InventoryMenu : MonoBehaviour
         playerItems.SortInventory();
         SetAllItemsMenuHighlightInactive();
         allItemsMenuButtonHighlight.SetActive(true);
-        for (int i = 0; i < playerItems.ItemSlots; i++)
+        for (int i = 0; i < playerItems.InventoryItemSlots; i++)
         {
             itemSlots[i].GetComponentInChildren<Text>().text = "";
             if (playerItems.InventoryItems[i] == null)
@@ -132,89 +131,65 @@ public class InventoryMenu : MonoBehaviour
     {
         SetAllItemsMenuHighlightInactive();
         weaponItemsMenuButtonHighlight.SetActive(true);
-        bool selected = false;
-        for (int i = 0; i < playerItems.ItemSlots; i++)
-        {
-            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Weapon && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Shield))
-            {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
-            }
-            else
-            {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
-                if (selected == false)
-                {
-                    SelectItem(i);
-                    selected = true;
-                }
-            }
-        }
+        ItemsList.itemTypes[] types = { ItemsList.itemTypes.Weapon, ItemsList.itemTypes.Shield };
+        ShowSpecificItems(types);
     }
 
     public void ShowArmorItems()
     {
         SetAllItemsMenuHighlightInactive();
         armorItemsMenuButtonHighlight.SetActive(true);
-        bool selected = false;
-        for (int i = 0; i < playerItems.ItemSlots; i++)
-        {
-            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Armor && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Helmet && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Boots && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Gloves))
-            {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
-            }
-            else
-            {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
-                if (selected == false)
-                {
-                    SelectItem(i);
-                    selected = true;
-                }
-            }
-        }
+        ItemsList.itemTypes[] types = { ItemsList.itemTypes.Armor, ItemsList.itemTypes.Helmet, ItemsList.itemTypes.Boots, ItemsList.itemTypes.Gloves };
+        ShowSpecificItems(types);
     }
 
     public void ShowAccessoryItems()
     {
         SetAllItemsMenuHighlightInactive();
         accessoryItemsMenuButtonHighlight.SetActive(true);
-        bool selected = false;
-        for (int i = 0; i < playerItems.ItemSlots; i++)
-        {
-            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Artifact && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Neckle && playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Ring))
-            {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
-            }
-            else
-            {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
-                if (selected == false)
-                {
-                    SelectItem(i);
-                    selected = true;
-                }
-            }
-        }
+        ItemsList.itemTypes[] types = { ItemsList.itemTypes.Artifact, ItemsList.itemTypes.Neckle, ItemsList.itemTypes.Ring };
+        ShowSpecificItems(types);
     }
 
     public void ShowMiscItems()
     {
         SetAllItemsMenuHighlightInactive();
         miscItemsMenuButtonHighlight.SetActive(true);
+        ItemsList.itemTypes[] types = { ItemsList.itemTypes.Misc };
+        ShowSpecificItems(types);
+    }
+
+    public void ShowSpecificItems(ItemsList.itemTypes[] itemTypes)
+    {
         bool selected = false;
-        for (int i = 0; i < playerItems.ItemSlots; i++)
+        for (int i = 0; i < playerItems.InventoryItemSlots; i++)
         {
-            if (playerItems.InventoryItems[i] == null || (playerItems.InventoryItems[i].Type != ItemsList.itemTypes.Misc))
+            if (playerItems.InventoryItems[i] == null)
             {
                 itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
             }
             else
             {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
-                if (selected == false)
+                bool isOfSearchingType = false;
+                foreach (ItemsList.itemTypes type in itemTypes)
                 {
-                    SelectItem(i);
-                    selected = true;
+                    if (playerItems.InventoryItems[i].Type == type)
+                    {
+                        isOfSearchingType = true;
+                    }
+                }
+                if (isOfSearchingType)
+                {
+                    itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
+                    if (selected == false)
+                    {
+                        SelectItem(i);
+                        selected = true;
+                    }
+                }
+                else
+                {
+                    itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
                 }
             }
         }
@@ -236,73 +211,9 @@ public class InventoryMenu : MonoBehaviour
         }
     }
 
-    public void ShowDismantleInfo()
+    public void DestroySelectedItem()
     {
-        Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
-        DismantleInfo.text = "Are you sure that you want to dismantle " + itemToDismantle.Rarity + " " + itemToDismantle.Name + " ?\nYou will get:";
-        if(itemToDismantle.DismantleResources.Length==0)
-        {
-            DismantleInfo.text += "\nnothing";
-        }
-        foreach(Item item in itemToDismantle.DismantleResources)
-        {
-            if(item.Type== ItemsList.itemTypes.Misc)
-            {
-                DismantleInfo.text += "\n- " + item.Amount + "x ";
-            }
-            else
-            {
-                DismantleInfo.text += "\n- 1x ";
-            }
-            DismantleInfo.text += item.Name;
-        }
-        DismantleInfo.transform.parent.gameObject.SetActive(true);
-    }
-
-    public void DismantleSelectedItem()
-    {
-        Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
-        if (playerItems.ItemSlots - playerItems.GetNumberOfSlotsUsed() >= itemToDismantle.DismantleResources.Length - 1)
-        {
-            playerItems.InventoryItems[selectedItemIndex] = null;
-            int i = 0;
-            int j = 0;
-            while(i<itemToDismantle.DismantleResources.Length)
-            {
-                if(itemToDismantle.DismantleResources[i].Type== ItemsList.itemTypes.Misc)
-                {
-                    int k = 0;
-                    while(k<playerItems.ItemSlots && playerItems.InventoryItems[k].Name!=itemToDismantle.DismantleResources[i].Name)
-                    {
-                        k++;
-                    }
-                    if(playerItems.InventoryItems[k]==null)
-                    {
-                        playerItems.InventoryItems[k] = itemToDismantle.DismantleResources[i];
-                    }
-                    else
-                    {
-                        playerItems.InventoryItems[k].Amount += itemToDismantle.DismantleResources[i].Amount;
-                    }
-                    i++;
-                    j--;
-                }
-                if(playerItems.InventoryItems[j]==null)
-                {
-                    playerItems.InventoryItems[j] = itemToDismantle.DismantleResources[i];
-                    i++;
-                }
-                j++;
-            }
-            SetItemSlots();
-            ShowAllItems();
-        }
-        else
-        {
-            info.text = "You don't have enough space in inventory to dismantle this item.";
-            info.transform.parent.gameObject.SetActive(true);
-        }
-        DismantleInfo.transform.parent.gameObject.SetActive(false);
+        //TODO destroy item
     }
 
     public void ShowAllGallery()

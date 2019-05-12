@@ -78,13 +78,13 @@ public class ItemEquipMenu : MonoBehaviour
 
     public void ShowItems()
     {
-        itemsIndexes = new int[playerItems.ItemSlots];
+        itemsIndexes = new int[playerItems.InventoryItemSlots];
         for(int i=0; i<itemSlots.Length;i++)
         {
             itemSlots[i].SetActive(false);
         }
         int j = 0;
-        for(int i=0; i<playerItems.ItemSlots; i++)
+        for(int i=0; i<playerItems.InventoryItemSlots; i++)
         {
             if (playerItems.InventoryItems[i] != null)
             {
@@ -140,7 +140,7 @@ public class ItemEquipMenu : MonoBehaviour
 
     public void UnequipItem()
     {
-        if(playerItems.ItemSlots-playerItems.GetNumberOfSlotsUsed()!=0)
+        if(playerItems.InventoryItemSlots-playerItems.GetNumberOfInventorySlotsUsed()!=0)
         {
             Item itemToUnequip = null;
             switch (itemsType)
@@ -188,7 +188,7 @@ public class ItemEquipMenu : MonoBehaviour
             }
             if (itemToUnequip != null)
             {
-                playerItems.InventoryItems[playerItems.ItemSlots - 1] = itemToUnequip;
+                playerItems.InventoryItems[playerItems.InventoryItemSlots - 1] = itemToUnequip;
                 playerItems.UpdateStats();
                 CloseWindow();
             }

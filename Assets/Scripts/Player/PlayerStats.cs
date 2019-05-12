@@ -10,10 +10,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int level;
     public int expToNextLevel { get; set; } = 10;
     public int currExp { get; set; } = 0;
-    [SerializeField] private int basicHP;
-    [SerializeField] private int basicDamage;
-    [SerializeField] private float basicCritMultiplier;
-    [SerializeField] private int basicAttackSpeed;
+    [SerializeField] private int basicHP = 10;
+    [SerializeField] private int basicDamage = 1;
+    [SerializeField] private float basicCritMultiplier = 1;
+    [SerializeField] private int basicAttackSpeed = 50;
     [Header("Defence")]
     [SerializeField] private int maxHP;
     public int currHp { get; set; }

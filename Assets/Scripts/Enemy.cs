@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Enemy : ScriptableObject
 {
     [Header("Basic Stats")]
-    [SerializeField] private string name;
+    [SerializeField] private string enemyName;
     [SerializeField] private Sprite sprite = null;
     [SerializeField] private PlayerStats.elementals element;
     [SerializeField] private int level;

@@ -8,19 +8,21 @@ public class ItemsList : MonoBehaviour
 {
     public enum itemTypes { Weapon, Armor, Shield, Helmet, Boots, Gloves, Neckle, Ring, Artifact, Misc };
     public enum itemRarity { Common, Uncommon, Rare, Legendary, Unique };
-    [SerializeField] int itemSlots = 50;
-    [SerializeField] Item equippedWeapon;
-    [SerializeField] Item equippedArmor;
-    [SerializeField] Item equippedShield;
-    [SerializeField] Item equippedRing;
-    [SerializeField] Item equippedNeckle;
-    [SerializeField] Item equippedBoots;
-    [SerializeField] Item equippedGloves;
-    [SerializeField] Item equippedArtifact;
-    [SerializeField] Item equippedHelmet;
+    [SerializeField] int inventoryItemSlots = 50;
+    [SerializeField] int stashItemSlots = 10;
+    [SerializeField] Item equippedWeapon = null;
+    [SerializeField] Item equippedArmor = null;
+    [SerializeField] Item equippedShield = null;
+    [SerializeField] Item equippedRing = null;
+    [SerializeField] Item equippedNeckle = null;
+    [SerializeField] Item equippedBoots = null;
+    [SerializeField] Item equippedGloves = null;
+    [SerializeField] Item equippedArtifact = null;
+    [SerializeField] Item equippedHelmet = null;
     Item[] equippedItems;
-    [SerializeField] Item[] inventoryItems;
-    [SerializeField] Item[] referenceItems;
+    [SerializeField] Item[] inventoryItems = null;
+    [SerializeField] Item[] stashItems = null;
+    [SerializeField] Item[] referenceItems = null;
     PlayerStats playerStats;
 
     public Item EquippedWeapon { get => equippedWeapon; set => equippedWeapon = value; }
@@ -33,8 +35,10 @@ public class ItemsList : MonoBehaviour
     public Item[] EquippedItems { get => equippedItems; set => equippedItems = value; }
     public Item EquippedArtifact { get => equippedArtifact; set => equippedArtifact = value; }
     public Item EquippedHelmet { get => equippedHelmet; set => equippedHelmet = value; }
-    public int ItemSlots { get => itemSlots; set => itemSlots = value; }
+    public int InventoryItemSlots { get => inventoryItemSlots; set => inventoryItemSlots = value; }
+    public int StashItemSlots { get => stashItemSlots; set => stashItemSlots = value; }
     public Item[] InventoryItems { get => inventoryItems; set => inventoryItems = value; }
+    public Item[] StashItems { get => stashItems; set => stashItems = value; }
 
     private void Start()
     {
@@ -95,12 +99,25 @@ public class ItemsList : MonoBehaviour
         playerStats.IncreaseMaxDamage(-Mathf.RoundToInt(playerStats.MaxDamage * playerStats.PhysicalToElementalDamage));
     }
 
-    public int GetNumberOfSlotsUsed()
+    public int GetNumberOfInventorySlotsUsed()
     {
         int used = 0;
         for (int i = 0; i < inventoryItems.Length; i++)
         {
             if (inventoryItems[i] != null)
+            {
+                used++;
+            }
+        }
+        return used;
+    }
+
+    public int GetNumberOfStashSlotsUsed()
+    {
+        int used = 0;
+        for (int i = 0; i < stashItems.Length; i++)
+        {
+            if (stashItems[i] != null)
             {
                 used++;
             }
@@ -235,6 +252,25 @@ public class ItemsList : MonoBehaviour
                 }
                 j++;
                 inventoryItems[j] = key;
+            }
+        }
+    }
+
+    public void SortStash()
+    {
+        for (int i = 1; i < stashItems.Length; i++)
+        {
+            Item key = stashItems[i];
+            if (key != null)
+            {
+                int j = i - 1;
+                while (j >= 0 && key.CompareTo(stashItems[j]) < 0)
+                {
+                    stashItems[j + 1] = stashItems[j];
+                    j = j - 1;
+                }
+                j++;
+                stashItems[j] = key;
             }
         }
     }

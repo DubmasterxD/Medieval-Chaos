@@ -6,11 +6,11 @@ using UnityEngine;
 public class Encounters : ScriptableObject
 {
     [SerializeField] string areaName;
-    [SerializeField] Enemy[] enemies;
+    [SerializeField] Enemy[] enemies = null;
     [SerializeField] float[] enemiesChances;
-    [SerializeField] Item[] items;
+    [SerializeField] Item[] items = null;
     [SerializeField] float[] itemsChances;
-    [SerializeField] Enemy rareEncounter;
+    [SerializeField] Enemy rareEncounter = null;
     [SerializeField] float chanceToEnemy;
     [SerializeField] float chanceToItem;
 
