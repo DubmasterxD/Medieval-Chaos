@@ -235,6 +235,7 @@ public class ItemsList : MonoBehaviour
                 break;
         }
         UpdateStats();
+        GameCanvas.instance.Overlay.GetComponent<SideMenu>().ShowEquippedItems();
     }
 
     public void SortInventory()

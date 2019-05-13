@@ -32,7 +32,7 @@ public class CityMenu : MonoBehaviour
     [SerializeField] Button button2 = null;
     [Header("Info")]
     [SerializeField] Text info = null;
-    [SerializeField] Text DismantleInfo = null;
+    [SerializeField] Text confirmText = null;
 
     private PlayerStats playerStats;
     private ItemsList playerItems;
@@ -301,31 +301,33 @@ public class CityMenu : MonoBehaviour
     public void ShowSellInfo()
     {
         Item itemToSell = playerItems.InventoryItems[selectedItemIndex];
-        DismantleInfo.text = "Are you sure that you want to sell " + itemToSell.Rarity + " " + itemToSell.Name + " for " + itemToSell.SellPrice + "?";
-        DismantleInfo.transform.parent.gameObject.SetActive(true);
+        confirmText.text = "Are you sure that you want to sell " + itemToSell.Rarity + " " + itemToSell.Name + " for " + itemToSell.SellPrice + "?";
+        confirmText.transform.parent.gameObject.SetActive(true);
+        confirmText.transform.parent.parent.GetComponent<InformationsMenu>().currentType = InformationsMenu.InfoTypes.Sell;
     }
 
     public void ShowDismantleInfo()
     {
         Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
-        DismantleInfo.text = "Are you sure that you want to dismantle " + itemToDismantle.Rarity + " " + itemToDismantle.Name + " ?\nYou will get:";
+        confirmText.text = "Are you sure that you want to dismantle " + itemToDismantle.Rarity + " " + itemToDismantle.Name + " ?\nYou will get:";
         if (itemToDismantle.DismantleResources.Length == 0)
         {
-            DismantleInfo.text += "\nnothing";
+            confirmText.text += "\nnothing";
         }
         foreach (Item item in itemToDismantle.DismantleResources)
         {
             if (item.Type == ItemsList.itemTypes.Misc)
             {
-                DismantleInfo.text += "\n- " + item.Amount + "x ";
+                confirmText.text += "\n- " + item.Amount + "x ";
             }
             else
             {
-                DismantleInfo.text += "\n- 1x ";
+                confirmText.text += "\n- 1x ";
             }
-            DismantleInfo.text += item.Name;
+            confirmText.text += item.Name;
         }
-        DismantleInfo.transform.parent.gameObject.SetActive(true);
+        confirmText.transform.parent.gameObject.SetActive(true);
+        confirmText.transform.parent.parent.GetComponent<InformationsMenu>().currentType = InformationsMenu.InfoTypes.Dismantle;
     }
 
     public void DismantleSelectedItem()
@@ -371,7 +373,7 @@ public class CityMenu : MonoBehaviour
             info.text = "You don't have enough space in inventory to dismantle this item.";
             info.transform.parent.gameObject.SetActive(true);
         }
-        DismantleInfo.transform.parent.gameObject.SetActive(false);
+        confirmText.transform.parent.gameObject.SetActive(false);
     }
 
     public void SetItemSlots()
@@ -415,7 +417,25 @@ public class CityMenu : MonoBehaviour
         else
         {
             ownedMoneyText.text = Player.instance.currency.gold.ToString();
-            itemCostText.text = "Upgrade for : " + playerItems.InventoryItems[selectedItemIndex].nextUpgradeCost;
+            if (playerItems.InventoryItems[selectedItemIndex] != null)
+            {
+                if (currentTab == CityTabs.Blacksmith)
+                {
+                    itemCostText.text = "Upgrade for : " + playerItems.InventoryItems[selectedItemIndex].nextUpgradeCost;
+                }
+                else if (currentTab == CityTabs.Sell)
+                {
+                    itemCostText.text = "Sell for : " + playerItems.InventoryItems[selectedItemIndex].SellPrice;
+                }
+                else
+                {
+                    itemCostText.text = "Buy for : " + playerItems.InventoryItems[selectedItemIndex].BuyPrice;
+                }
+            }
+            else
+            {
+                itemCostText.text = "";
+            }
         }
     }
 
@@ -464,16 +484,19 @@ public class CityMenu : MonoBehaviour
     private void EquipSelectedItem()
     {
         Item itemToEquip = playerItems.InventoryItems[selectedItemIndex];
-        if (itemToEquip.Level > playerStats.Level)
+        if (itemToEquip != null)
         {
-            info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
-            info.transform.parent.gameObject.SetActive(true);
-        }
-        else
-        {
-            playerItems.EquipItem(selectedItemIndex);
-            SetItemSlots();
-            ShowAllItems();
+            if (itemToEquip.Level > playerStats.Level)
+            {
+                info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
+                info.transform.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                playerItems.EquipItem(selectedItemIndex);
+                SetItemSlots();
+                ShowAllItems();
+            }
         }
     }
 
@@ -491,6 +514,7 @@ public class CityMenu : MonoBehaviour
         playerItems.InventoryItems[selectedItemIndex] = null;
         SetItemSlots();
         ShowAllItems();
+        confirmText.transform.parent.gameObject.SetActive(false);
     }
 
     private void MoveSelectedItem()
@@ -520,6 +544,7 @@ public class CityMenu : MonoBehaviour
             toItems[itemSlots - 1] = itemToMove;
             playerItems.SortStash();
             playerItems.SortInventory();
+            ShowAllItems();
         }
         else
         {
