@@ -555,6 +555,7 @@ public class CityMenu : MonoBehaviour
 
     public void ExitCity()
     {
+        OpenInventory();
         gameObject.SetActive(false);
     }
 }
