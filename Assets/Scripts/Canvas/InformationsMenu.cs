@@ -11,7 +11,7 @@ public class InformationsMenu : MonoBehaviour
 
     private void Start()
     {
-        cityMenu = GameCanvas.instance.City.GetComponent<CityMenu>();
+        cityMenu = GameCanvas.instance.CityMenu.GetComponent<CityMenu>();
     }
 
     public void Confirm()

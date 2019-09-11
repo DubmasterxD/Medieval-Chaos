@@ -21,7 +21,7 @@ public class Actions : MonoBehaviour
     private void Start()
     {
         AreaChanged("Test");
-        actionButtonText = GameCanvas.instance.Overlay.gameObject.GetComponent<SideMenu>().ActionButton.GetComponentInChildren<Text>();
+        actionButtonText = GameCanvas.instance.OverlayMenu.gameObject.GetComponent<SideMenu>().ActionButton.GetComponentInChildren<Text>();
     }
 
     public void AreaChanged(string newAreaName)
