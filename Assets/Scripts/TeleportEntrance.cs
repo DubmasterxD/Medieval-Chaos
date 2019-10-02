@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TeleportEntrance : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class TeleportEntrance : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player.instance.previousScene = GameManager.instance.GetComponent<SceneLoader>().GetCurrentScene();
-            Player.instance.movement.HitWall();
+            Player.instance.movement.CancelMove();
             GameManager.instance.gameObject.GetComponent<SceneLoader>().ChangeScene(toScene);
             GameManager.instance.actions.AreaChanged(ToScene);
             GameManager.instance.actions.SetNewAction();
