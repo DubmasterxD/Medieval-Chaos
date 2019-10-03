@@ -32,14 +32,12 @@ public class CityMenu : MonoBehaviour
     [SerializeField] Text info = null;
     [SerializeField] Text confirmText = null;
 
-    private PlayerStats playerStats;
-    private ItemsList playerItems;
+    private Player player;
     int selectedItemIndex = 0;
 
     private void Start()
     {
-        playerStats = Player.instance.stats;
-        playerItems = Player.instance.items;
+        player = FindObjectOfType<Player>();
         OpenInventory();
     }
 
@@ -118,11 +116,11 @@ public class CityMenu : MonoBehaviour
         allItemsMenuButtonHighlight.SetActive(true);
         if (currentTab == CityTabs.Stash)
         {
-            ShowItems(playerItems.StashItems, playerItems.StashItemSlots);
+            ShowItems(player.items.StashItems, player.items.StashItemSlots);
         }
         else
         {
-            ShowItems(playerItems.InventoryItems, playerItems.InventoryItemSlots);
+            ShowItems(player.items.InventoryItems, player.items.InventoryItemSlots);
         }
         SelectItem(0);
     }
@@ -131,11 +129,11 @@ public class CityMenu : MonoBehaviour
     {
         if (currentTab == CityTabs.Stash)
         {
-            playerItems.SortStash();
+            player.items.SortStash();
         }
         else
         {
-            playerItems.SortInventory();
+            player.items.SortInventory();
         }
     }
 
@@ -200,13 +198,13 @@ public class CityMenu : MonoBehaviour
         int slots;
         if (currentTab == CityTabs.Stash)
         {
-            items = playerItems.StashItems;
-            slots = playerItems.StashItemSlots;
+            items = player.items.StashItems;
+            slots = player.items.StashItemSlots;
         }
         else
         {
-            items = playerItems.InventoryItems;
-            slots = playerItems.InventoryItemSlots;
+            items = player.items.InventoryItems;
+            slots = player.items.InventoryItemSlots;
         }
         for (int i = 0; i < slots; i++)
         {
@@ -247,7 +245,7 @@ public class CityMenu : MonoBehaviour
         selectedItemIndex = index;
         if (itemSlots[index].GetComponentsInChildren<Image>()[1].color != Color.black)
         {
-            if (playerItems.InventoryItems[index] == null)
+            if (player.items.InventoryItems[index] == null)
             {
                 selectedItemImage.sprite = null;
                 selectedItemName.text = "None";
@@ -259,9 +257,9 @@ public class CityMenu : MonoBehaviour
             {
                 if (currentTab == CityTabs.Stash)
                 {
-                    selectedItemImage.sprite = playerItems.StashItems[index].Image;
-                    selectedItemName.text = playerItems.StashItems[index].Rarity + " " + playerItems.StashItems[index].Name;
-                    selectedItemDescription.text = playerItems.StashItems[index].GetStatsDescription();
+                    selectedItemImage.sprite = player.items.StashItems[index].Image;
+                    selectedItemName.text = player.items.StashItems[index].Rarity + " " + player.items.StashItems[index].Name;
+                    selectedItemDescription.text = player.items.StashItems[index].GetStatsDescription();
                 }
                 else if (currentTab == CityTabs.Buy)
                 {
@@ -269,13 +267,13 @@ public class CityMenu : MonoBehaviour
                 }
                 else
                 {
-                    selectedItemImage.sprite = playerItems.InventoryItems[index].Image;
-                    selectedItemName.text = playerItems.InventoryItems[index].Rarity + " " + playerItems.InventoryItems[index].Name;
-                    selectedItemDescription.text = playerItems.InventoryItems[index].GetStatsDescription();
+                    selectedItemImage.sprite = player.items.InventoryItems[index].Image;
+                    selectedItemName.text = player.items.InventoryItems[index].Rarity + " " + player.items.InventoryItems[index].Name;
+                    selectedItemDescription.text = player.items.InventoryItems[index].GetStatsDescription();
                     if (currentTab == CityTabs.Blacksmith)
                     {
-                        Item itemToUpgrade = playerItems.InventoryItems[selectedItemIndex];
-                        selectedItemBlacksmithDescription.text = playerItems.InventoryItems[index].GetStatsDescription();
+                        Item itemToUpgrade = player.items.InventoryItems[selectedItemIndex];
+                        selectedItemBlacksmithDescription.text = player.items.InventoryItems[index].GetStatsDescription();
                         selectedItemBlacksmithUpgrade.text = "Materials required :";
                         foreach (Item item in itemToUpgrade.UpgradeResources)
                         {
@@ -289,7 +287,7 @@ public class CityMenu : MonoBehaviour
                             }
                             selectedItemBlacksmithUpgrade.text += item.Name;
                         }
-                        selectedItemBlacksmithUpgrade.text += "\n" + playerItems.InventoryItems[index].nextUpgradeCost + " Gold";
+                        selectedItemBlacksmithUpgrade.text += "\n" + player.items.InventoryItems[index].nextUpgradeCost + " Gold";
                     }
                 }
             }
@@ -298,7 +296,7 @@ public class CityMenu : MonoBehaviour
 
     public void ShowSellInfo()
     {
-        Item itemToSell = playerItems.InventoryItems[selectedItemIndex];
+        Item itemToSell = player.items.InventoryItems[selectedItemIndex];
         confirmText.text = "Are you sure that you want to sell " + itemToSell.Rarity + " " + itemToSell.Name + " for " + itemToSell.SellPrice + "?";
         confirmText.transform.parent.gameObject.SetActive(true);
         confirmText.transform.parent.parent.GetComponent<InformationsMenu>().currentType = InformationsMenu.InfoTypes.Sell;
@@ -306,7 +304,7 @@ public class CityMenu : MonoBehaviour
 
     public void ShowDismantleInfo()
     {
-        Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
+        Item itemToDismantle = player.items.InventoryItems[selectedItemIndex];
         confirmText.text = "Are you sure that you want to dismantle " + itemToDismantle.Rarity + " " + itemToDismantle.Name + " ?\nYou will get:";
         if (itemToDismantle.DismantleResources.Length == 0)
         {
@@ -330,10 +328,10 @@ public class CityMenu : MonoBehaviour
 
     public void DismantleSelectedItem()
     {
-        Item itemToDismantle = playerItems.InventoryItems[selectedItemIndex];
-        if (playerItems.InventoryItemSlots - playerItems.GetNumberOfInventorySlotsUsed() >= itemToDismantle.DismantleResources.Length - 1)
+        Item itemToDismantle = player.items.InventoryItems[selectedItemIndex];
+        if (player.items.InventoryItemSlots - player.items.GetNumberOfInventorySlotsUsed() >= itemToDismantle.DismantleResources.Length - 1)
         {
-            playerItems.InventoryItems[selectedItemIndex] = null;
+            player.items.InventoryItems[selectedItemIndex] = null;
             int i = 0;
             int j = 0;
             while (i < itemToDismantle.DismantleResources.Length)
@@ -341,24 +339,24 @@ public class CityMenu : MonoBehaviour
                 if (itemToDismantle.DismantleResources[i].Type == ItemsList.itemTypes.Misc)
                 {
                     int k = 0;
-                    while (k < playerItems.InventoryItemSlots && playerItems.InventoryItems[k].Name != itemToDismantle.DismantleResources[i].Name)
+                    while (k < player.items.InventoryItemSlots && player.items.InventoryItems[k].Name != itemToDismantle.DismantleResources[i].Name)
                     {
                         k++;
                     }
-                    if (playerItems.InventoryItems[k] == null)
+                    if (player.items.InventoryItems[k] == null)
                     {
-                        playerItems.InventoryItems[k] = itemToDismantle.DismantleResources[i];
+                        player.items.InventoryItems[k] = itemToDismantle.DismantleResources[i];
                     }
                     else
                     {
-                        playerItems.InventoryItems[k].Amount += itemToDismantle.DismantleResources[i].Amount;
+                        player.items.InventoryItems[k].Amount += itemToDismantle.DismantleResources[i].Amount;
                     }
                     i++;
                     j--;
                 }
-                if (playerItems.InventoryItems[j] == null)
+                if (player.items.InventoryItems[j] == null)
                 {
-                    playerItems.InventoryItems[j] = itemToDismantle.DismantleResources[i];
+                    player.items.InventoryItems[j] = itemToDismantle.DismantleResources[i];
                     i++;
                 }
                 j++;
@@ -380,7 +378,7 @@ public class CityMenu : MonoBehaviour
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                if (i < playerItems.StashItemSlots)
+                if (i < player.items.StashItemSlots)
                 {
                     itemSlots[i].SetActive(true);
                 }
@@ -398,7 +396,7 @@ public class CityMenu : MonoBehaviour
         {
             for (int i = 0; i < itemSlots.Length; i++)
             {
-                if (i < playerItems.InventoryItemSlots)
+                if (i < player.items.InventoryItemSlots)
                 {
                     itemSlots[i].SetActive(true);
                 }
@@ -410,24 +408,24 @@ public class CityMenu : MonoBehaviour
         }
         if (currentTab == CityTabs.Inventory || currentTab == CityTabs.Stash)
         {
-            slotsText.text = "Slots used: " + playerItems.GetNumberOfInventorySlotsUsed() + "/" + playerItems.InventoryItemSlots;
+            slotsText.text = "Slots used: " + player.items.GetNumberOfInventorySlotsUsed() + "/" + player.items.InventoryItemSlots;
         }
         else
         {
-            ownedMoneyText.text = Player.instance.currency.gold.ToString();
-            if (playerItems.InventoryItems[selectedItemIndex] != null)
+            ownedMoneyText.text = player.currency.gold.ToString();
+            if (player.items.InventoryItems[selectedItemIndex] != null)
             {
                 if (currentTab == CityTabs.Blacksmith)
                 {
-                    itemCostText.text = "Upgrade for : " + playerItems.InventoryItems[selectedItemIndex].nextUpgradeCost;
+                    itemCostText.text = "Upgrade for : " + player.items.InventoryItems[selectedItemIndex].nextUpgradeCost;
                 }
                 else if (currentTab == CityTabs.Sell)
                 {
-                    itemCostText.text = "Sell for : " + playerItems.InventoryItems[selectedItemIndex].SellPrice;
+                    itemCostText.text = "Sell for : " + player.items.InventoryItems[selectedItemIndex].SellPrice;
                 }
                 else
                 {
-                    itemCostText.text = "Buy for : " + playerItems.InventoryItems[selectedItemIndex].BuyPrice;
+                    itemCostText.text = "Buy for : " + player.items.InventoryItems[selectedItemIndex].BuyPrice;
                 }
             }
             else
@@ -481,17 +479,17 @@ public class CityMenu : MonoBehaviour
 
     private void EquipSelectedItem()
     {
-        Item itemToEquip = playerItems.InventoryItems[selectedItemIndex];
+        Item itemToEquip = player.items.InventoryItems[selectedItemIndex];
         if (itemToEquip != null)
         {
-            if (itemToEquip.Level > playerStats.Level)
+            if (itemToEquip.Level > player.stats.Level)
             {
                 info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
                 info.transform.parent.gameObject.SetActive(true);
             }
             else
             {
-                playerItems.EquipItem(selectedItemIndex);
+                player.items.EquipItem(selectedItemIndex);
                 SetItemSlots();
                 ShowAllItems();
             }
@@ -500,16 +498,16 @@ public class CityMenu : MonoBehaviour
 
     public void SellSelectedItem()
     {
-        Item itemToSell = playerItems.InventoryItems[selectedItemIndex];
+        Item itemToSell = player.items.InventoryItems[selectedItemIndex];
         if (itemToSell.Type == ItemsList.itemTypes.Misc)
         {
-            Player.instance.currency.gold += itemToSell.Amount * itemToSell.SellPrice;
+            player.currency.gold += itemToSell.Amount * itemToSell.SellPrice;
         }
         else
         {
-            Player.instance.currency.gold += itemToSell.SellPrice;
+            player.currency.gold += itemToSell.SellPrice;
         }
-        playerItems.InventoryItems[selectedItemIndex] = null;
+        player.items.InventoryItems[selectedItemIndex] = null;
         SetItemSlots();
         ShowAllItems();
         confirmText.transform.parent.gameObject.SetActive(false);
@@ -523,25 +521,25 @@ public class CityMenu : MonoBehaviour
         Item[] toItems;
         if(currentTab == CityTabs.Inventory)
         {
-            slotsUsed = playerItems.GetNumberOfStashSlotsUsed();
-            itemSlots = playerItems.StashItemSlots;
-            fromItems = playerItems.InventoryItems;
-            toItems = playerItems.StashItems;
+            slotsUsed = player.items.GetNumberOfStashSlotsUsed();
+            itemSlots = player.items.StashItemSlots;
+            fromItems = player.items.InventoryItems;
+            toItems = player.items.StashItems;
         }
         else
         {
-            slotsUsed = playerItems.GetNumberOfInventorySlotsUsed();
-            itemSlots = playerItems.InventoryItemSlots;
-            fromItems = playerItems.StashItems;
-            toItems = playerItems.InventoryItems;
+            slotsUsed = player.items.GetNumberOfInventorySlotsUsed();
+            itemSlots = player.items.InventoryItemSlots;
+            fromItems = player.items.StashItems;
+            toItems = player.items.InventoryItems;
         }
         if (slotsUsed < itemSlots)
         {
             Item itemToMove = fromItems[selectedItemIndex];
             fromItems[selectedItemIndex] = null;
             toItems[itemSlots - 1] = itemToMove;
-            playerItems.SortStash();
-            playerItems.SortInventory();
+            player.items.SortStash();
+            player.items.SortInventory();
             ShowAllItems();
         }
         else

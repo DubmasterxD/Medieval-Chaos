@@ -14,16 +14,16 @@ public class ItemEquipMenu : MonoBehaviour
     ItemsList.itemTypes itemsType;
     int selectedItemIndex = 0;
 
-    ItemsList playerItems;
+    Player player;
 
     private void Start()
     {
-        playerItems = Player.instance.items;
+        player = FindObjectOfType<Player>();
     }
 
     public void LoadInfo(ItemsList.itemTypes newItemType)
     {
-        playerItems.SortInventory();
+        player.items.SortInventory();
         itemsType = newItemType;
         ShowItems();
         SelectItem(-1);
@@ -31,31 +31,31 @@ public class ItemEquipMenu : MonoBehaviour
         switch (itemsType)
         {
             case ItemsList.itemTypes.Weapon:
-                equippedItem = playerItems.EquippedWeapon;
+                equippedItem = player.items.EquippedWeapon;
                 break;
             case ItemsList.itemTypes.Armor:
-                equippedItem = playerItems.EquippedArmor;
+                equippedItem = player.items.EquippedArmor;
                 break;
             case ItemsList.itemTypes.Shield:
-                equippedItem = playerItems.EquippedShield;
+                equippedItem = player.items.EquippedShield;
                 break;
             case ItemsList.itemTypes.Helmet:
-                equippedItem = playerItems.EquippedHelmet;
+                equippedItem = player.items.EquippedHelmet;
                 break;
             case ItemsList.itemTypes.Boots:
-                equippedItem = playerItems.EquippedBoots;
+                equippedItem = player.items.EquippedBoots;
                 break;
             case ItemsList.itemTypes.Gloves:
-                equippedItem = playerItems.EquippedGloves;
+                equippedItem = player.items.EquippedGloves;
                 break;
             case ItemsList.itemTypes.Neckle:
-                equippedItem = playerItems.EquippedNeckle;
+                equippedItem = player.items.EquippedNeckle;
                 break;
             case ItemsList.itemTypes.Ring:
-                equippedItem = playerItems.EquippedRing;
+                equippedItem = player.items.EquippedRing;
                 break;
             case ItemsList.itemTypes.Artifact:
-                equippedItem = playerItems.EquippedArtifact;
+                equippedItem = player.items.EquippedArtifact;
                 break;
             case ItemsList.itemTypes.Misc:
                 break;
@@ -76,21 +76,21 @@ public class ItemEquipMenu : MonoBehaviour
 
     public void ShowItems()
     {
-        itemsIndexes = new int[playerItems.InventoryItemSlots];
+        itemsIndexes = new int[player.items.InventoryItemSlots];
         for(int i=0; i<itemSlots.Length;i++)
         {
             itemSlots[i].SetActive(false);
         }
         int j = 0;
-        for(int i=0; i<playerItems.InventoryItemSlots; i++)
+        for(int i=0; i< player.items.InventoryItemSlots; i++)
         {
-            if (playerItems.InventoryItems[i] != null)
+            if (player.items.InventoryItems[i] != null)
             {
-                if (playerItems.InventoryItems[i].Type == itemsType)
+                if (player.items.InventoryItems[i].Type == itemsType)
                 {
                     itemSlots[j].SetActive(true);
                     itemsIndexes[j] = i;
-                    itemSlots[j].GetComponentsInChildren<Image>()[1].sprite = playerItems.InventoryItems[i].Image;
+                    itemSlots[j].GetComponentsInChildren<Image>()[1].sprite = player.items.InventoryItems[i].Image;
                     j++;
                 }
             }
@@ -107,7 +107,7 @@ public class ItemEquipMenu : MonoBehaviour
         }
         else
         {
-            Item selectedItem = playerItems.InventoryItems[itemsIndexes[index]];
+            Item selectedItem = player.items.InventoryItems[itemsIndexes[index]];
             selectedItemImage.sprite = selectedItem.Image;
             selectedItemInfo.text = selectedItem.GetStatsDescription();
         }
@@ -122,15 +122,15 @@ public class ItemEquipMenu : MonoBehaviour
         }
         else
         {
-            Item itemToEquip = playerItems.InventoryItems[itemsIndexes[selectedItemIndex]];
-            if (itemToEquip.Level > Player.instance.stats.Level)
+            Item itemToEquip = player.items.InventoryItems[itemsIndexes[selectedItemIndex]];
+            if (itemToEquip.Level > player.stats.Level)
             {
                 info.text = "Your level is too low to equip this " + itemsType.ToString() + ".";
                 info.transform.parent.gameObject.SetActive(true);
             }
             else
             {
-                playerItems.EquipItem(itemsIndexes[selectedItemIndex]);
+                player.items.EquipItem(itemsIndexes[selectedItemIndex]);
                 CloseWindow();
             }
         }
@@ -138,46 +138,46 @@ public class ItemEquipMenu : MonoBehaviour
 
     public void UnequipItem()
     {
-        if(playerItems.InventoryItemSlots-playerItems.GetNumberOfInventorySlotsUsed()!=0)
+        if(player.items.InventoryItemSlots- player.items.GetNumberOfInventorySlotsUsed()!=0)
         {
             Item itemToUnequip = null;
             switch (itemsType)
             {
                 case ItemsList.itemTypes.Weapon:
-                    itemToUnequip = playerItems.EquippedWeapon;
-                    playerItems.EquippedWeapon = null;
+                    itemToUnequip = player.items.EquippedWeapon;
+                    player.items.EquippedWeapon = null;
                     break;
                 case ItemsList.itemTypes.Armor:
-                    itemToUnequip = playerItems.EquippedArmor;
-                    playerItems.EquippedArmor = null;
+                    itemToUnequip = player.items.EquippedArmor;
+                    player.items.EquippedArmor = null;
                     break;
                 case ItemsList.itemTypes.Shield:
-                    itemToUnequip = playerItems.EquippedShield;
-                    playerItems.EquippedShield = null;
+                    itemToUnequip = player.items.EquippedShield;
+                    player.items.EquippedShield = null;
                     break;
                 case ItemsList.itemTypes.Helmet:
-                    itemToUnequip = playerItems.EquippedHelmet;
-                    playerItems.EquippedHelmet = null;
+                    itemToUnequip = player.items.EquippedHelmet;
+                    player.items.EquippedHelmet = null;
                     break;
                 case ItemsList.itemTypes.Boots:
-                    itemToUnequip = playerItems.EquippedBoots;
-                    playerItems.EquippedBoots = null;
+                    itemToUnequip = player.items.EquippedBoots;
+                    player.items.EquippedBoots = null;
                     break;
                 case ItemsList.itemTypes.Gloves:
-                    itemToUnequip = playerItems.EquippedGloves;
-                    playerItems.EquippedGloves = null;
+                    itemToUnequip = player.items.EquippedGloves;
+                    player.items.EquippedGloves = null;
                     break;
                 case ItemsList.itemTypes.Neckle:
-                    itemToUnequip = playerItems.EquippedNeckle;
-                    playerItems.EquippedNeckle = null;
+                    itemToUnequip = player.items.EquippedNeckle;
+                    player.items.EquippedNeckle = null;
                     break;
                 case ItemsList.itemTypes.Ring:
-                    itemToUnequip = playerItems.EquippedRing;
-                    playerItems.EquippedRing = null;
+                    itemToUnequip = player.items.EquippedRing;
+                    player.items.EquippedRing = null;
                     break;
                 case ItemsList.itemTypes.Artifact:
-                    itemToUnequip = playerItems.EquippedArtifact;
-                    playerItems.EquippedArtifact = null;
+                    itemToUnequip = player.items.EquippedArtifact;
+                    player.items.EquippedArtifact = null;
                     break;
                 case ItemsList.itemTypes.Misc:
                     break;
@@ -186,8 +186,8 @@ public class ItemEquipMenu : MonoBehaviour
             }
             if (itemToUnequip != null)
             {
-                playerItems.InventoryItems[playerItems.InventoryItemSlots - 1] = itemToUnequip;
-                playerItems.UpdateStats();
+                player.items.InventoryItems[player.items.InventoryItemSlots - 1] = itemToUnequip;
+                player.items.UpdateStats();
                 CloseWindow();
             }
             else

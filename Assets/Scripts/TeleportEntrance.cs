@@ -6,12 +6,19 @@ public class TeleportEntrance : MonoBehaviour
 
     public string ToScene { get => toScene; }
 
+    Player player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Player.instance.previousScene = GameManager.instance.GetComponent<SceneLoader>().GetCurrentScene();
-            Player.instance.movement.CancelMove();
+            player.previousScene = GameManager.instance.GetComponent<SceneLoader>().GetCurrentScene();
+            player.movement.CancelMove();
             GameManager.instance.gameObject.GetComponent<SceneLoader>().ChangeScene(toScene);
             GameManager.instance.actions.AreaChanged(ToScene);
             GameManager.instance.actions.SetNewAction();

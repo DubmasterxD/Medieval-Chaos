@@ -32,7 +32,7 @@ public class SideMenu : MonoBehaviour
 
     private void Start()
     {
-        player = Player.instance;
+        player = FindObjectOfType<Player>();
         actions = GameManager.instance.actions;
         actionInfo = actionMenu.GetComponent<ActionMenu>().ActionInfo;
         actionFight = actionMenu.GetComponent<ActionMenu>().ActionFight;

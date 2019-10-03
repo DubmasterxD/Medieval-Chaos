@@ -7,10 +7,17 @@ public class TopMenu : MonoBehaviour
     [SerializeField] Text premiumText = null;
     [SerializeField] Text movesText = null;
 
+    Player player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
     void Start()
     {
-        goldText.text = Player.instance.currency.gold.ToString();
-        premiumText.text = Player.instance.currency.premium.ToString();
-        movesText.text = Player.instance.currency.movesLeft + "/" + Player.instance.currency.maxMoves;
+        goldText.text = player.currency.gold.ToString();
+        premiumText.text = player.currency.premium.ToString();
+        movesText.text = player.currency.movesLeft + "/" + player.currency.maxMoves;
     }
 }

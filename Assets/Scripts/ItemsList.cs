@@ -19,7 +19,7 @@ public class ItemsList : MonoBehaviour
     [SerializeField] Item[] inventoryItems = null;
     [SerializeField] Item[] stashItems = null;
     [SerializeField] Item[] referenceItems = null;
-    PlayerStats playerStats;
+    Player player;
 
     public Item EquippedWeapon { get => equippedWeapon; set => equippedWeapon = value; }
     public Item EquippedArmor { get => equippedArmor; set => equippedArmor = value; }
@@ -38,7 +38,7 @@ public class ItemsList : MonoBehaviour
 
     private void Start()
     {
-        playerStats = Player.instance.GetComponent<PlayerStats>();
+        player = FindObjectOfType<Player>();
         //inventoryItems = new Item[itemSlots];
         UpdateStats();
     }
@@ -46,52 +46,52 @@ public class ItemsList : MonoBehaviour
     public void UpdateStats()
     {
         equippedItems = new Item[] { equippedWeapon, equippedArmor, equippedShield, equippedRing, equippedNeckle, equippedBoots, equippedGloves, equippedArtifact, equippedHelmet };
-        playerStats.ResetStats();
+        player.stats.ResetStats();
         if (equippedWeapon != null)
         {
-            playerStats.Element = equippedWeapon.Element;
+            player.stats.Element = equippedWeapon.Element;
         }
         else
         {
-            playerStats.Element = PlayerStats.elementals.None;
+            player.stats.Element = PlayerStats.elementals.None;
         }
         foreach (Item item in equippedItems)
         {
             if (item != null)
             {
-                playerStats.IncreaseMaxHP(item.Health);
-                playerStats.IncreaseArmor(item.Armor);
-                playerStats.IncreaseChanceToBlock(item.ChanceToBlock);
-                playerStats.IncreaseCritResists(item.CritResist);
-                playerStats.IncreaseFireResists(item.FireResist);
-                playerStats.IncreaseIceResists(item.IceResist);
-                playerStats.IncreaseEarthResists(item.EarthResist);
-                playerStats.IncreaseAttackSpeed(item.AttackSpeed);
-                playerStats.IncreaseCritChance(item.CritChance);
-                playerStats.IncreaseCritMultiplier(item.CritMultiplier);
-                playerStats.IncreaseArmorPenetration(item.ArmorPenetration);
-                playerStats.IncreasePhysicalToElementalDamage(item.PhysicalToElementalDamage);
-                playerStats.IncreaseDamageReflected(item.DamageReflected);
-                playerStats.IncreaseLifeSteal(item.LifeSteal);
-                playerStats.IncreaseChanceToSurviveOn1HP(item.ChanceToSurviveOn1HP);
-                playerStats.IncreaseChanceToGainShield(item.ChanceToGainShield);
-                playerStats.IncreaseMaxShield(item.Shield);
+                player.stats.IncreaseMaxHP(item.Health);
+                player.stats.IncreaseArmor(item.Armor);
+                player.stats.IncreaseChanceToBlock(item.ChanceToBlock);
+                player.stats.IncreaseCritResists(item.CritResist);
+                player.stats.IncreaseFireResists(item.FireResist);
+                player.stats.IncreaseIceResists(item.IceResist);
+                player.stats.IncreaseEarthResists(item.EarthResist);
+                player.stats.IncreaseAttackSpeed(item.AttackSpeed);
+                player.stats.IncreaseCritChance(item.CritChance);
+                player.stats.IncreaseCritMultiplier(item.CritMultiplier);
+                player.stats.IncreaseArmorPenetration(item.ArmorPenetration);
+                player.stats.IncreasePhysicalToElementalDamage(item.PhysicalToElementalDamage);
+                player.stats.IncreaseDamageReflected(item.DamageReflected);
+                player.stats.IncreaseLifeSteal(item.LifeSteal);
+                player.stats.IncreaseChanceToSurviveOn1HP(item.ChanceToSurviveOn1HP);
+                player.stats.IncreaseChanceToGainShield(item.ChanceToGainShield);
+                player.stats.IncreaseMaxShield(item.Shield);
                 if (item.Element == PlayerStats.elementals.None)
                 {
-                    playerStats.IncreaseMinDamage(item.MinDamage);
-                    playerStats.IncreaseMaxDamage(item.MaxDamage);
+                    player.stats.IncreaseMinDamage(item.MinDamage);
+                    player.stats.IncreaseMaxDamage(item.MaxDamage);
                 }
-                else if (item.Element == playerStats.Element)
+                else if (item.Element == player.stats.Element)
                 {
-                    playerStats.IncreaseMinElementalDamage(item.MinDamage);
-                    playerStats.IncreaseMaxElementalDamage(item.MaxDamage);
+                    player.stats.IncreaseMinElementalDamage(item.MinDamage);
+                    player.stats.IncreaseMaxElementalDamage(item.MaxDamage);
                 }
             }
         }
-        playerStats.IncreaseMinElementalDamage(Mathf.RoundToInt(playerStats.MinDamage * playerStats.PhysicalToElementalDamage));
-        playerStats.IncreaseMaxElementalDamage(Mathf.RoundToInt(playerStats.MaxDamage * playerStats.PhysicalToElementalDamage));
-        playerStats.IncreaseMinDamage(-Mathf.RoundToInt(playerStats.MinDamage * playerStats.PhysicalToElementalDamage));
-        playerStats.IncreaseMaxDamage(-Mathf.RoundToInt(playerStats.MaxDamage * playerStats.PhysicalToElementalDamage));
+        player.stats.IncreaseMinElementalDamage(Mathf.RoundToInt(player.stats.MinDamage * player.stats.PhysicalToElementalDamage));
+        player.stats.IncreaseMaxElementalDamage(Mathf.RoundToInt(player.stats.MaxDamage * player.stats.PhysicalToElementalDamage));
+        player.stats.IncreaseMinDamage(-Mathf.RoundToInt(player.stats.MinDamage * player.stats.PhysicalToElementalDamage));
+        player.stats.IncreaseMaxDamage(-Mathf.RoundToInt(player.stats.MaxDamage * player.stats.PhysicalToElementalDamage));
     }
 
     public int GetNumberOfInventorySlotsUsed()
@@ -230,7 +230,7 @@ public class ItemsList : MonoBehaviour
                 break;
         }
         UpdateStats();
-        GameCanvas.instance.OverlayMenu.GetComponent<SideMenu>().ShowEquippedItems();
+        FindObjectOfType<SideMenu>().ShowEquippedItems();
     }
 
     public void SortInventory()

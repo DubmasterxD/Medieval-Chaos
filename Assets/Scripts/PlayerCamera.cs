@@ -4,12 +4,14 @@ using UnityEngine.Tilemaps;
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] float xOffset = 0;
-    GameObject playerBody;
-    Tilemap map;
+
     Vector2 topRightLimit;
     Vector2 botLeftLimit;
     float halfHeight;
     float halfWidth;
+
+    GameObject playerBody;
+    Tilemap map;
 
     private void Start()
     {
@@ -23,7 +25,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void SetVariables()
     {
-        playerBody = Player.instance.GetComponentInChildren<SpriteRenderer>().gameObject;
+        playerBody = FindObjectOfType<Player>().GetComponentInChildren<SpriteRenderer>().gameObject;
         halfHeight = Camera.main.orthographicSize;
         halfWidth = halfHeight * Camera.main.aspect;
         map = FindObjectOfType<Grid>().GetComponentInChildren<Tilemap>();

@@ -2,8 +2,6 @@
 
 public class GameCanvas : MonoBehaviour
 {
-    public static GameCanvas instance;
-
     [Header("Overlay")]
     [SerializeField] GameObject overlayMenu = null;
     [SerializeField] GameObject profileMenu = null;
@@ -108,16 +106,7 @@ public class GameCanvas : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            SetScripts();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        SetScripts();
     }
 
     private void SetScripts()

@@ -4,15 +4,22 @@ public class TeleportExit : MonoBehaviour
 {
     [SerializeField] string fromScene = "";
 
+    Player player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
     private void Start()
     {
         if(transform.parent.gameObject.GetComponent<TeleportEntrance>())
         {
             fromScene = transform.parent.gameObject.GetComponent<TeleportEntrance>().ToScene;
         }
-        if(Player.instance.previousScene == fromScene)
+        if(player.previousScene == fromScene)
         {
-            Player.instance.gameObject.transform.position = transform.position;
+            player.gameObject.transform.position = transform.position;
         }
     }
 }

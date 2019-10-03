@@ -44,13 +44,11 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] Text info = null;
     int selectedItemIndex = 0;
 
-    private PlayerStats playerStats;
-    private ItemsList playerItems;
+    private Player player;
 
     private void Start()
     {
-        playerStats = Player.instance.stats;
-        playerItems = Player.instance.items;
+        player = FindObjectOfType<Player>();
     }
 
     public void ShowItemsMenu()
@@ -66,7 +64,7 @@ public class InventoryMenu : MonoBehaviour
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (i < playerItems.InventoryItemSlots)
+            if (i < player.items.InventoryItemSlots)
             {
                 itemSlots[i].SetActive(true);
             }
@@ -75,7 +73,7 @@ public class InventoryMenu : MonoBehaviour
                 itemSlots[i].SetActive(false);
             }
         }
-        slotsText.text = "Slots used: " + playerItems.GetNumberOfInventorySlotsUsed() + "/" + playerItems.InventoryItemSlots;
+        slotsText.text = "Slots used: " + player.items.GetNumberOfInventorySlotsUsed() + "/" + player.items.InventoryItemSlots;
     }
 
     public void ShowStatsMenu()
@@ -103,23 +101,23 @@ public class InventoryMenu : MonoBehaviour
 
     public void ShowAllItems()
     {
-        playerItems.SortInventory();
+        player.items.SortInventory();
         SetAllItemsMenuHighlightInactive();
         allItemsMenuButtonHighlight.SetActive(true);
-        for (int i = 0; i < playerItems.InventoryItemSlots; i++)
+        for (int i = 0; i < player.items.InventoryItemSlots; i++)
         {
             itemSlots[i].GetComponentInChildren<Text>().text = "";
-            if (playerItems.InventoryItems[i] == null)
+            if (player.items.InventoryItems[i] == null)
             {
                 itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = null;
                 itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
             }
             else
             {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = playerItems.InventoryItems[i].Image;
-                if (playerItems.InventoryItems[i].Type == ItemsList.itemTypes.Misc)
+                itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = player.items.InventoryItems[i].Image;
+                if (player.items.InventoryItems[i].Type == ItemsList.itemTypes.Misc)
                 {
-                    itemSlots[i].GetComponentInChildren<Text>().text = playerItems.InventoryItems[i].Amount.ToString();
+                    itemSlots[i].GetComponentInChildren<Text>().text = player.items.InventoryItems[i].Amount.ToString();
                 }
                 itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
             }
@@ -162,9 +160,9 @@ public class InventoryMenu : MonoBehaviour
     public void ShowSpecificItems(ItemsList.itemTypes[] itemTypes)
     {
         bool selected = false;
-        for (int i = 0; i < playerItems.InventoryItemSlots; i++)
+        for (int i = 0; i < player.items.InventoryItemSlots; i++)
         {
-            if (playerItems.InventoryItems[i] == null)
+            if (player.items.InventoryItems[i] == null)
             {
                 itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
             }
@@ -173,7 +171,7 @@ public class InventoryMenu : MonoBehaviour
                 bool isOfSearchingType = false;
                 foreach (ItemsList.itemTypes type in itemTypes)
                 {
-                    if (playerItems.InventoryItems[i].Type == type)
+                    if (player.items.InventoryItems[i].Type == type)
                     {
                         isOfSearchingType = true;
                     }
@@ -197,15 +195,15 @@ public class InventoryMenu : MonoBehaviour
 
     public void EquipSelectedItem()
     {
-        Item itemToEquip = playerItems.InventoryItems[selectedItemIndex];
-        if (itemToEquip.Level > playerStats.Level)
+        Item itemToEquip = player.items.InventoryItems[selectedItemIndex];
+        if (itemToEquip.Level > player.stats.Level)
         {
             info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
             info.transform.parent.gameObject.SetActive(true);
         }
         else
         {
-            playerItems.EquipItem(selectedItemIndex);
+            player.items.EquipItem(selectedItemIndex);
             SetItemSlots();
             ShowAllItems();
         }
@@ -274,7 +272,7 @@ public class InventoryMenu : MonoBehaviour
         selectedItemIndex = index;
         if (itemSlots[index].GetComponentsInChildren<Image>()[1].color != Color.black)
         {
-            if (playerItems.InventoryItems[index] == null)
+            if (player.items.InventoryItems[index] == null)
             {
                 selectedItemImage.sprite = null;
                 selectedItemName.text = "None";
@@ -282,9 +280,9 @@ public class InventoryMenu : MonoBehaviour
             }
             else
             {
-                selectedItemImage.sprite = playerItems.InventoryItems[index].Image;
-                selectedItemName.text = playerItems.InventoryItems[index].Rarity + " " + playerItems.InventoryItems[index].Name;
-                selectedItemDescription.text = playerItems.InventoryItems[index].GetStatsDescription();
+                selectedItemImage.sprite = player.items.InventoryItems[index].Image;
+                selectedItemName.text = player.items.InventoryItems[index].Rarity + " " + player.items.InventoryItems[index].Name;
+                selectedItemDescription.text = player.items.InventoryItems[index].GetStatsDescription();
             }
         }
     }
@@ -299,69 +297,69 @@ public class InventoryMenu : MonoBehaviour
 
     private void RefreshProfileStats()
     {
-        nicknameText.text = Player.instance.Nickname;
-        levelText.text = "Lvl: " + playerStats.Level;
-        expValueText.text = playerStats.currExp + "/" + playerStats.expToNextLevel;
-        expSlider.value = playerStats.currExp / playerStats.expToNextLevel;
-        goldText.text = Player.instance.currency.gold.ToString();
+        nicknameText.text = player.Nickname;
+        levelText.text = "Lvl: " + player.stats.Level;
+        expValueText.text = player.stats.currExp + "/" + player.stats.expToNextLevel;
+        expSlider.value = player.stats.currExp / player.stats.expToNextLevel;
+        goldText.text = player.currency.gold.ToString();
     }
 
     private void RefreshAttackStats()
     {
-        attackStatsText.text = "Damage: " + playerStats.MinDamage + " - " + playerStats.MaxDamage;
-        attackStatsText.text += "\nAttack Speed: " + playerStats.AttackSpeed;
-        if (playerStats.CritChance != 0)
+        attackStatsText.text = "Damage: " + player.stats.MinDamage + " - " + player.stats.MaxDamage;
+        attackStatsText.text += "\nAttack Speed: " + player.stats.AttackSpeed;
+        if (player.stats.CritChance != 0)
         {
-            attackStatsText.text += "\nCritical Hit Chance: " + (playerStats.CritChance * 100) + "%";
-            attackStatsText.text += "\nCritical Hit Multiplier: " + playerStats.CritMultiplier;
+            attackStatsText.text += "\nCritical Hit Chance: " + (player.stats.CritChance * 100) + "%";
+            attackStatsText.text += "\nCritical Hit Multiplier: " + player.stats.CritMultiplier;
         }
-        if (playerStats.ArmorPenetration != 0)
+        if (player.stats.ArmorPenetration != 0)
         {
-            attackStatsText.text += "\nArmor Penetration: " + playerStats.ArmorPenetration;
+            attackStatsText.text += "\nArmor Penetration: " + player.stats.ArmorPenetration;
         }
-        if (playerStats.Element != PlayerStats.elementals.None)
+        if (player.stats.Element != PlayerStats.elementals.None)
         {
-            attackStatsText.text += "\n" + playerStats.Element.ToString() + " Damage: " + playerStats.MinElementalDamage + " - " + playerStats.MaxElementalDamage;
-            attackStatsText.text += "\nPhysical To " + playerStats.Element + " Damage: " + playerStats.PhysicalToElementalDamage;
+            attackStatsText.text += "\n" + player.stats.Element.ToString() + " Damage: " + player.stats.MinElementalDamage + " - " + player.stats.MaxElementalDamage;
+            attackStatsText.text += "\nPhysical To " + player.stats.Element + " Damage: " + player.stats.PhysicalToElementalDamage;
         }
     }
 
     private void RefreshDefenceStats()
     {
-        defenceStatsText.text = "Health: " + playerStats.MaxHP;
-        defenceStatsText.text += "\nArmor: " + playerStats.Armor;
-        if (playerStats.ChanceToBlock != 0)
+        defenceStatsText.text = "Health: " + player.stats.MaxHP;
+        defenceStatsText.text += "\nArmor: " + player.stats.Armor;
+        if (player.stats.ChanceToBlock != 0)
         {
-            defenceStatsText.text += "\nChance To Block: " + (playerStats.ChanceToBlock * 100) + "%";
+            defenceStatsText.text += "\nChance To Block: " + (player.stats.ChanceToBlock * 100) + "%";
         }
-        if (playerStats.CritResist != 0)
+        if (player.stats.CritResist != 0)
         {
-            defenceStatsText.text += "\nCritical Damage Resists: " + (playerStats.CritResist * 100) + "%";
+            defenceStatsText.text += "\nCritical Damage Resists: " + (player.stats.CritResist * 100) + "%";
         }
-        defenceStatsText.text += "\nFire Resists: " + (playerStats.FireResist * 100) + "%";
-        defenceStatsText.text += "\nIce Resists: " + (playerStats.IceResist * 100) + "%";
-        defenceStatsText.text += "\nEarth Resists: " + (playerStats.EarthResist * 100) + "%";
+        defenceStatsText.text += "\nFire Resists: " + (player.stats.FireResist * 100) + "%";
+        defenceStatsText.text += "\nIce Resists: " + (player.stats.IceResist * 100) + "%";
+        defenceStatsText.text += "\nEarth Resists: " + (player.stats.EarthResist * 100) + "%";
     }
 
     private void RefreshSpecialStats()
     {
         specialStatsText.text = "";
-        if (playerStats.LifeSteal != 0)
+        if (player.stats.LifeSteal != 0)
         {
-            specialStatsText.text = "\nLife Steal: " + (playerStats.LifeSteal * 100) + "%";
+            specialStatsText.text = "\nLife Steal: " + (player.stats.LifeSteal * 100) + "%";
         }
-        if (playerStats.DamageReflected != 0)
+        if (player.stats.DamageReflected != 0)
         {
-            specialStatsText.text += "\nDamage Reflection: " + (playerStats.DamageReflected * 100) + "%";
+            specialStatsText.text += "\nDamage Reflection: " + (player.stats.DamageReflected * 100) + "%";
         }
-        if (playerStats.ChanceToSurviveOn1HP != 0)
+        if (player.stats.ChanceToSurviveOn1HP != 0)
         {
-            specialStatsText.text += "\nChance To Cheat Death: " + (playerStats.ChanceToSurviveOn1HP * 100) + "%";
+            specialStatsText.text += "\nChance To Cheat Death: " + (player.stats.ChanceToSurviveOn1HP * 100) + "%";
         }
-        if (playerStats.ChanceToGainShield != 0)
+        if (player.stats.ChanceToGainShield != 0)
         {
-            specialStatsText.text += "\nChance To Gain Shield: " + (playerStats.ChanceToGainShield * 100) + "%";
-            specialStatsText.text += "\nAmount Of Gained Shield: " + playerStats.MaxShield;
+            specialStatsText.text += "\nChance To Gain Shield: " + (player.stats.ChanceToGainShield * 100) + "%";
+            specialStatsText.text += "\nAmount Of Gained Shield: " + player.stats.MaxShield;
         }
         if (specialStatsText.text != "")
         {

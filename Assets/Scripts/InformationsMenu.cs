@@ -9,7 +9,7 @@ public class InformationsMenu : MonoBehaviour
 
     private void Start()
     {
-        cityMenu = GameCanvas.instance.CityMenu.GetComponent<CityMenu>();
+        cityMenu = FindObjectOfType<CityMenu>();
     }
 
     public void Confirm()

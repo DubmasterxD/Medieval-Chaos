@@ -8,11 +8,18 @@ public class ProfileMenu : MonoBehaviour
     [SerializeField] Text expValueText = null;
     [SerializeField] Slider expSlider = null;
 
+    Player player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
     private void Start()
     {
-        nicknameText.text = Player.instance.Nickname;
-        levelText.text = "Lvl: " + Player.instance.stats.Level;
-        expValueText.text = Player.instance.stats.currExp + "/" + Player.instance.stats.expToNextLevel;
-        expSlider.value = Player.instance.stats.currExp / Player.instance.stats.expToNextLevel;
+        nicknameText.text = player.Nickname;
+        levelText.text = "Lvl: " + player.stats.Level;
+        expValueText.text = player.stats.currExp + "/" + player.stats.expToNextLevel;
+        expSlider.value = player.stats.currExp / player.stats.expToNextLevel;
     }
 }
