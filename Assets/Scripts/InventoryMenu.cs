@@ -2,12 +2,7 @@
 
 public class InventoryMenu : MonoBehaviour
 {
-    [SerializeField] GameObject inventoryMenu = null;
     [Header("Top Menu")]
-    [SerializeField] GameObject itemsMenu = null;
-    [SerializeField] GameObject statsMenu = null;
-    [SerializeField] GameObject achievementsMenu = null;
-    [SerializeField] GameObject galleryMenu = null;
     [SerializeField] GameObject itemsMenuButtonHighlight = null;
     [SerializeField] GameObject statsMenuButtonHighlight = null;
     [SerializeField] GameObject achievementsMenuButtonHighlight = null;
@@ -22,16 +17,16 @@ public class InventoryMenu : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<Player>();
-        itemsInventoryMenu = FindObjectOfType<ItemsInventoryMenu>();
-        statsInventoryMenu = FindObjectOfType<StatsInventoryMenu>();
-        galleryInventoryMenu = FindObjectOfType<GalleryInventoryMenu>();
-        achievementsInventoryMenu = FindObjectOfType<AchievementsInventoryMenu>();
+        itemsInventoryMenu = GetComponentInChildren<ItemsInventoryMenu>();
+        statsInventoryMenu = GetComponentInChildren<StatsInventoryMenu>();
+        galleryInventoryMenu = GetComponentInChildren<GalleryInventoryMenu>();
+        achievementsInventoryMenu = GetComponentInChildren<AchievementsInventoryMenu>();
     }
 
     public void ShowItemsMenu()
     {
         SetAllTopMenuInactive();
-        itemsMenu.SetActive(true);
+        itemsInventoryMenu.gameObject.SetActive(true);
         itemsMenuButtonHighlight.SetActive(true);
         itemsInventoryMenu.SetItemSlots();
         itemsInventoryMenu.ShowAllItems();
@@ -41,21 +36,21 @@ public class InventoryMenu : MonoBehaviour
     {
         statsInventoryMenu.RefreshStats();
         SetAllTopMenuInactive();
-        statsMenu.SetActive(true);
+        statsInventoryMenu.gameObject.SetActive(true);
         statsMenuButtonHighlight.SetActive(true);
     }
 
     public void ShowAchievementsMenu()
     {
         SetAllTopMenuInactive();
-        achievementsMenu.SetActive(true);
+        achievementsInventoryMenu.gameObject.SetActive(true);
         achievementsMenuButtonHighlight.SetActive(true);
     }
 
     public void ShowGalleryMenu()
     {
         SetAllTopMenuInactive();
-        galleryMenu.SetActive(true);
+        galleryInventoryMenu.gameObject.SetActive(true);
         galleryMenuButtonHighlight.SetActive(true);
         galleryInventoryMenu.ShowAllGallery();
     }
@@ -67,18 +62,18 @@ public class InventoryMenu : MonoBehaviour
 
     private void SetAllTopMenuInactive()
     {
-        itemsMenu.SetActive(false);
+        itemsInventoryMenu.gameObject.SetActive(false);
         itemsMenuButtonHighlight.SetActive(false);
-        statsMenu.SetActive(false);
+        statsInventoryMenu.gameObject.SetActive(false);
         statsMenuButtonHighlight.SetActive(false);
-        achievementsMenu.SetActive(false);
+        achievementsInventoryMenu.gameObject.SetActive(false);
         achievementsMenuButtonHighlight.SetActive(false);
-        galleryMenu.SetActive(false);
+        galleryInventoryMenu.gameObject.SetActive(false);
         galleryMenuButtonHighlight.SetActive(false);
     }
 
     public void CloseWindow()
     {
-        inventoryMenu.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
