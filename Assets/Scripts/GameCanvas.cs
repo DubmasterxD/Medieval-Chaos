@@ -24,11 +24,11 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] GameObject questLogMenu = null;
 
     ItemEquipMenu itemEquipMenuScript = null;
-    InventoryMenu inventoryMenuScript = null;
-    ItemsInventoryMenu itemsInventoryMenuScript = null;
-    StatsInventoryMenu statsInventoryMenuScript = null;
-    AchievementsInventoryMenu achievementsInventoryMenuScript = null;
-    GalleryInventoryMenu galleryInventoryMenuScript = null;
+    UIInventoryTabChanger inventoryMenuScript = null;
+    UIItemsInventory itemsInventoryMenuScript = null;
+    UIStatsInventory statsInventoryMenuScript = null;
+    UIAchievementsInventory achievementsInventoryMenuScript = null;
+    UIGalleryinventory galleryInventoryMenuScript = null;
     QuestLogMenu questLogMenuScript = null;
 
     [Header("City")]
@@ -79,11 +79,11 @@ public class GameCanvas : MonoBehaviour
     public GameObject InventoryMenu { get => inventoryMenu; set => inventoryMenu = value; }
     public GameObject QuestLogMenu { get => questLogMenu; set => questLogMenu = value; }
     public ItemEquipMenu ItemEquipMenuScript { get => itemEquipMenuScript; set => itemEquipMenuScript = value; }
-    public InventoryMenu InventoryMenuScript { get => inventoryMenuScript; set => inventoryMenuScript = value; }
-    public ItemsInventoryMenu ItemsInventoryMenuScript { get => itemsInventoryMenuScript; set => itemsInventoryMenuScript = value; }
-    public StatsInventoryMenu StatsInventoryMenuScript { get => statsInventoryMenuScript; set => statsInventoryMenuScript = value; }
-    public AchievementsInventoryMenu AchievementsInventoryMenuScript { get => achievementsInventoryMenuScript; set => achievementsInventoryMenuScript = value; }
-    public GalleryInventoryMenu GalleryInventoryMenuScript { get => galleryInventoryMenuScript; set => galleryInventoryMenuScript = value; }
+    public UIInventoryTabChanger InventoryMenuScript { get => inventoryMenuScript; set => inventoryMenuScript = value; }
+    public UIItemsInventory ItemsInventoryMenuScript { get => itemsInventoryMenuScript; set => itemsInventoryMenuScript = value; }
+    public UIStatsInventory StatsInventoryMenuScript { get => statsInventoryMenuScript; set => statsInventoryMenuScript = value; }
+    public UIAchievementsInventory AchievementsInventoryMenuScript { get => achievementsInventoryMenuScript; set => achievementsInventoryMenuScript = value; }
+    public UIGalleryinventory GalleryInventoryMenuScript { get => galleryInventoryMenuScript; set => galleryInventoryMenuScript = value; }
     public QuestLogMenu QuestLogMenuScript { get => questLogMenuScript; set => questLogMenuScript = value; }
     public GameObject CityMenu { get => cityMenu; set => cityMenu = value; }
     public CityMenu CityMenuScript { get => cityMenuScript; set => cityMenuScript = value; }
@@ -111,23 +111,23 @@ public class GameCanvas : MonoBehaviour
 
     private void SetScripts()
     {
-        achievementsInventoryMenuScript = windowsMenu.GetComponent<AchievementsInventoryMenu>();
+        achievementsInventoryMenuScript = windowsMenu.GetComponent<UIAchievementsInventory>();
         actionMenuScript=actionMenu.GetComponent<ActionMenu>();
         arrowsMenuScript=overlayMenu.GetComponent<MoveArrows>();
         blacksmithCityMenuScript=cityMenu.GetComponent<BlacksmithCityMenu>();
         cityMenuScript=cityMenu.GetComponent<CityMenu>();
-        galleryInventoryMenuScript=windowsMenu.GetComponent<GalleryInventoryMenu>();
+        galleryInventoryMenuScript=windowsMenu.GetComponent<UIGalleryinventory>();
         informationsMenuScript=informationsMenu.GetComponent<InformationsMenu>();
-        inventoryMenuScript=windowsMenu.GetComponent<InventoryMenu>();
+        inventoryMenuScript=windowsMenu.GetComponent<UIInventoryTabChanger>();
         itemEquipMenuScript=windowsMenu.GetComponent<ItemEquipMenu>();
         itemsCityMenuScript=cityMenu.GetComponent<ItemsCityMenu>();
-        itemsInventoryMenuScript=windowsMenu.GetComponent<ItemsInventoryMenu>();
+        itemsInventoryMenuScript=windowsMenu.GetComponent<UIItemsInventory>();
         profileMenuScript=overlayMenu.GetComponent<ProfileMenu>();
         questLogMenuScript=windowsMenu.GetComponent<QuestLogMenu>();
         shopCityMenuScript=cityMenu.GetComponent<ShopCityMenu>();
         sideMenuScript=overlayMenu.GetComponent<SideMenu>();
         stashCityMenuScript=cityMenu.GetComponent<StashCityMenu>();
-        statsInventoryMenuScript=windowsMenu.GetComponent<StatsInventoryMenu>();
+        statsInventoryMenuScript=windowsMenu.GetComponent<UIStatsInventory>();
         topMenuScript = overlayMenu.GetComponent<TopMenu>();
     }
 }

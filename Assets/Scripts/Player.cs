@@ -11,6 +11,11 @@ public class Player : MonoBehaviour
     public string previousScene { get; set; }
     public string Nickname { get => nickname; set => nickname = value; }
 
+    private void Awake()
+    {
+        SetReferences();
+    }
+
     private void SetReferences()
     {
         movement = GetComponent<PlayerMovement>();

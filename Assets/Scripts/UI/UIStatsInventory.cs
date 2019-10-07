@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class StatsInventoryMenu : MonoBehaviour
+public class UIStatsInventory : UIInventory
 {
     [SerializeField] Text nicknameText = null;
     [SerializeField] Text levelText = null;
@@ -13,6 +13,11 @@ public class StatsInventoryMenu : MonoBehaviour
     [SerializeField] Text specialStatsText = null;
 
     private Player player;
+
+    public override void OpenTab()
+    {
+        //RefreshStats();
+    }
 
     public void RefreshStats()
     {

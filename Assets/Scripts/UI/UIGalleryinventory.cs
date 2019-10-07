@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GalleryInventoryMenu : MonoBehaviour
+public class UIGalleryinventory : UIInventory
 {
     [SerializeField] GameObject allGalleryMenuButtonHighlight = null;
     [SerializeField] GameObject weaponGalleryMenuButtonHighlight = null;
@@ -8,6 +8,11 @@ public class GalleryInventoryMenu : MonoBehaviour
     [SerializeField] GameObject accessoryGalleryMenuButtonHighlight = null;
 
     private Player player;
+
+    public override void OpenTab()
+    {
+        //ShowAllGallery();
+    }
 
     private void SetAllGalleryMenuHighlightInactive()
     {
