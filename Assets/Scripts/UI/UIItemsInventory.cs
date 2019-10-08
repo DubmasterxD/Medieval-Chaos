@@ -15,15 +15,16 @@ public class UIItemsInventory : UIInventory
     [SerializeField] UIItemSlots itemSlots = null;
     [SerializeField] Text slotsUsed = null;
     [SerializeField] UISelectedItem selectedItem = null;
-    [SerializeField] Text info = null;
 
     int selectedItemIndex = 0;
 
     Player player;
+    UIInformations informations;
 
     private void Awake()
     {
         player = FindObjectOfType<Player>();
+        informations = FindObjectOfType<UIInformations>();
     }
 
     public override void OpenTab()
@@ -78,8 +79,10 @@ public class UIItemsInventory : UIInventory
         Item itemToEquip = player.items.InventoryItems[selectedItemIndex];
         if (itemToEquip.Level > player.stats.Level)
         {
-            info.text = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
-            info.transform.parent.gameObject.SetActive(true);
+            informations.ToggleActive(true);
+            string newInfo = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
+            informations.ChangeInformation(newInfo);
+            informations.SetButtons(false);
         }
         else
         {
