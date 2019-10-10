@@ -7,10 +7,11 @@ public class UIItemSlots : MonoBehaviour
     [SerializeField] UIItemSlot itemSlotPrefab = null;
     List<UIItemSlot> itemSlots = null;
 
-    Player player;
-
+    public int selectedItemIndex { get; set; } = 0;
     bool created = false;
 
+    Player player;
+    
     private void Awake()
     {
         player = FindObjectOfType<Player>();

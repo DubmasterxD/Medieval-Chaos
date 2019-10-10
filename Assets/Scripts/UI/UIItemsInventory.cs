@@ -16,15 +16,25 @@ public class UIItemsInventory : UIInventory
     [SerializeField] Text slotsUsed = null;
     [SerializeField] UISelectedItem selectedItem = null;
 
-    int selectedItemIndex = 0;
-
     Player player;
     UIInformations informations;
+    EventsManager eventsManager;
 
     private void Awake()
     {
         player = FindObjectOfType<Player>();
         informations = FindObjectOfType<UIInformations>();
+        eventsManager = FindObjectOfType<EventsManager>();
+    }
+
+    private void OnEnable()
+    {
+        eventsManager.onItemSelected += SelectItem;
+    }
+
+    private void OnDisable()
+    {
+        eventsManager.onItemSelected -= SelectItem;
     }
 
     public override void OpenTab()
@@ -45,7 +55,7 @@ public class UIItemsInventory : UIInventory
         SetAllItemsMenuHighlightInactive();
         itemTabs[index].tab.ToggleHighlightActive(true);
         itemSlots.ShowSpecificItems(itemTabs[index].itemTypes);
-        SelectItem(selectedItemIndex);
+        SelectItem(0);
     }
 
     private void SetAllItemsMenuHighlightInactive()
@@ -58,14 +68,15 @@ public class UIItemsInventory : UIInventory
 
     public void SelectItem(int index)
     {
-        selectedItemIndex = index;
-        if (!itemSlots.CanSelect(index))
+        Debug.Log("a");
+        if (itemSlots.CanSelect(index))
         {
-            selectedItem.SelectItem(null);
+            selectedItem.SelectItem(player.items.InventoryItems[index]);
+            itemSlots.selectedItemIndex = index;
         }
         else
         {
-            selectedItem.SelectItem(player.items.InventoryItems[index]);
+            selectedItem.SelectItem(null);
         }
     }
 
@@ -76,19 +87,28 @@ public class UIItemsInventory : UIInventory
 
     public void EquipSelectedItem()
     {
-        Item itemToEquip = player.items.InventoryItems[selectedItemIndex];
-        if (itemToEquip.Level > player.stats.Level)
+        Item itemToEquip = player.items.InventoryItems[itemSlots.selectedItemIndex];
+        if (CanEquip(itemToEquip))
         {
-            informations.ToggleActive(true);
-            string newInfo = "Your level is too low to equip this " + itemToEquip.Type.ToString() + ".";
-            informations.ChangeInformation(newInfo);
-            informations.SetButtons(false);
-        }
-        else
-        {
-            player.items.EquipItem(selectedItemIndex);
+            player.items.EquipItem(itemSlots.selectedItemIndex);
             ActualizeSlotsUsedText();
             itemSlots.LoadItems();
         }
+        else
+        {
+            ShowInfo("Your level is too low to equip this " + itemToEquip.Type.ToString() + ".");
+        }
+    }
+
+    private void ShowInfo(string info)
+    {
+        informations.ToggleActive(true);
+        informations.ChangeInformation(info);
+        informations.SetButtons(false);
+    }
+
+    private bool CanEquip(Item itemToEquip)
+    {
+        return itemToEquip.Level <= player.stats.Level;
     }
 }

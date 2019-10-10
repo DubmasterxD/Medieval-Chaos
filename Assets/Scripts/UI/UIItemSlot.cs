@@ -2,17 +2,17 @@
 
 public class UIItemSlot : MonoBehaviour
 {
-    public int index = 0;
+    public int index { get; set; } = 0;
 
-    UIItemsInventory itemsInventory;
+    EventsManager eventsManager;
 
     private void Awake()
     {
-        itemsInventory = FindObjectOfType<UIItemsInventory>();
+        eventsManager = FindObjectOfType<EventsManager>();
     }
 
     public void SelectItem()
     {
-        itemsInventory.SelectItem(index);
+        eventsManager.SelectItem(index);
     }
 }

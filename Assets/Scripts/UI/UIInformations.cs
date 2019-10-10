@@ -9,7 +9,7 @@ public class UIInformations : MonoBehaviour
 
     public void ToggleActive(bool isActive)
     {
-        gameObject.SetActive(isActive);
+        transform.GetChild(0).gameObject.SetActive(isActive);
     }
 
     public void ChangeInformation(string newText)
