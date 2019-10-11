@@ -270,4 +270,9 @@ public class ItemsList : MonoBehaviour
             }
         }
     }
+
+    public void DestroyItemFromInventory(int index)
+    {
+        inventoryItems[index] = null;
+    }
 }

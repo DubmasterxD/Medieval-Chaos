@@ -10,9 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 lastMoveDirection;
 
-    int wallAnimatorID = Animator.StringToHash("wall");
     int moveXAnimatorID = Animator.StringToHash("moveX");
     int moveYAnimatorID = Animator.StringToHash("moveY");
+    int wallAnimatorID = Animator.StringToHash("wall");
 
     Animator animator;
     Actions actions;
@@ -33,16 +33,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool CanMove()
+    {
+        return moveDirection != Vector2.zero && !isMoving;
+    }
+
     private void Move()
     {
         lastMoveDirection = moveDirection;
         SetMoveAnimator(lastMoveDirection);
         ToggleMoving(true);
-    }
-
-    private bool CanMove()
-    {
-        return moveDirection != Vector2.zero && !isMoving;
     }
 
     public void FinishMovement()
@@ -53,6 +53,12 @@ public class PlayerMovement : MonoBehaviour
         actions.SetNewAction();
     }
 
+    private void SetMoveAnimator(Vector2 moveDirection)
+    {
+        animator.SetFloat(moveXAnimatorID, moveDirection.x);
+        animator.SetFloat(moveYAnimatorID, moveDirection.y);
+    }
+
     private void ChangePosition()
     {
         Vector3 newPosition = transform.position;
@@ -61,17 +67,9 @@ public class PlayerMovement : MonoBehaviour
         transform.position = newPosition;
     }
 
-    public void CancelMove()
+    private void ToggleMoving(bool isMoving)
     {
-        SetMoveAnimator(Vector2.zero);
-        animator.SetTrigger(wallAnimatorID);
-        ToggleMoving(false);
-    }
-
-    private void SetMoveAnimator(Vector2 moveDirection)
-    {
-        animator.SetFloat(moveXAnimatorID, moveDirection.x);
-        animator.SetFloat(moveYAnimatorID, moveDirection.y);
+        this.isMoving = isMoving;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,8 +80,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ToggleMoving(bool isMoving)
+    public void CancelMove()
     {
-        this.isMoving = isMoving;
+        SetMoveAnimator(Vector2.zero);
+        animator.SetTrigger(wallAnimatorID);
+        ToggleMoving(false);
     }
 }

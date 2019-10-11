@@ -8,6 +8,7 @@ public class UIItemSlots : MonoBehaviour
     List<UIItemSlot> itemSlots = null;
 
     public int selectedItemIndex { get; set; } = 0;
+
     bool created = false;
 
     Player player;
@@ -19,7 +20,7 @@ public class UIItemSlots : MonoBehaviour
 
     public void CreateItemSlots()
     {
-        if (!created)
+        if (!created) //TODO find better way when possibility to increase slots number is added
         {
             itemSlots = new List<UIItemSlot>();
             for (int i = 0; i < player.items.InventoryItemSlots; i++)
@@ -37,20 +38,18 @@ public class UIItemSlots : MonoBehaviour
         player.items.SortInventory();
         for (int i = 0; i < player.items.InventoryItemSlots; i++)
         {
-            itemSlots[i].GetComponentInChildren<Text>().text = "";
+            itemSlots[i].ChangeItemAmount(0);
             if (player.items.InventoryItems[i] == null)
             {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = null;
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
+                itemSlots[i].ChangeSprite(null);
             }
             else
             {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].sprite = player.items.InventoryItems[i].Image;
+                itemSlots[i].ChangeSprite(player.items.InventoryItems[i].Image);
                 if (player.items.InventoryItems[i].Type == ItemsList.itemTypes.Misc)
                 {
-                    itemSlots[i].GetComponentInChildren<Text>().text = player.items.InventoryItems[i].Amount.ToString();
+                    itemSlots[i].ChangeItemAmount(player.items.InventoryItems[i].Amount);
                 }
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
             }
         }
     }
@@ -61,28 +60,26 @@ public class UIItemSlots : MonoBehaviour
         {
             if (player.items.InventoryItems[i] == null)
             {
-                itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
+                itemSlots[i].ToggleSelectable(false);
             }
             else
             {
-                bool isOfSearchingType = false;
-                foreach (ItemsList.itemTypes type in itemTypes)
-                {
-                    if (player.items.InventoryItems[i].Type == type)
-                    {
-                        isOfSearchingType = true;
-                    }
-                }
-                if (isOfSearchingType)
-                {
-                    itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.white;
-                }
-                else
-                {
-                    itemSlots[i].GetComponentsInChildren<Image>()[1].color = Color.black;
-                }
+                bool isOfSearchingType = ContainsType(itemTypes, player.items.InventoryItems[i].Type);
+                itemSlots[i].ToggleSelectable(isOfSearchingType);
             }
         }
+    }
+
+    private bool ContainsType(ItemsList.itemTypes[] itemTypes, ItemsList.itemTypes type)
+    {
+        foreach (ItemsList.itemTypes itemType in itemTypes)
+        {
+            if (itemType == type)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool CanSelect(int index)
