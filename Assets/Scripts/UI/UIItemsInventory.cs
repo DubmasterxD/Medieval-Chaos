@@ -3,17 +3,8 @@ using UnityEngine.UI;
 
 public class UIItemsInventory : UIInventory
 {
-    [SerializeField] ItemTab[] itemTabs = null;
-
-    [System.Serializable]
-    class ItemTab
-    {
-        public UITab tab = null;
-        public ItemsList.itemTypes[] itemTypes = null;
-    }
-
     [SerializeField] UISelectedItem selectedItem = null;
-    [SerializeField] UIItemSlots itemSlots = null;
+    [SerializeField] UIItems itemsUI = null;
     [SerializeField] Text slotsUsed = null;
 
     Player player;
@@ -41,17 +32,8 @@ public class UIItemsInventory : UIInventory
 
     public override void OpenTab()
     {
-        itemSlots.CreateItemSlots();
+        itemsUI.OpenItemsTab(0);
         ActualizeSlotsUsedText();
-        itemSlots.LoadItems();
-        OpenItemsTab(0);
-    }
-
-    public void OpenItemsTab(int index)
-    {
-        SetAllItemsMenuHighlightInactive();
-        itemTabs[index].tab.ToggleHighlightActive(true);
-        itemSlots.ShowSpecificItems(itemTabs[index].itemTypes);
         SelectItem(0);
     }
 
@@ -60,20 +42,12 @@ public class UIItemsInventory : UIInventory
         slotsUsed.text = "Slots used: " + player.items.GetNumberOfInventorySlotsUsed() + "/" + player.items.InventoryItemSlots;
     }
 
-    private void SetAllItemsMenuHighlightInactive()
-    {
-        foreach(ItemTab itemTab in itemTabs)
-        {
-            itemTab.tab.ToggleHighlightActive(false);
-        }
-    }
-
     private void SelectItem(int index)
     {
-        if (itemSlots.CanSelect(index))
+        if (itemsUI.CanSelect(index))
         {
             selectedItem.SelectItem(player.items.InventoryItems[index]);
-            itemSlots.selectedItemIndex = index;
+            itemsUI.SelectedItemIndex = index;
         }
         else
         {
@@ -83,10 +57,10 @@ public class UIItemsInventory : UIInventory
 
     public void EquipSelectedItem()
     {
-        Item itemToEquip = player.items.InventoryItems[itemSlots.selectedItemIndex];
+        Item itemToEquip = player.items.InventoryItems[itemsUI.SelectedItemIndex];
         if (CanEquip(itemToEquip))
         {
-            player.items.EquipItem(itemSlots.selectedItemIndex);
+            player.items.EquipItem(itemsUI.SelectedItemIndex);
             RefreshItemSlots();
         }
         else
@@ -97,7 +71,7 @@ public class UIItemsInventory : UIInventory
 
     public void DestroySelectedItem()
     {
-        player.items.DestroyItemFromInventory(itemSlots.selectedItemIndex);
+        player.items.DestroyItemFromInventory(itemsUI.SelectedItemIndex);
         RefreshItemSlots();
     }
 
@@ -109,8 +83,7 @@ public class UIItemsInventory : UIInventory
     private void RefreshItemSlots()
     {
         ActualizeSlotsUsedText();
-        itemSlots.LoadItems();
-        OpenItemsTab(0);
+        itemsUI.OpenItemsTab(0);
     }
 
     private void ShowInfo(string info)

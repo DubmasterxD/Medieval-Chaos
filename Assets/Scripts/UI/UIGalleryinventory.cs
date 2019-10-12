@@ -2,47 +2,10 @@
 
 public class UIGalleryinventory : UIInventory
 {
-    [SerializeField] GameObject allGalleryMenuButtonHighlight = null;
-    [SerializeField] GameObject weaponGalleryMenuButtonHighlight = null;
-    [SerializeField] GameObject armorGalleryMenuButtonHighlight = null;
-    [SerializeField] GameObject accessoryGalleryMenuButtonHighlight = null;
-
-    private Player player;
+    [SerializeField] UIItems itemsUI = null;
 
     public override void OpenTab()
     {
-        //ShowAllGallery();
-    }
-
-    private void SetAllGalleryMenuHighlightInactive()
-    {
-        allGalleryMenuButtonHighlight.SetActive(false);
-        weaponGalleryMenuButtonHighlight.SetActive(false);
-        armorGalleryMenuButtonHighlight.SetActive(false);
-        accessoryGalleryMenuButtonHighlight.SetActive(false);
-    }
-
-    public void ShowAllGallery()
-    {
-        SetAllGalleryMenuHighlightInactive();
-        allGalleryMenuButtonHighlight.SetActive(true);
-    }
-
-    public void ShowWeaponGallery()
-    {
-        SetAllGalleryMenuHighlightInactive();
-        weaponGalleryMenuButtonHighlight.SetActive(true);
-    }
-
-    public void ShowArmorGallery()
-    {
-        SetAllGalleryMenuHighlightInactive();
-        armorGalleryMenuButtonHighlight.SetActive(true);
-    }
-
-    public void ShowAccessoryGallery()
-    {
-        SetAllGalleryMenuHighlightInactive();
-        accessoryGalleryMenuButtonHighlight.SetActive(true);
+        itemsUI.OpenItemsTab(0);
     }
 }
