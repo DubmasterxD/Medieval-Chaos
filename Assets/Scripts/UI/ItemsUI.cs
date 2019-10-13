@@ -1,15 +1,15 @@
 ﻿
 using UnityEngine;
 
-public class UIItems : MonoBehaviour
+public class ItemsUI : MonoBehaviour
 {
     [SerializeField] UIItemTab[] itemTabs = null;
-    [SerializeField] UIItemSlots itemSlots = null;
+    [SerializeField] ItemSlotsUI itemSlots = null;
 
     [System.Serializable]
     public class UIItemTab
     {
-        public UITab tab = null;
+        public TabUI tab = null;
         public ItemsList.itemTypes[] itemTypes = null;
     }
 

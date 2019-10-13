@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class UIInventoryTabChanger : MonoBehaviour
+public class InventoryTabChangerUI : MonoBehaviour
 {
-    [SerializeField] UITab[] topTabs = null;
+    [SerializeField] TabUI[] topTabs = null;
 
-    UIInventory[] inventoryTabs = null;
+    InventoryUI[] inventoryTabs = null;
 
     Player player;
 
@@ -22,8 +22,8 @@ public class UIInventoryTabChanger : MonoBehaviour
 
     private void InitializeInventoryTabs()
     {
-        inventoryTabs = new UIInventory[topTabs.Length];
-        foreach(UIInventory tab in GetComponentsInChildren<UIInventory>())
+        inventoryTabs = new InventoryUI[topTabs.Length];
+        foreach(InventoryUI tab in GetComponentsInChildren<InventoryUI>())
         {
             if (tab.Index < topTabs.Length)
             {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UISelectedItem : MonoBehaviour
+public class SelectedItemUI : MonoBehaviour
 {
     [SerializeField] Image selectedItemImage = null;
     [SerializeField] Text selectedItemName = null;

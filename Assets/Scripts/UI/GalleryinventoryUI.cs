@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class UIGalleryinventory : UIInventory
+public class GalleryinventoryUI : InventoryUI
 {
-    [SerializeField] UIItems itemsUI = null;
+    [SerializeField] ItemsUI itemsUI = null;
 
     public override void OpenTab()
     {

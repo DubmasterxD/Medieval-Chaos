@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemSlot : MonoBehaviour
+public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField] Text itemAmount = null;
     [SerializeField] Image itemImage = null;

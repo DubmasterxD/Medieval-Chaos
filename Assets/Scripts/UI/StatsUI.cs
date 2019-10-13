@@ -1,39 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIStatsInventory : UIInventory
+public class StatsUI : MonoBehaviour
 {
-    [SerializeField] Text nicknameText = null;
-    [SerializeField] Text levelText = null;
-    [SerializeField] Text expValueText = null;
-    [SerializeField] Slider expSlider = null;
-    [SerializeField] Text goldText = null;
     [SerializeField] Text attackStatsText = null;
     [SerializeField] Text defenceStatsText = null;
     [SerializeField] Text specialStatsText = null;
 
     private Player player;
 
-    public override void OpenTab()
-    {
-        //RefreshStats();
-    }
-
     public void RefreshStats()
     {
-        RefreshProfileStats();
         RefreshAttackStats();
         RefreshDefenceStats();
         RefreshSpecialStats();
-    }
-
-    private void RefreshProfileStats()
-    {
-        nicknameText.text = player.Nickname;
-        levelText.text = "Lvl: " + player.stats.Level;
-        expValueText.text = player.stats.currExp + "/" + player.stats.expToNextLevel;
-        expSlider.value = player.stats.currExp / player.stats.expToNextLevel;
-        goldText.text = player.currency.gold.ToString();
     }
 
     private void RefreshAttackStats()

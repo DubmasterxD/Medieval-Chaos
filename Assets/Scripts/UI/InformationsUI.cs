@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIInformations : MonoBehaviour
+public class InformationsUI : MonoBehaviour
 {
     [SerializeField] Text information;
     [SerializeField] GameObject confirmationButtons;

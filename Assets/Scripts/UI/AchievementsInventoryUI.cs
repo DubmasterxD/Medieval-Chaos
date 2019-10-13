@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class UIAchievementsInventory : UIInventory
+public class AchievementsInventoryUI : InventoryUI
 {
     public override void OpenTab()
     {

@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemsInventory : UIInventory
+public class ItemsInventoryUI : InventoryUI
 {
-    [SerializeField] UISelectedItem selectedItem = null;
-    [SerializeField] UIItems itemsUI = null;
+    [SerializeField] SelectedItemUI selectedItem = null;
+    [SerializeField] ItemsUI itemsUI = null;
     [SerializeField] Text slotsUsed = null;
 
     Player player;
-    UIInformations informations;
+    InformationsUI informations;
     EventsManager eventsManager;
 
     private void Awake()
     {
         player = FindObjectOfType<Player>();
-        informations = FindObjectOfType<UIInformations>();
+        informations = FindObjectOfType<InformationsUI>();
         eventsManager = FindObjectOfType<EventsManager>();
     }
 

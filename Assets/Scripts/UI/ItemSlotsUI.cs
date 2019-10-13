@@ -2,10 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemSlots : MonoBehaviour
+public class ItemSlotsUI : MonoBehaviour
 {
-    [SerializeField] UIItemSlot itemSlotPrefab = null;
-    List<UIItemSlot> itemSlots = null;
+    [SerializeField] ItemSlotUI itemSlotPrefab = null;
+    List<ItemSlotUI> itemSlots = null;
 
     public int selectedItemIndex { get; set; } = 0;
 
@@ -22,10 +22,10 @@ public class UIItemSlots : MonoBehaviour
     {
         if (!created) //TODO find better way when possibility to increase slots number is added
         {
-            itemSlots = new List<UIItemSlot>();
+            itemSlots = new List<ItemSlotUI>();
             for (int i = 0; i < player.items.InventoryItemSlots; i++)
             {
-                UIItemSlot itemSlot = Instantiate(itemSlotPrefab, transform);
+                ItemSlotUI itemSlot = Instantiate(itemSlotPrefab, transform);
                 itemSlot.index = i;
                 itemSlots.Add(itemSlot);
             }

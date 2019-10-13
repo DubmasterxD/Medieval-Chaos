@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class UIInventory : MonoBehaviour
+public abstract class InventoryUI : MonoBehaviour
 {
     [SerializeField] int index = 0;
 

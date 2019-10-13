@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UITab : MonoBehaviour
+public class TabUI : MonoBehaviour
 {
     [SerializeField] Image highlight = null;
 
