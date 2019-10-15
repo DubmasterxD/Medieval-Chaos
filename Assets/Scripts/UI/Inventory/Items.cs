@@ -81,7 +81,7 @@ namespace Medieval.UI.Inventory
 
         private bool CanEquip(Item itemToEquip)
         {
-            return itemToEquip.Level <= player.stats.Level;
+            return itemToEquip.Level <= player.Stats.Level;
         }
 
         private void RefreshItemSlots()

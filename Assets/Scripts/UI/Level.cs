@@ -19,9 +19,9 @@ namespace Medieval.UI
 
         public void RefreshStats()
         {
-            levelText.text = "Lvl: " + player.stats.Level;
-            expValueText.text = player.stats.currExp + "/" + player.stats.expToNextLevel;
-            expSlider.value = player.stats.currExp / player.stats.expToNextLevel;
+            levelText.text = "Lvl: " + player.Stats.Level;
+            expValueText.text = player.Stats.currExp + "/" + player.Stats.expToNextLevel;
+            expSlider.value = player.Stats.currExp / player.Stats.expToNextLevel;
         }
     }
 }

@@ -6,9 +6,9 @@ namespace Medieval.UI
 {
     public class Currency : MonoBehaviour
     {
-        [SerializeField] Text goldText = null;
-        [SerializeField] Text premiumText = null;
-        [SerializeField] Text movesText = null;
+        [SerializeField] Text gold = null;
+        [SerializeField] Text premium = null;
+        [SerializeField] Text moves = null;
 
         Manager player;
 
@@ -19,9 +19,9 @@ namespace Medieval.UI
 
         void Start()
         {
-            goldText.text = player.currency.gold.ToString();
-            premiumText.text = player.currency.premium.ToString();
-            movesText.text = player.currency.movesLeft + "/" + player.currency.maxMoves;
+            gold.text = player.currency.gold.ToString();
+            premium.text = player.currency.premium.ToString();
+            moves.text = player.currency.movesLeft + "/" + player.currency.maxMoves;
         }
     }
 }

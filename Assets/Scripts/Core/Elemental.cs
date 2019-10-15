@@ -1,6 +1,6 @@
 ﻿namespace Medieval.Core
 {
-    public enum Elementals
+    public enum Elemental
     {
         None,
         Fire,

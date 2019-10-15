@@ -11,7 +11,7 @@ namespace Medieval.Core
         [SerializeField] private int iDNumber;
         [SerializeField] private Sprite image;
         [SerializeField] private int level;
-        [SerializeField] Elementals element;
+        [SerializeField] Elemental element;
         [SerializeField] ItemType type;
         [SerializeField] ItemRarity rarity;
         [SerializeField] private int maxDurability;
@@ -53,7 +53,7 @@ namespace Medieval.Core
         public int IDNumber { get => iDNumber; set => iDNumber = value; }
         public Sprite Image { get => image; set => image = value; }
         public int Level { get => level; set => level = value; }
-        public Elementals Element { get => element; set => element = value; }
+        public Elemental Element { get => element; set => element = value; }
         public ItemType Type { get => type; set => type = value; }
         public ItemRarity Rarity { get => rarity; set => rarity = value; }
         public int MaxDurability { get => maxDurability; set => maxDurability = value; }
@@ -124,16 +124,16 @@ namespace Medieval.Core
             {
                 switch (element)
                 {
-                    case Elementals.None:
+                    case Elemental.None:
                         stats += "\n";
                         break;
-                    case Elementals.Fire:
+                    case Elemental.Fire:
                         stats += "\nFire ";
                         break;
-                    case Elementals.Ice:
+                    case Elemental.Ice:
                         stats += "\nIce ";
                         break;
-                    case Elementals.Earth:
+                    case Elemental.Earth:
                         stats += "\nEarth ";
                         break;
                     default:

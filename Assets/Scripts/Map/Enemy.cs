@@ -9,7 +9,7 @@ namespace Medieval.Map
         [Header("Basic Stats")]
         [SerializeField] private string enemyName;
         [SerializeField] private Sprite sprite = null;
-        [SerializeField] private Elementals element;
+        [SerializeField] private Elemental element;
         [SerializeField] private int level;
         [Header("Defence")]
         [SerializeField] private int maxHP;

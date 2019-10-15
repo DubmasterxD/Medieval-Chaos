@@ -127,7 +127,7 @@ namespace Medieval.UI
             else
             {
                 Item itemToEquip = player.items.InventoryItems[itemsIndexes[selectedItemIndex]];
-                if (itemToEquip.Level > player.stats.Level)
+                if (itemToEquip.Level > player.Stats.Level)
                 {
                     info.text = "Your level is too low to equip this " + itemsType.ToString() + ".";
                     info.transform.parent.gameObject.SetActive(true);

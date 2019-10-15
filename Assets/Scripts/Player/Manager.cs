@@ -6,14 +6,15 @@ namespace Medieval.Player
 {
     public class Manager : MonoBehaviour
     {
+        [SerializeField] string nickname;
+        [SerializeField] Stats stats = null;
+        public string previousScene { get; set; }
         public Mover movement { get; private set; }
-        public PlayerStats stats { get; private set; }
         public Currency currency { get; private set; }
         public Items items { get; private set; }
 
-        [SerializeField] string nickname;
-        public string previousScene { get; set; }
         public string Nickname { get => nickname; set => nickname = value; }
+        public Stats Stats { get => stats; set => stats = value; }
 
         private void Awake()
         {
@@ -23,7 +24,6 @@ namespace Medieval.Player
         private void SetReferences()
         {
             movement = GetComponent<Mover>();
-            stats = GetComponent<PlayerStats>();
             currency = GetComponent<Currency>();
             items = GetComponent<Items>();
         }

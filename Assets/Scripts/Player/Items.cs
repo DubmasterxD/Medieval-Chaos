@@ -48,52 +48,52 @@ namespace Medieval.Player
         public void UpdateStats()
         {
             equippedItems = new Item[] { equippedWeapon, equippedArmor, equippedShield, equippedRing, equippedNeckle, equippedBoots, equippedGloves, equippedArtifact, equippedHelmet };
-            player.stats.ResetStats();
+            player.Stats.ResetStats();
             if (equippedWeapon != null)
             {
-                player.stats.Element = equippedWeapon.Element;
+                player.Stats.Element = equippedWeapon.Element;
             }
             else
             {
-                player.stats.Element = Elementals.None;
+                player.Stats.Element = Elemental.None;
             }
             foreach (Item item in equippedItems)
             {
                 if (item != null)
                 {
-                    player.stats.IncreaseMaxHP(item.Health);
-                    player.stats.IncreaseArmor(item.Armor);
-                    player.stats.IncreaseChanceToBlock(item.ChanceToBlock);
-                    player.stats.IncreaseCritResists(item.CritResist);
-                    player.stats.IncreaseFireResists(item.FireResist);
-                    player.stats.IncreaseIceResists(item.IceResist);
-                    player.stats.IncreaseEarthResists(item.EarthResist);
-                    player.stats.IncreaseAttackSpeed(item.AttackSpeed);
-                    player.stats.IncreaseCritChance(item.CritChance);
-                    player.stats.IncreaseCritMultiplier(item.CritMultiplier);
-                    player.stats.IncreaseArmorPenetration(item.ArmorPenetration);
-                    player.stats.IncreasePhysicalToElementalDamage(item.PhysicalToElementalDamage);
-                    player.stats.IncreaseDamageReflected(item.DamageReflected);
-                    player.stats.IncreaseLifeSteal(item.LifeSteal);
-                    player.stats.IncreaseChanceToSurviveOn1HP(item.ChanceToSurviveOn1HP);
-                    player.stats.IncreaseChanceToGainShield(item.ChanceToGainShield);
-                    player.stats.IncreaseMaxShield(item.Shield);
-                    if (item.Element == Elementals.None)
+                    player.Stats.IncreaseMaxHP(item.Health);
+                    player.Stats.IncreaseArmor(item.Armor);
+                    player.Stats.IncreaseChanceToBlock(item.ChanceToBlock);
+                    player.Stats.IncreaseCritResists(item.CritResist);
+                    player.Stats.IncreaseFireResists(item.FireResist);
+                    player.Stats.IncreaseIceResists(item.IceResist);
+                    player.Stats.IncreaseEarthResists(item.EarthResist);
+                    player.Stats.IncreaseAttackSpeed(item.AttackSpeed);
+                    player.Stats.IncreaseCritChance(item.CritChance);
+                    player.Stats.IncreaseCritMultiplier(item.CritMultiplier);
+                    player.Stats.IncreaseArmorPenetration(item.ArmorPenetration);
+                    player.Stats.IncreasePhysicalToElementalDamage(item.PhysicalToElementalDamage);
+                    player.Stats.IncreaseDamageReflected(item.DamageReflected);
+                    player.Stats.IncreaseLifeSteal(item.LifeSteal);
+                    player.Stats.IncreaseChanceToSurviveOn1HP(item.ChanceToSurviveOn1HP);
+                    player.Stats.IncreaseChanceToGainShield(item.ChanceToGainShield);
+                    player.Stats.IncreaseMaxShield(item.Shield);
+                    if (item.Element == Elemental.None)
                     {
-                        player.stats.IncreaseMinDamage(item.MinDamage);
-                        player.stats.IncreaseMaxDamage(item.MaxDamage);
+                        player.Stats.IncreaseMinDamage(item.MinDamage);
+                        player.Stats.IncreaseMaxDamage(item.MaxDamage);
                     }
-                    else if (item.Element == player.stats.Element)
+                    else if (item.Element == player.Stats.Element)
                     {
-                        player.stats.IncreaseMinElementalDamage(item.MinDamage);
-                        player.stats.IncreaseMaxElementalDamage(item.MaxDamage);
+                        player.Stats.IncreaseMinElementalDamage(item.MinDamage);
+                        player.Stats.IncreaseMaxElementalDamage(item.MaxDamage);
                     }
                 }
             }
-            player.stats.IncreaseMinElementalDamage(Mathf.RoundToInt(player.stats.MinDamage * player.stats.PhysicalToElementalDamage));
-            player.stats.IncreaseMaxElementalDamage(Mathf.RoundToInt(player.stats.MaxDamage * player.stats.PhysicalToElementalDamage));
-            player.stats.IncreaseMinDamage(-Mathf.RoundToInt(player.stats.MinDamage * player.stats.PhysicalToElementalDamage));
-            player.stats.IncreaseMaxDamage(-Mathf.RoundToInt(player.stats.MaxDamage * player.stats.PhysicalToElementalDamage));
+            player.Stats.IncreaseMinElementalDamage(Mathf.RoundToInt(player.Stats.MinDamage * player.Stats.PhysicalToElementalDamage));
+            player.Stats.IncreaseMaxElementalDamage(Mathf.RoundToInt(player.Stats.MaxDamage * player.Stats.PhysicalToElementalDamage));
+            player.Stats.IncreaseMinDamage(-Mathf.RoundToInt(player.Stats.MinDamage * player.Stats.PhysicalToElementalDamage));
+            player.Stats.IncreaseMaxDamage(-Mathf.RoundToInt(player.Stats.MaxDamage * player.Stats.PhysicalToElementalDamage));
         }
 
         public int GetNumberOfInventorySlotsUsed()
