@@ -9,12 +9,14 @@ namespace Medieval.Combat
         [Header("Basic Stats")]
         [SerializeField] Elemental elemental = default;
         [SerializeField] int level = 0;
+        //player only
         public int expToNextLevel { get; set; } = 10;
         public int currExp { get; set; } = 0;
         [SerializeField] int basicHP = 10;
         [SerializeField] int basicDamage = 1;
         [SerializeField] float basicCritMultiplier = 1;
         [SerializeField] int basicAttackSpeed = 50;
+        //end player only
         [Header("Defence")]
         [SerializeField] int maxHP;
         public int currHp { get; set; }
@@ -31,11 +33,13 @@ namespace Medieval.Combat
         [Range(0, 1)] [SerializeField] float critChance;
         [SerializeField] float critMultiplier;
         [SerializeField] int armorPenetration;
+        //player only
         [SerializeField] int minElementalDamage;
         [SerializeField] int maxElementalDamage;
         [Range(0, 1)] [SerializeField] float physicalToElementalDamage;
         [Header("Special")]
         [Range(0, 1)] [SerializeField] float damageReflected;
+        //end player only
         [Range(0, 1)] [SerializeField] float lifeSteal;
         [Range(0, 1)] [SerializeField] float chanceToSurviveOn1HP;
         [Range(0, 1)] [SerializeField] float chanceToGainShield;

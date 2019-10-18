@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 119585837945782233}
   - component: {fileID: 119585837945782215}
   - component: {fileID: 119585837945782235}
-  - component: {fileID: 7962644058215252345}
   - component: {fileID: 5295797058100683417}
   - component: {fileID: 361197555}
   m_Layer: 0
@@ -118,6 +117,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickname: Dubmaster xD
+  stats:
+    elemental: 0
+    level: 0
+    basicHP: 10
+    basicDamage: 1
+    basicCritMultiplier: 1
+    basicAttackSpeed: 50
+    maxHP: 0
+    armor: 0
+    chanceToBlock: 0
+    critResist: 0
+    fireResist: 0
+    iceResist: 0
+    earthResist: 0
+    minDamage: 0
+    maxDamage: 0
+    attackSpeed: 0
+    critChance: 0
+    critMultiplier: 0
+    armorPenetration: 0
+    minElementalDamage: 0
+    maxElementalDamage: 0
+    physicalToElementalDamage: 0
+    damageReflected: 0
+    lifeSteal: 0
+    chanceToSurviveOn1HP: 0
+    chanceToGainShield: 0
+    maxShield: 0
 --- !u!114 &119585837945782235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,45 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
---- !u!114 &7962644058215252345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119585837945782237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26688a9f4bd0d6a43a8ed32b3a0b423d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  element: 0
-  level: 1
-  basicHP: 10
-  basicDamage: 1
-  basicCritMultiplier: 1.3
-  basicAttackSpeed: 50
-  maxHP: 50
-  armor: 5
-  chanceToBlock: 0
-  critResist: 0
-  fireResist: 0
-  iceResist: 0
-  earthResist: 0
-  minDamage: 1
-  maxDamage: 2
-  attackSpeed: 50
-  critChance: 0
-  critMultiplier: 1.5
-  armorPenetration: 0
-  minElementalDamage: 0
-  maxElementalDamage: 0
-  physicalToElementalDamage: 0
-  damageReflected: 0
-  lifeSteal: 0
-  chanceToSurviveOn1HP: 0
-  chanceToGainShield: 0
-  maxShield: 0
 --- !u!114 &5295797058100683417
 MonoBehaviour:
   m_ObjectHideFlags: 0
