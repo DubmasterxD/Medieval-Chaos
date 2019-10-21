@@ -18,7 +18,7 @@ namespace Medieval.UI
             player = FindObjectOfType<Manager>();
         }
 
-        public void RefreshStats()
+        public void Refresh()
         {
             RefreshAttackStats();
             RefreshDefenceStats();

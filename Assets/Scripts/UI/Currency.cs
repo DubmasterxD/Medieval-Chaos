@@ -19,9 +19,23 @@ namespace Medieval.UI
 
         void Start()
         {
-            gold.text = player.currency.gold.ToString();
-            premium.text = player.currency.premium.ToString();
-            moves.text = player.currency.movesLeft + "/" + player.currency.maxMoves;
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            if (gold != null)
+            {
+                gold.text = player.currency.gold.ToString();
+            }
+            if (premium != null)
+            {
+                premium.text = player.currency.premium.ToString();
+            }
+            if (moves != null)
+            {
+                moves.text = player.currency.movesLeft + "/" + player.currency.maxMoves;
+            }
         }
     }
 }

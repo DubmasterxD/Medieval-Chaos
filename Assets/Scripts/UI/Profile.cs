@@ -6,10 +6,10 @@ namespace Medieval.UI
 {
     public class Profile : MonoBehaviour
     {
-        [SerializeField] Text nicknameText = null;
-        [SerializeField] Text levelText = null;
-        [SerializeField] Text expValueText = null;
-        [SerializeField] Slider expSlider = null;
+        [SerializeField] Text nickname = null;
+        [SerializeField] Text level = null;
+        [SerializeField] Text experienceValue = null;
+        [SerializeField] Slider experienceSlider = null;
 
         Manager player;
 
@@ -20,10 +20,25 @@ namespace Medieval.UI
 
         private void Start()
         {
-            nicknameText.text = player.Nickname;
-            levelText.text = "Lvl: " + player.Stats.Level;
-            expValueText.text = player.Stats.currExp + "/" + player.Stats.expToNextLevel;
-            expSlider.value = player.Stats.currExp / player.Stats.expToNextLevel;
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            SetNickname(player.Nickname);
+            UpdateExperience();
+        }
+
+        private void  SetNickname(string newNickname)
+        {
+            nickname.text = newNickname;
+        }
+
+        private void UpdateExperience()
+        {
+            level.text = "Lvl: " + player.Stats.Level;
+            experienceValue.text = player.Stats.currExp + "/" + player.Stats.expToNextLevel;
+            experienceSlider.value = player.Stats.currExp / player.Stats.expToNextLevel;
         }
     }
 }
